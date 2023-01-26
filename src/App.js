@@ -86,7 +86,7 @@ function App() {
           <div
             className={`${
               pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300 mb-8`}
+            } relative transition-all ease-in-out delay-300 mb-8 pb-8 border-b-[0.5px] border-gray-200`}
           >
             <div className="flex items-center gap-4 mb-4">
               <img
@@ -96,11 +96,11 @@ function App() {
                 alt="Logo"
               />
               <h1 className="font-bold">
-                FutureFuture Inc. (January 2022 - January 2023)
+                FutureFuture Inc. (Jan 2022 - Jan 2023)
               </h1>
             </div>
-            <ul className="gap-4 flex flex-col w-[500px] justify-start">
-              <h1 className="font-bold text-[12px] mb-[-10px]">
+            <ul className="gap-2 flex flex-col w-[500px] justify-start">
+              <h1 className="font-bold text-[12px] mb-[-5px]">
                 Full-stack / Lead Developer
               </h1>
               <li className="text-[8px]">
@@ -137,10 +137,10 @@ function App() {
                 src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
                 alt="Logo"
               />
-              <h1 className="font-bold">Runner Inc. (June 2019 - Aug 2020)</h1>
+              <h1 className="font-bold">Runner Inc. (Jun 2019 - Aug 2020)</h1>
             </div>
-            <ul className="gap-4 flex flex-col w-[500px] justify-start">
-              <h1 className="font-bold text-[12px] mb-[-10px]">
+            <ul className="gap-2 flex flex-col w-[500px] justify-start">
+              <h1 className="font-bold text-[12px] mb-[-5px]">
                 Full-stack Developer
               </h1>
               <li className="text-[8px]">
@@ -160,8 +160,9 @@ function App() {
                 system for order/courier infos
               </li>
             </ul>
-            <ul className="gap-4 flex flex-col w-[500px] justify-start my-4">
-              <h1 className="font-bold text-[12px] mb-[-10px]">
+            <br />
+            <ul className="gap-2 flex flex-col w-[500px] justify-start my-4">
+              <h1 className="font-bold text-[12px] mb-[-5px]">
                 Front-end Developer
               </h1>
               <li className="text-[8px]">
