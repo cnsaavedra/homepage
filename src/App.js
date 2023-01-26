@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
-
 function App() {
   return (
-  <div className='flex flex-start'>
-    Hello
+  <div className="flex justify-center items-center">
+    <h1 className='text-xs'>
+      Testtests
+    </h1>
   </div>
   );
 }
