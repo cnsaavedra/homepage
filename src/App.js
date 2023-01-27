@@ -248,7 +248,7 @@ function App() {
             <div className="flex flex-col items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">Old MMO Friends</h1>
             </div>
-            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+            <div className="flex flex-col md:flex-row md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
               <ul className="gap-2 flex flex-col justify-start mx-auto">
                 <li className="text-[18px]">
                   • Users find and message other users to socialize/reconcile
@@ -287,7 +287,7 @@ function App() {
             <div className="flex flex-col items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">FFXIV Statistics</h1>
             </div>
-            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+            <div className="flex flex-col md:flex-row md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
               <ul className="gap-2 flex flex-col md:justify-start">
                 <li className="text-[18px]">
                   • Using the API of Final Fantasy 14 by Square Enix to gather
