@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ArrowLeft from "./icons/icons";
+import { ArrowLeft, Linkedin } from "./icons/icons";
 import { Scrollbars } from "react-custom-scrollbars";
 
 function App() {
@@ -54,6 +54,12 @@ function App() {
                 Portfolio
               </h6>
               <h6
+                tabIndex={0}
+                role="button"
+                onClick={() => {
+                  setPageFirstLoad(true);
+                  setCurrentPage("contact");
+                }}
                 className={`${
                   pageFirstLoad ? "opacity-0" : "opacity-100"
                 } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
@@ -438,12 +444,83 @@ function App() {
     );
   }
 
+  function contact() {
+    return (
+      <div className="my-auto mx-auto flex px-5 py-24 items-center justify-center flex-col">
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={() => {
+            setCurrentPage("homepage");
+          }}
+          className="absolute top-5 left-5 cursor-pointer"
+        >
+          <ArrowLeft />
+        </div>
+        <div className="text-center lg:w-2/3 w-full">
+          <h1
+            className={`${
+              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
+            }  transition-all ease-in-out delay-75 title-font text-title mb-4 font-medium text-primary-800 text-black  top-[-150px]`}
+          >
+            Contact and Links
+          </h1>
+          <h6
+            className={`${
+              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
+            }  transition-all ease-in-out delay-75 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+          >
+            Email:{" "}
+            <span className="font-light">
+              christian.nico.saavedra@gmail.com
+            </span>
+          </h6>
+          <h6
+            className={`${
+              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
+            }  transition-all ease-in-out delay-75 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+          >
+            Music Email: <span className="font-light">tokibitsu@gmail.com</span>
+          </h6>
+          <div className="flex flex-row gap-24 justify-center items-center relative my-auto h-full">
+            <a href="https://github.com/cnsaavedra">
+              <img
+                width={250}
+                height={250}
+                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                alt="Github"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+              <img
+                width={250}
+                height={250}
+                src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                alt="Linkedin"
+              />
+            </a>
+            <a href="https://soundcloud.com/primaryflow">
+              <img
+                width={250}
+                height={250}
+                src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                alt="Soundcloud"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (currentPage === "homepage") {
     return homePage();
   } else if (currentPage === "experience") {
     return experience();
   } else if (currentPage === "portfolio") {
     return portfolio();
+  } else if (currentPage === "contact") {
+    return contact();
   }
 }
 
