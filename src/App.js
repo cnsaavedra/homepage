@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ArrowLeft from "./icons/icons";
+import { Scrollbars } from "react-custom-scrollbars";
 
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
@@ -23,7 +24,7 @@ function App() {
                 pageFirstLoad ? "opacity-0" : "opacity-100"
               } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
             >
-              Welcome to my Portfolio
+              Welcome to my website
             </h1>
             <div className="flex justify-center items-center gap-8">
               <h6
@@ -40,6 +41,12 @@ function App() {
                 Experience
               </h6>
               <h6
+                tabIndex={0}
+                role="button"
+                onClick={() => {
+                  setPageFirstLoad(true);
+                  setCurrentPage("portfolio");
+                }}
                 className={`${
                   pageFirstLoad ? "opacity-0" : "opacity-100"
                 } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
@@ -206,10 +213,235 @@ function App() {
     );
   }
 
+  function portfolio() {
+    return (
+      <section className="body-font font-poppins">
+        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={() => {
+              setCurrentPage("homepage");
+            }}
+            className="absolute top-5 left-5 cursor-pointer"
+          >
+            <ArrowLeft />
+          </div>
+          <div className="text-center lg:w-2/3 w-full">
+            <h1
+              className={`${
+                pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
+              } relative transition-all ease-in-out delay-75 title-font text-title mb-4 font-medium text-primary-800 text-black`}
+            >
+              Portfolio
+            </h1>
+          </div>
+          <div
+            className={`${
+              pageFirstLoad ? "opacity-0" : "opacity-100"
+            } relative transition-all ease-in-out delay-300`}
+          >
+            <div className="flex flex-col items-center gap-4 mb-4">
+              <h1 className="font-bold text-[74px]">Old MMO Friends</h1>
+            </div>
+            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start">
+                <li className="text-[30px]">
+                  • Users find and message other users to socialize/reconcile
+                  via this social platform.
+                </li>
+                <li className="text-[30px]">
+                  • Manages users; profiles, friends, messages, notifications
+                  and other user information.
+                </li>
+                <li className="text-[30px]">
+                  • Uses PostgreSQL via Sequelize creating queries
+                </li>
+                <li className="text-[30px]">
+                  • Follows an MVC structure along with a client and a server,
+                  with Express.js back-end framework.
+                </li>
+                <li className="text-[30px]">
+                  • Hashes user passwords with JWT tokens
+                </li>
+              </ul>
+              <div className="mx-auto flex justify-center">
+                <img
+                  className="object-contain"
+                  src="https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966"
+                  alt="Logo"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`${
+              pageFirstLoad ? "opacity-0" : "opacity-100"
+            } relative transition-all ease-in-out delay-300`}
+          >
+            <div className="flex flex-col items-center gap-4 mb-4">
+              <h1 className="font-bold text-[74px]">FFXIV Statistics</h1>
+            </div>
+            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start">
+                <li className="text-[30px]">
+                  • Using the API of Final Fantasy 14 by Square Enix to gather
+                  data that allows to analyze statistics given by the API
+                </li>
+                <li className="text-[30px]">
+                  • Manipulated data to get the results we need in a UI/UX
+                  friendly manner, designed to show an attractive way to present
+                  statistics
+                </li>
+                <li className="text-[30px]">
+                  • Ability to find out the demographics of a guild, through
+                  data manipluations and parsing
+                </li>
+                <li className="text-[30px]">
+                  • Ability to find out the best market values through finding
+                  velocities of items sold and their demands
+                </li>
+                <li className="text-[30px]">
+                  • Efficiently uses CSS flex/grid to show the "fashion" section
+                  of the website in an easy and efficient way to present the
+                  clothings from the game
+                </li>
+              </ul>
+              <div className="flex flex-row items-center gap-4 mx-auto">
+                <Scrollbars style={{ width: 500, height: 500 }}>
+                  <img
+                    className="w-[500px] h-[500px] object-contain"
+                    src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
+                    alt="Logo"
+                  />
+                  <img
+                    className="w-[500px] h-[500px] object-contain"
+                    src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
+                    alt="Logo"
+                  />
+                  <img
+                    className="w-[500px] h-[500px] object-contain"
+                    src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
+                    alt="Logo"
+                  />
+                </Scrollbars>
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`${
+              pageFirstLoad ? "opacity-0" : "opacity-100"
+            } relative transition-all ease-in-out delay-300`}
+          >
+            <div className="flex flex-col items-center gap-4 mb-4">
+              <h1 className="font-bold text-[74px]">Pick For Us</h1>
+            </div>
+            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start">
+                <li className="text-[30px] flex flex-col italic">
+                  • Done through vanilla Javascript, HTML, using MongoDB for the
+                  database to show that the foundation of Javascript, HTML,
+                  jQuery, Database related languages
+                </li>
+                <li className="text-[30px]">
+                  • Hanging out with friends? Everyone is indecisive and you all
+                  don't know where to go? Get everyone on this website and
+                  anonymously share your thoughts on what to do for the rest of
+                  the day!
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • What's so special about this? Can't we just share our
+                  thoughts in real life?
+                  <span className="text-[15px] ml-8">
+                    No one will be the decisive friend and finalize a place. It
+                    is also most likely that deep down, you and your friends
+                    have an idea what you all really want. This website will
+                    extract the information needed from you and your friends to
+                    finalize and get the most wanted option. And really if
+                    everyone is indecisive, who is the leader of the group? THIS
+                    WEBSITE!
+                  </span>
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  •How do you extract the most wanted option?
+                  <span className="text-[15px] ml-8">
+                    You are given 60 seconds to put in your thoughts, therefore
+                    the website is trying to get the first thing that comes to
+                    you and your friends minds.
+                    <img
+                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
+                      alt="Logo"
+                    />
+                  </span>
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • For example if we want to choose a food place, we would
+                  select "Picking Food".
+                  <img
+                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
+                    alt="Logo"
+                  />
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • In this scenario, seems like everyone is okay with whatever.
+                  The website analyzes the data and tries to narrow down options
+                  and finally giving the best option.
+                  <img
+                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
+                    alt="Logo"
+                  />
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • From the database, the website narrowed down to only
+                  selecting food and checks for the most common cuisine/food (If
+                  someone says "I don't want burger" it would detect the "don't
+                  want (insert food here)" and would not include burger).
+                  <img
+                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
+                    alt="Logo"
+                  />
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • So in the end we are given these options!
+                </li>
+                <li className="text-[30px] flex flex-col">
+                  • The "You have duplicates, but we fixed that for you" is
+                  towards the message that had burger in the same sentence (Or
+                  could be spammed by the same guy. Keep in mind if it's from
+                  the same guy who wants to spam a certain cuisine/food in the
+                  chat then not everyone indecisive and therefore that person
+                  can plan the meal for everyone). It is a way to disallow from
+                  repeating the same words accidentally.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h1 className="my-8">
+            More on{" "}
+            <a
+              href="https://github.com/cnsaavedra/"
+              className="underline text-blue-300"
+            >
+              my github
+            </a>
+          </h1>
+        </div>
+      </section>
+    );
+  }
+
   if (currentPage === "homepage") {
     return homePage();
   } else if (currentPage === "experience") {
     return experience();
+  } else if (currentPage === "portfolio") {
+    return portfolio();
   }
 }
 
