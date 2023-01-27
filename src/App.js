@@ -93,37 +93,37 @@ function App() {
           <div
             className={`${
               pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300 mb-8 pb-8 border-b-[0.5px] border-gray-200`}
+            } relative transition-all ease-in-out delay-300 mb-8 pb-8 border-b-[0.5px] border-gray-200 w-full mx-auto flex justify-center flex-col items-center`}
           >
             <div className="flex items-center gap-4 mb-4">
               <img
-                width={20}
-                height={20}
+                width={40}
+                height={40}
                 src="https://media.licdn.com/dms/image/C560BAQE4LymCVTWYLg/company-logo_100_100/0/1519887572074?e=1682553600&v=beta&t=yQW-JNz_A5FHo6llpm6KFauBG1k24EXzIhEPFDsfFBw"
                 alt="Logo"
               />
-              <h1 className="font-bold">
+              <h1 className="font-bold text-[32px] my-12">
                 FutureFuture Inc. (Jan 2022 - Jan 2023)
               </h1>
             </div>
-            <ul className="gap-2 flex flex-col w-[500px] justify-start">
-              <h1 className="font-bold text-[12px] mb-[-5px]">
+            <ul className="gap-2 flex flex-col w-full justify-start">
+              <h1 className="font-bold text-[20px] my-[5px]">
                 Full-stack / Lead Developer
               </h1>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Worked on various projects: Merchant Dashboard, E-Commerce
                 Tools, Delivery Solutions, Courier/Driver applications to help
                 couriers with delivery all via React, React Native, PHP, Laravel
                 and AWS.
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Developed new features, and pages and fixed bugs for the main
                 delivery website including new checkout methods, blog page,
                 partners page, career signup, and more • Developed new features
                 for the delivery dashboard, improving the workflow of Customer
                 Service and Dispatchers
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Automated metrics that allow couriers to see their statistics
                 on delivering • Created a dashboard for merchants to use
                 involving analytics that allows them to view/edit/add orders,
@@ -135,74 +135,78 @@ function App() {
           <div
             className={`${
               pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300`}
+            } relative transition-all ease-in-out delay-300 w-full mx-auto flex justify-center flex-col items-center`}
           >
             <div className="flex items-center gap-4 mb-4">
               <img
-                width={20}
-                height={20}
+                width={40}
+                height={40}
                 src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
                 alt="Logo"
               />
-              <h1 className="font-bold">Runner Inc. (Jun 2019 - Aug 2020)</h1>
+              <h1 className="font-bold text-[32px] my-12">
+                Runner Inc. (Jun 2019 - Aug 2020)
+              </h1>
             </div>
-            <ul className="gap-2 flex flex-col w-[500px] justify-start">
-              <h1 className="font-bold text-[12px] mb-[-5px]">
+            <ul className="gap-2 flex flex-col w-full justify-start">
+              <h1 className="font-bold text-[20px] my-[5px]">
                 Full-stack Developer
               </h1>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Using PHP, Laravel, AWS, Amazon Redshift, PostgreSQL, Stripe,
                 Xero
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Worked on database queries to help with analytics
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Automating tables, charts, excel sheets, data manipulations,
                 and data stores
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Created API's for all platforms worked on such as: e-commerce
                 api's, analytics, database storing, invoice, automation, and map
                 system for order/courier infos
               </li>
             </ul>
             <br />
-            <ul className="gap-2 flex flex-col w-[500px] justify-start my-4">
-              <h1 className="font-bold text-[12px] mb-[-5px]">
+            <ul className="gap-2 flex flex-col w-full justify-start my-4">
+              <h1 className="font-bold text-[20px] my-[5px]">
                 Front-end Developer
               </h1>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Worked on various projects:
                 <li className="ml-[8px]">
                   - Dispatch to help dispatchers/couriers, Ecommerce website,
                   Analytics Platform, Courier App to help couriers with delivery
                 </li>
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Overall improve, fix and organize code
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Improved UI/UX and added utilities/pages for dispatch team
                 with task/order lists, user info, mapping system UI/UX, and
                 auto-updates
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Improved UI/UX and added utilities/pages for the main website
                 using animations and improved Frontend code
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Created application for both website and iOS that helps with
                 analytics
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • Started on an app for couriers using React Native on iOS
               </li>
-              <li className="text-[8px]">• Using custom CSS and Javascript</li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
+                • Using custom CSS and Javascript
+              </li>
+              <li className="text-[16px] ml-[8px]">
                 • Worked on both Vue and React Native
               </li>
-              <li className="text-[8px]">
+              <li className="text-[16px] ml-[8px]">
                 • QA work such as creating test, automation and overall bug
                 testing
               </li>
