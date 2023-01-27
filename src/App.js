@@ -246,26 +246,26 @@ function App() {
             } relative transition-all ease-in-out delay-300`}
           >
             <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[74px]">Old MMO Friends</h1>
+              <h1 className="font-bold text-[50px] my-8">Old MMO Friends</h1>
             </div>
-            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start">
-                <li className="text-[30px]">
+            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start mx-auto">
+                <li className="text-[18px]">
                   • Users find and message other users to socialize/reconcile
                   via this social platform.
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Manages users; profiles, friends, messages, notifications
                   and other user information.
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Uses PostgreSQL via Sequelize creating queries
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Follows an MVC structure along with a client and a server,
                   with Express.js back-end framework.
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Hashes user passwords with JWT tokens
                 </li>
               </ul>
@@ -285,51 +285,49 @@ function App() {
             } relative transition-all ease-in-out delay-300`}
           >
             <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[74px]">FFXIV Statistics</h1>
+              <h1 className="font-bold text-[50px] my-8">FFXIV Statistics</h1>
             </div>
-            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start">
-                <li className="text-[30px]">
+            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col md:justify-start">
+                <li className="text-[18px]">
                   • Using the API of Final Fantasy 14 by Square Enix to gather
                   data that allows to analyze statistics given by the API
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Manipulated data to get the results we need in a UI/UX
                   friendly manner, designed to show an attractive way to present
                   statistics
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Ability to find out the demographics of a guild, through
                   data manipluations and parsing
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Ability to find out the best market values through finding
                   velocities of items sold and their demands
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Efficiently uses CSS flex/grid to show the "fashion" section
                   of the website in an easy and efficient way to present the
                   clothings from the game
                 </li>
               </ul>
-              <div className="flex flex-row items-center gap-4 mx-auto">
-                <Scrollbars style={{ width: 500, height: 500 }}>
-                  <img
-                    className="w-[500px] h-[500px] object-contain"
-                    src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
-                    alt="Logo"
-                  />
-                  <img
-                    className="w-[500px] h-[500px] object-contain"
-                    src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
-                    alt="Logo"
-                  />
-                  <img
-                    className="w-[500px] h-[500px] object-contain"
-                    src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
-                    alt="Logo"
-                  />
-                </Scrollbars>
+              <div className="flex md:flex-row flex-col items-center gap-8 md:gap-4 mx-auto overflow-y-auto">
+                <img
+                  className="md:w-[500px] md:h-[500px] object-contain"
+                  src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
+                  alt="Logo"
+                />
+                <img
+                  className="md:w-[500px] md:h-[500px] object-contain"
+                  src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
+                  alt="Logo"
+                />
+                <img
+                  className="md:w-[500px] md:h-[500px] object-contain"
+                  src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
+                  alt="Logo"
+                />
               </div>
             </div>
           </div>
@@ -340,22 +338,22 @@ function App() {
             } relative transition-all ease-in-out delay-300`}
           >
             <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[74px]">Pick For Us</h1>
+              <h1 className="font-bold text-[50px] my-8">Pick For Us</h1>
             </div>
-            <div className="flex flex-row gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
               <ul className="gap-2 flex flex-col justify-start">
-                <li className="text-[30px] flex flex-col italic">
+                <li className="text-[18px] flex flex-col italic">
                   • Done through vanilla Javascript, HTML, using MongoDB for the
                   database to show that the foundation of Javascript, HTML,
                   jQuery, Database related languages
                 </li>
-                <li className="text-[30px]">
+                <li className="text-[18px]">
                   • Hanging out with friends? Everyone is indecisive and you all
                   don't know where to go? Get everyone on this website and
                   anonymously share your thoughts on what to do for the rest of
                   the day!
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • What's so special about this? Can't we just share our
                   thoughts in real life?
                   <span className="text-[15px] ml-8">
@@ -368,7 +366,7 @@ function App() {
                     WEBSITE!
                   </span>
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   •How do you extract the most wanted option?
                   <span className="text-[15px] ml-8">
                     You are given 60 seconds to put in your thoughts, therefore
@@ -381,7 +379,7 @@ function App() {
                     />
                   </span>
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • For example if we want to choose a food place, we would
                   select "Picking Food".
                   <img
@@ -390,7 +388,7 @@ function App() {
                     alt="Logo"
                   />
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • In this scenario, seems like everyone is okay with whatever.
                   The website analyzes the data and tries to narrow down options
                   and finally giving the best option.
@@ -400,7 +398,7 @@ function App() {
                     alt="Logo"
                   />
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • From the database, the website narrowed down to only
                   selecting food and checks for the most common cuisine/food (If
                   someone says "I don't want burger" it would detect the "don't
@@ -411,10 +409,10 @@ function App() {
                     alt="Logo"
                   />
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • So in the end we are given these options!
                 </li>
-                <li className="text-[30px] flex flex-col">
+                <li className="text-[18px] flex flex-col">
                   • The "You have duplicates, but we fixed that for you" is
                   towards the message that had burger in the same sentence (Or
                   could be spammed by the same guy. Keep in mind if it's from
