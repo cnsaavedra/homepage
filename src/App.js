@@ -482,9 +482,12 @@ function App() {
           >
             Music Email: <span className="font-light">tokibitsu@gmail.com</span>
           </h6>
-          <div className="flex flex-row gap-24 justify-center items-center relative my-auto h-full">
+          <div className="flex flex-col md:flex-row gap-24 justify-center items-center relative my-auto md:h-[500px]">
             <a href="https://github.com/cnsaavedra">
               <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
                 width={250}
                 height={250}
                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
@@ -493,6 +496,9 @@ function App() {
             </a>
             <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
               <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
                 width={250}
                 height={250}
                 src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
@@ -501,6 +507,9 @@ function App() {
             </a>
             <a href="https://soundcloud.com/primaryflow">
               <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
                 width={250}
                 height={250}
                 src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
