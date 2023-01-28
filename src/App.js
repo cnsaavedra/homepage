@@ -17,7 +17,7 @@ function App() {
   function homePage() {
     return (
       <section className="body-font font-poppins">
-        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
           <div className="text-center lg:w-2/3 w-full">
             <h1
               className={`${
@@ -26,7 +26,7 @@ function App() {
             >
               Welcome to my website
             </h1>
-            <div className="flex justify-center items-center gap-8">
+            <div className="flex justify-center items-center gap-8 mb-8">
               <h6
                 tabIndex={0}
                 role="button"
@@ -36,7 +36,7 @@ function App() {
                 }}
                 className={`${
                   pageFirstLoad ? "opacity-0" : "opacity-100"
-                } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-black`}
+                } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
               >
                 Experience
               </h6>
@@ -67,6 +67,41 @@ function App() {
                 Contact
               </h6>
             </div>
+          </div>
+          <div className="flex flex-row gap-4 items-center">
+            <a href="https://github.com/cnsaavedra">
+              <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                width={40}
+                height={40}
+                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                alt="Github"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+              <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                width={40}
+                height={40}
+                src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                alt="Linkedin"
+              />
+            </a>
+            <a href="https://soundcloud.com/primaryflow">
+              <img
+                className={`${
+                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                width={40}
+                height={40}
+                src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                alt="Soundcloud"
+              />
+            </a>
           </div>
         </div>
       </section>
@@ -150,7 +185,7 @@ function App() {
                 src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
                 alt="Logo"
               />
-              <h1 className="font-bold text-[32px] my-12">
+              <h1 className="font-bold text-[32px] md:my-12">
                 Runner Inc. (Jun 2019 - Aug 2020)
               </h1>
             </div>
@@ -271,7 +306,7 @@ function App() {
                   • Follows an MVC structure along with a client and a server,
                   with Express.js back-end framework.
                 </li>
-                <li className="text-[18px]">
+                <li className="text-[18px] mb-8 md:mb-0">
                   • Hashes user passwords with JWT tokens
                 </li>
               </ul>
@@ -312,7 +347,7 @@ function App() {
                   • Ability to find out the best market values through finding
                   velocities of items sold and their demands
                 </li>
-                <li className="text-[18px]">
+                <li className="text-[18px] mb-8 md:mb-0">
                   • Efficiently uses CSS flex/grid to show the "fashion" section
                   of the website in an easy and efficient way to present the
                   clothings from the game
@@ -347,7 +382,7 @@ function App() {
               <h1 className="font-bold text-[50px] my-8">Pick For Us</h1>
             </div>
             <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start">
+              <ul className="gap-8 md:gap-2 flex flex-col justify-start">
                 <li className="text-[18px] flex flex-col italic">
                   • Done through vanilla Javascript, HTML, using MongoDB for the
                   database to show that the foundation of Javascript, HTML,
@@ -468,19 +503,20 @@ function App() {
           <h6
             className={`${
               pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-            }  transition-all ease-in-out delay-75 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+            }  transition-all ease-in-out delay-75 title-font text-[20px] mb-4 font-medium text-primary-800 text-black`}
           >
             Email:{" "}
-            <span className="font-light">
+            <span className="font-light text-[18px]">
               christian.nico.saavedra@gmail.com
             </span>
           </h6>
           <h6
             className={`${
               pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-            }  transition-all ease-in-out delay-75 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+            }  transition-all ease-in-out delay-75 title-font text-[20px] mb-4 font-medium text-primary-800 text-black`}
           >
-            Music Email: <span className="font-light">tokibitsu@gmail.com</span>
+            Music Email:{" "}
+            <span className="font-light text-[18px]">tokibitsu@gmail.com</span>
           </h6>
           <div className="flex flex-col md:flex-row gap-24 justify-center items-center relative my-auto md:h-[500px]">
             <a href="https://github.com/cnsaavedra">
@@ -494,7 +530,10 @@ function App() {
                 alt="Github"
               />
             </a>
-            <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+            <a
+              className="ml-[45px] md:ml-0"
+              href="https://www.linkedin.com/in/christian-saavedra-b07413245/"
+            >
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
