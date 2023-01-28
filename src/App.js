@@ -262,15 +262,14 @@ function App() {
   const [sliderRef, slider] = useKeenSlider({
     slidesPerView: 1,
     initial: 0,
-    mode: "free",
+    mode: "snap",
     vertical: false,
-    spacing: 30,
+    spacing: 15,
     controls: true,
     breakpoints: {
       "(max-width: 768px)": {
         slidesPerView: 1,
         vertical: true,
-        size: 15,
       },
     },
   });
@@ -370,10 +369,10 @@ function App() {
                   clothings from the game
                 </li>
               </ul>
-              <div className="max-w-[500px]">
+              <div className="keen-slider max-w-[500px] overflow-hidden">
                 <div
                   ref={sliderRef}
-                  className="keen-slider flex gap-4 h-[500px] w-[500px]"
+                  className="keen-slider flex gap-4 h-[500px] w-[500px] overflow-hidden"
                 >
                   <img
                     className="keen-slider__slide"
