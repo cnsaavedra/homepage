@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Linkedin } from "./icons/icons";
-import { Scrollbars } from "react-custom-scrollbars";
 
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
