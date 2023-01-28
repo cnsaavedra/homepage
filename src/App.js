@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Linkedin } from "./icons/icons";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
@@ -66,41 +68,41 @@ function App() {
                 Contact
               </h6>
             </div>
-          </div>
-          <div className="flex flex-row gap-4 items-center">
-            <a href="https://github.com/cnsaavedra">
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
-                width={40}
-                height={40}
-                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                alt="Github"
-              />
-            </a>
-            <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
-                width={40}
-                height={40}
-                src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                alt="Linkedin"
-              />
-            </a>
-            <a href="https://soundcloud.com/primaryflow">
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
-                width={40}
-                height={40}
-                src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                alt="Soundcloud"
-              />
-            </a>
+            <div className="flex justify-center items-center gap-8 mb-8 ml-6">
+              <a href="https://github.com/cnsaavedra">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                  width={40}
+                  height={40}
+                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                  alt="Github"
+                />
+              </a>
+              <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                  width={40}
+                  height={40}
+                  src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                  alt="Linkedin"
+                />
+              </a>
+              <a href="https://soundcloud.com/primaryflow">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                  width={40}
+                  height={40}
+                  src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                  alt="Soundcloud"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -257,6 +259,22 @@ function App() {
     );
   }
 
+  const [sliderRef, slider] = useKeenSlider({
+    slidesPerView: 1,
+    initial: 0,
+    mode: "free",
+    vertical: false,
+    spacing: 30,
+    controls: true,
+    breakpoints: {
+      "(max-width: 768px)": {
+        slidesPerView: 1,
+        vertical: true,
+        size: 15,
+      },
+    },
+  });
+
   function portfolio() {
     return (
       <section className="body-font font-poppins">
@@ -288,7 +306,7 @@ function App() {
             <div className="flex flex-col items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">Old MMO Friends</h1>
             </div>
-            <div className="flex flex-col md:flex-row md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
+            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
               <ul className="gap-2 flex flex-col justify-start mx-auto">
                 <li className="text-[18px]">
                   • Users find and message other users to socialize/reconcile
@@ -327,8 +345,8 @@ function App() {
             <div className="flex flex-col items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">FFXIV Statistics</h1>
             </div>
-            <div className="flex flex-col md:flex-row md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col md:justify-start">
+            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start mx-auto">
                 <li className="text-[18px]">
                   • Using the API of Final Fantasy 14 by Square Enix to gather
                   data that allows to analyze statistics given by the API
@@ -352,22 +370,27 @@ function App() {
                   clothings from the game
                 </li>
               </ul>
-              <div className="flex md:flex-row flex-col items-center gap-8 md:gap-4 mx-auto">
-                <img
-                  className="md:w-[500px] md:h-[500px] object-contain"
-                  src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
-                  alt="Logo"
-                />
-                <img
-                  className="md:w-[500px] md:h-[500px] object-contain"
-                  src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
-                  alt="Logo"
-                />
-                <img
-                  className="md:w-[500px] md:h-[500px] object-contain"
-                  src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
-                  alt="Logo"
-                />
+              <div className="max-w-[500px]">
+                <div
+                  ref={sliderRef}
+                  className="keen-slider flex gap-4 h-[500px] w-[500px]"
+                >
+                  <img
+                    className="keen-slider__slide"
+                    src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
+                    alt="Logo"
+                  />
+                  <img
+                    className="keen-slider__slide"
+                    src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
+                    alt="Logo"
+                  />
+                  <img
+                    className="keen-slider__slide"
+                    src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
+                    alt="Logo"
+                  />
+                </div>
               </div>
             </div>
           </div>
