@@ -352,7 +352,7 @@ function App() {
                   clothings from the game
                 </li>
               </ul>
-              <div className="flex md:flex-row flex-col items-center gap-8 md:gap-4 mx-auto overflow-y-auto">
+              <div className="flex md:flex-row flex-col items-center gap-8 md:gap-4 mx-auto">
                 <img
                   className="md:w-[500px] md:h-[500px] object-contain"
                   src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
