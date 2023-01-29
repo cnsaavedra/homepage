@@ -121,7 +121,9 @@ function App() {
             }}
             className="absolute top-5 left-5 cursor-pointer"
           >
-            <ArrowLeft />
+            <div className="hover:opacity-50">
+              <ArrowLeft />
+            </div>
           </div>
           <div className="text-center lg:w-2/3 w-full">
             <h1
@@ -286,7 +288,9 @@ function App() {
             }}
             className="absolute top-5 left-5 cursor-pointer"
           >
-            <ArrowLeft />
+            <div className="hover:opacity-50">
+              <ArrowLeft />
+            </div>
           </div>
           <div className="text-center lg:w-2/3 w-full">
             <h1
@@ -511,7 +515,9 @@ function App() {
           }}
           className="absolute top-5 left-5 cursor-pointer"
         >
-          <ArrowLeft />
+          <div className="hover:opacity-50">
+            <ArrowLeft />
+          </div>
         </div>
         <div className="text-center lg:w-2/3 w-full">
           <h1
