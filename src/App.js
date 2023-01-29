@@ -378,21 +378,30 @@ function App() {
                   ref={sliderRef}
                   className="keen-slider flex gap-4 h-[500px] w-[500px] overflow-hidden"
                 >
-                  <img
-                    className="keen-slider__slide"
-                    src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
-                    alt="Logo"
-                  />
-                  <img
-                    className="keen-slider__slide"
-                    src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
-                    alt="Logo"
-                  />
-                  <img
-                    className="keen-slider__slide"
-                    src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
-                    alt="Logo"
-                  />
+                  <div className="keen-slider__slide flex flex-col justify-center items-center">
+                    <img
+                      className="h-[500px]"
+                      src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
+                      alt="Logo"
+                    />
+                    <h6 className="flex justify-center self-center">1</h6>
+                  </div>
+                  <div className="keen-slider__slide flex flex-col justify-center items-center">
+                    <img
+                      className="h-[500px]"
+                      src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
+                      alt="Logo"
+                    />
+                    <h6 className="flex justify-center self-center">2</h6>
+                  </div>
+                  <div className="keen-slider__slide flex flex-col justify-center items-center">
+                    <img
+                      className="h-[500px] object-cover"
+                      src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
+                      alt="Logo"
+                    />
+                    <h6 className="flex justify-center self-center">3</h6>
+                  </div>
                 </div>
               </div>
             </div>
