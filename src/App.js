@@ -559,7 +559,7 @@ function App() {
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
@@ -573,7 +573,7 @@ function App() {
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
@@ -584,7 +584,7 @@ function App() {
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black`}
+                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
