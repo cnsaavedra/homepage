@@ -345,7 +345,7 @@ function App() {
               pageFirstLoad ? "opacity-0" : "opacity-100"
             } relative transition-all ease-in-out delay-300`}
           >
-            <div className="flex flex-col items-center gap-4 mb-4">
+            <div className="flex flex-col items-start md:items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">FFXIV Statistics</h1>
             </div>
             <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
