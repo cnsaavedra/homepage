@@ -220,14 +220,14 @@ function App() {
               </p>
               <p className="md:w-[1000px] mx-8 md:mx-0">
                 In my spare time, I developed my personal portfolio
-                (github.com/cnsaavedra) by making a web, mobile, and desktop
-                applications, mostly in Javascript, Python, and its frameworks.
-                Outside of my professional and academic life, I'm a
-                semi-professional music producer. I have produced for record
-                labels such as Jazz Hop Café Records and I have achieved more
-                than a million streams through several music platforms (Spotify,
-                SoundCloud, Bandcamp, etc.). You can listen to my music using
-                the links below.
+                <a href="github.com/cnsaavedra"> (github.com/cnsaavedra) </a>by
+                making a web, mobile, and desktop applications, mostly in
+                Javascript, Python, and its frameworks. Outside of my
+                professional and academic life, I'm a semi-professional music
+                producer. I have produced for record labels such as Jazz Hop
+                Café Records and I have achieved more than a million streams
+                through several music platforms (Spotify, SoundCloud, Bandcamp,
+                etc.). You can listen to my music using the links below.
               </p>
               <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
                 <a
