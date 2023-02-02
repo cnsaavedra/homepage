@@ -12,6 +12,40 @@ function App() {
 
   const aboutMeRef = useRef(null);
 
+  const [scrollDir, setScrollDir] = useState("none");
+
+  useEffect(() => {
+    if (!pageFirstLoad) {
+      const threshold = 0;
+      let lastScrollY = window.pageYOffset;
+      let ticking = false;
+
+      const updateScrollDir = () => {
+        const scrollY = window.pageYOffset;
+
+        if (Math.abs(scrollY - lastScrollY) < threshold) {
+          ticking = false;
+          return;
+        }
+        setScrollDir(scrollY > lastScrollY ? "scrolling down" : "scrolling up");
+        lastScrollY = scrollY > 0 ? scrollY : 0;
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateScrollDir);
+          ticking = true;
+        }
+      };
+
+      window.addEventListener("scroll", onScroll);
+      console.log(scrollDir);
+
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+  }, [scrollDir, pageFirstLoad]);
+
   useEffect(() => {
     let timer1 = setTimeout(() => setPageFirstLoad(false), delay * 1000);
     return () => {
@@ -32,19 +66,21 @@ function App() {
     return (
       <div>
         <section className="body-font font-poppins min-h-screen">
-          {!pressedAboutMeArrow && !pageFirstLoad && (
-            <div
-              tabIndex={0}
-              role="button"
-              onClick={() => {
-                setPressedAboutMeArrow(true);
-                scrollToAboutMe();
-              }}
-              className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-ping cursor-pointer"
-            >
-              <ArrowDownCircle size={45} />
-            </div>
-          )}
+          {!pressedAboutMeArrow &&
+            !pageFirstLoad &&
+            scrollDir !== "scrolling down" && (
+              <div
+                tabIndex={0}
+                role="button"
+                onClick={() => {
+                  setPressedAboutMeArrow(true);
+                  scrollToAboutMe();
+                }}
+                className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-ping cursor-pointer"
+              >
+                <ArrowDownCircle size={45} />
+              </div>
+            )}
           <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
             <div className="text-center lg:w-2/3 w-full">
               {pageFirstLoad && (
@@ -193,6 +229,32 @@ function App() {
                 SoundCloud, Bandcamp, etc.). You can listen to my music using
                 the links below.
               </p>
+              <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
+                <a
+                  className="text-blue-500 underline"
+                  href="https://soundcloud.com/primaryflow"
+                >
+                  SoundCloud
+                </a>
+                <a
+                  className="text-blue-500 underline"
+                  href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
+                >
+                  Spotify
+                </a>
+                <a
+                  className="text-blue-500 underline"
+                  href="https://music.apple.com/ng/artist/dominant/id1275392590"
+                >
+                  Apple Music
+                </a>
+                <a
+                  className="text-blue-500 underline"
+                  href="https://dominantmusic.bandcamp.com"
+                >
+                  Bandcamp
+                </a>
+              </div>
             </div>
           </section>
         )}
