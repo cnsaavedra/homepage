@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, Linkedin } from "./icons/icons";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
+import { TypeAnimation } from "react-type-animation";
 
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
   const [currentPage, setCurrentPage] = useState("homepage");
-  const delay = 0.5;
+  const delay = currentPage === "homepage" ? 4 : 0.5;
 
   useEffect(() => {
     let timer1 = setTimeout(() => setPageFirstLoad(false), delay * 1000);
@@ -20,6 +21,21 @@ function App() {
       <section className="body-font font-poppins">
         <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
           <div className="text-center lg:w-2/3 w-full">
+            {pageFirstLoad && (
+              <TypeAnimation
+                sequence={[
+                  "Hi,", // Types 'One'
+                  1000, // Waits 2s
+                  "Hi, my name is Christian Saavedra", // Types 'Three' without deleting 'Two'
+                  () => {
+                    console.log("Done typing!"); // Place optional callbacks anywhere in the array
+                  },
+                ]}
+                wrapper="div"
+                cursor={true}
+                style={{ fontSize: "3em" }}
+              />
+            )}
             <h1
               className={`${
                 pageFirstLoad ? "opacity-0" : "opacity-100"
