@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArrowLeft, Linkedin } from "./icons/icons";
+import { useEffect, useState, useRef } from "react";
+import { ArrowLeft, ArrowDownCircle } from "./icons/icons";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { TypeAnimation } from "react-type-animation";
@@ -7,7 +7,10 @@ import { TypeAnimation } from "react-type-animation";
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
   const [currentPage, setCurrentPage] = useState("homepage");
+  const [pressedAboutMeArrow, setPressedAboutMeArrow] = useState(false);
   const delay = currentPage === "homepage" ? 4 : 0.5;
+
+  const aboutMeRef = useRef(null);
 
   useEffect(() => {
     let timer1 = setTimeout(() => setPageFirstLoad(false), delay * 1000);
@@ -16,112 +19,184 @@ function App() {
     };
   }, [currentPage]);
 
+  function aboutMe() {}
+
+  function scrollToAboutMe() {
+    window.scrollTo({
+      top: aboutMeRef.current.offsetTop,
+      behavior: "smooth",
+    });
+  }
+
   function homePage() {
     return (
-      <section className="body-font font-poppins">
-        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
-          <div className="text-center lg:w-2/3 w-full">
-            {pageFirstLoad && (
-              <TypeAnimation
-                sequence={[
-                  "Hi,", // Types 'One'
-                  1000, // Waits 2s
-                  "Hi, my name is Christian Saavedra", // Types 'Three' without deleting 'Two'
-                  () => {
-                    console.log("Done typing!"); // Place optional callbacks anywhere in the array
-                  },
-                ]}
-                wrapper="div"
-                cursor={true}
-                style={{ fontSize: "3em" }}
-              />
-            )}
-            <h1
-              className={`${
-                pageFirstLoad ? "opacity-0" : "opacity-100"
-              } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
+      <div>
+        <section className="body-font font-poppins min-h-screen">
+          {!pressedAboutMeArrow && !pageFirstLoad && (
+            <div
+              tabIndex={0}
+              role="button"
+              onClick={() => {
+                setPressedAboutMeArrow(true);
+                scrollToAboutMe();
+              }}
+              className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-ping cursor-pointer"
             >
-              Welcome to my website
-            </h1>
-            <div className="flex justify-center items-center gap-8 mb-8">
-              <h6
-                tabIndex={0}
-                role="button"
-                onClick={() => {
-                  setPageFirstLoad(true);
-                  setCurrentPage("experience");
-                }}
-                className={`${
-                  pageFirstLoad ? "opacity-0" : "opacity-100"
-                } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
-              >
-                Experience
-              </h6>
-              <h6
-                tabIndex={0}
-                role="button"
-                onClick={() => {
-                  setPageFirstLoad(true);
-                  setCurrentPage("portfolio");
-                }}
-                className={`${
-                  pageFirstLoad ? "opacity-0" : "opacity-100"
-                } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
-              >
-                Portfolio
-              </h6>
-              <h6
-                tabIndex={0}
-                role="button"
-                onClick={() => {
-                  setPageFirstLoad(true);
-                  setCurrentPage("contact");
-                }}
-                className={`${
-                  pageFirstLoad ? "opacity-0" : "opacity-100"
-                } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
-              >
-                Contact
-              </h6>
+              <ArrowDownCircle size={45} />
             </div>
-            <div className="flex justify-center items-center gap-8 mb-8 ml-6">
-              <a href="https://github.com/cnsaavedra">
-                <img
-                  className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={40}
-                  height={40}
-                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                  alt="Github"
+          )}
+          <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
+            <div className="text-center lg:w-2/3 w-full">
+              {pageFirstLoad && (
+                <TypeAnimation
+                  sequence={[
+                    "Hi,", // Types 'One'
+                    1000, // Waits 2s
+                    "Hi, my name is Christian Saavedra", // Types 'Three' without deleting 'Two'
+                    () => {
+                      console.log("Done typing!"); // Place optional callbacks anywhere in the array
+                    },
+                  ]}
+                  wrapper="div"
+                  cursor={true}
+                  style={{ fontSize: "3em" }}
                 />
-              </a>
-              <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
-                <img
+              )}
+              <h1
+                className={`${
+                  pageFirstLoad ? "opacity-0" : "opacity-100"
+                } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
+              >
+                Welcome to my website
+              </h1>
+              <div className="flex justify-center items-center gap-8 mb-8">
+                <h6
+                  tabIndex={0}
+                  role="button"
+                  onClick={() => {
+                    setPageFirstLoad(true);
+                    setCurrentPage("experience");
+                  }}
                   className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={40}
-                  height={40}
-                  src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                  alt="Linkedin"
-                />
-              </a>
-              <a href="https://soundcloud.com/primaryflow">
-                <img
+                    pageFirstLoad ? "opacity-0" : "opacity-100"
+                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
+                >
+                  Experience
+                </h6>
+                <h6
+                  tabIndex={0}
+                  role="button"
+                  onClick={() => {
+                    setPageFirstLoad(true);
+                    setCurrentPage("portfolio");
+                  }}
                   className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={40}
-                  height={40}
-                  src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                  alt="Soundcloud"
-                />
-              </a>
+                    pageFirstLoad ? "opacity-0" : "opacity-100"
+                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
+                >
+                  Portfolio
+                </h6>
+                <h6
+                  tabIndex={0}
+                  role="button"
+                  onClick={() => {
+                    setPageFirstLoad(true);
+                    setCurrentPage("contact");
+                  }}
+                  className={`${
+                    pageFirstLoad ? "opacity-0" : "opacity-100"
+                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
+                >
+                  Contact
+                </h6>
+              </div>
+              <div className="flex justify-center items-center gap-8 mb-8 ml-6">
+                <a href="https://github.com/cnsaavedra">
+                  <img
+                    className={`${
+                      pageFirstLoad
+                        ? "opacity-0 -left-36"
+                        : "opacity-100 left-0"
+                    }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                    width={40}
+                    height={40}
+                    src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                    alt="Github"
+                  />
+                </a>
+                <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+                  <img
+                    className={`${
+                      pageFirstLoad
+                        ? "opacity-0 -left-36"
+                        : "opacity-100 left-0"
+                    }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                    width={40}
+                    height={40}
+                    src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                    alt="Linkedin"
+                  />
+                </a>
+                <a href="https://soundcloud.com/primaryflow">
+                  <img
+                    className={`${
+                      pageFirstLoad
+                        ? "opacity-0 -left-36"
+                        : "opacity-100 left-0"
+                    }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                    width={40}
+                    height={40}
+                    src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                    alt="Soundcloud"
+                  />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+        {!pageFirstLoad && (
+          <section
+            ref={aboutMeRef}
+            className="body-font font-poppins min-h-screen py-12"
+          >
+            <div className="flex flex-col justify-center items-center">
+              <img
+                className="rounded-full w-[200px] h-[200px]"
+                src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
+                alt="Profile"
+              />
+              <h1 className="text-[4em] my-8">About Me</h1>
+              <p className="w-[1000px] mb-8">
+                I graduated from the University of Toronto with an HBSc,
+                including Computer Science Major, Math and Statistics Minors.
+                Before graduating, I interned through Runner, where I learned a
+                lot about coding practices, industry standards, and more
+                involving dev workspaces. After graduating, I went back to
+                Runner / FutureFuture (Under the umbrella of Runner), where I
+                developed and maintained an E-Commerce website involving many
+                other projects related to analytics, dispatching, and delivery
+                software solutions. In Runner / FutureFuture, I lead a project
+                staffed as a Full-stack & Lead Developer working on various
+                roles such as Front-end, Back-end, Mobile, and Dev-ops. My main
+                focus was to build a dashboard for merchants/partners of the
+                company that allows them to View/Edit/Add orders, products,
+                menu's, and also see analtics/insights.
+              </p>
+              <p className="w-[1000px]">
+                In my spare time, I developed my personal portfolio
+                (github.com/cnsaavedra) by making a web, mobile, and desktop
+                applications, mostly in Javascript, Python, and its frameworks.
+                Outside of my professional and academic life, I'm a
+                semi-professional music producer. I have produced for record
+                labels such as Jazz Hop Café Records and I have achieved more
+                than a million streams through several music platforms (Spotify,
+                SoundCloud, Bandcamp, etc.). You can listen to my music using
+                the links below.
+              </p>
+            </div>
+          </section>
+        )}
+      </div>
     );
   }
 
