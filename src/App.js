@@ -59,7 +59,7 @@ function App() {
 
   function scrollToAboutMe() {
     window.scrollTo({
-      top: aboutMeRef.current.offsetTop,
+      top: 850,
       behavior: "smooth",
     });
   }
@@ -89,7 +89,7 @@ function App() {
       end: "#albums",
       properties: [
         {
-          startValue: 0,
+          startValue: 0.5,
           endValue: 1,
           property: "opacity",
         },
