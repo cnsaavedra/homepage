@@ -11,6 +11,7 @@ function App() {
   const delay = currentPage === "homepage" ? 4 : 0.5;
 
   const aboutMeRef = useRef(null);
+  const albumsRef = useRef(null);
 
   const [scrollDir, setScrollDir] = useState("none");
 
@@ -191,72 +192,113 @@ function App() {
           </div>
         </section>
         {!pageFirstLoad && (
-          <section
-            ref={aboutMeRef}
-            className="body-font font-poppins min-h-screen py-12"
-          >
-            <div className="flex flex-col justify-center items-center mx-auto">
-              <img
-                className="rounded-full w-[200px] h-[200px]"
-                src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
-                alt="Profile"
-              />
-              <h1 className="text-[4em] my-8">About Me</h1>
-              <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
-                I graduated from the University of Toronto with an HBSc,
-                including Computer Science Major, Math and Statistics Minors.
-                Before graduating, I interned through Runner, where I learned a
-                lot about coding practices, industry standards, and more
-                involving dev workspaces. After graduating, I went back to
-                Runner / FutureFuture (Under the umbrella of Runner), where I
-                developed and maintained an E-Commerce website involving many
-                other projects related to analytics, dispatching, and delivery
-                software solutions. In Runner / FutureFuture, I lead a project
-                staffed as a Full-stack & Lead Developer working on various
-                roles such as Front-end, Back-end, Mobile, and Dev-ops. My main
-                focus was to build a dashboard for merchants/partners of the
-                company that allows them to View/Edit/Add orders, products,
-                menu's, and also see analtics/insights.
-              </p>
-              <p className="md:w-[1000px] mx-8 md:mx-0">
-                In my spare time, I developed my personal portfolio
-                <a href="github.com/cnsaavedra"> (github.com/cnsaavedra) </a>by
-                making a web, mobile, and desktop applications, mostly in
-                Javascript, Python, and its frameworks. Outside of my
-                professional and academic life, I'm a semi-professional music
-                producer. I have produced for record labels such as Jazz Hop
-                Café Records and I have achieved more than a million streams
-                through several music platforms (Spotify, SoundCloud, Bandcamp,
-                etc.). You can listen to my music using the links below.
-              </p>
-              <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
-                <a
-                  className="text-blue-500 underline"
-                  href="https://soundcloud.com/primaryflow"
-                >
-                  SoundCloud
-                </a>
-                <a
-                  className="text-blue-500 underline"
-                  href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
-                >
-                  Spotify
-                </a>
-                <a
-                  className="text-blue-500 underline"
-                  href="https://music.apple.com/ng/artist/dominant/id1275392590"
-                >
-                  Apple Music
-                </a>
-                <a
-                  className="text-blue-500 underline"
-                  href="https://dominantmusic.bandcamp.com"
-                >
-                  Bandcamp
-                </a>
+          <>
+            <section
+              ref={aboutMeRef}
+              className="body-font font-poppins min-h-screen py-12"
+            >
+              <div className="flex flex-col justify-center items-center mx-auto">
+                <img
+                  className="rounded-full w-[200px] h-[200px]"
+                  src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
+                  alt="Profile"
+                />
+                <h1 className="text-[4em] my-8">About Me</h1>
+                <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
+                  I graduated from the University of Toronto with an HBSc,
+                  including Computer Science Major, Math and Statistics Minors.
+                  Before graduating, I interned through Runner, where I learned
+                  a lot about coding practices, industry standards, and more
+                  involving dev workspaces. After graduating, I went back to
+                  Runner / FutureFuture (Under the umbrella of Runner), where I
+                  developed and maintained an E-Commerce website involving many
+                  other projects related to analytics, dispatching, and delivery
+                  software solutions. In Runner / FutureFuture, I lead a project
+                  staffed as a Full-stack & Lead Developer working on various
+                  roles such as Front-end, Back-end, Mobile, and Dev-ops. My
+                  main focus was to build a dashboard for merchants/partners of
+                  the company that allows them to View/Edit/Add orders,
+                  products, menu's, and also see analtics/insights.
+                </p>
+                <p className="md:w-[1000px] mx-8 md:mx-0">
+                  In my spare time, I developed my personal portfolio
+                  <a href="github.com/cnsaavedra"> (github.com/cnsaavedra) </a>
+                  by making a web, mobile, and desktop applications, mostly in
+                  Javascript, Python, and its frameworks. Outside of my
+                  professional and academic life, I'm a semi-professional music
+                  producer. I have produced for record labels such as Jazz Hop
+                  Café Records and I have achieved more than a million streams
+                  through several music platforms (Spotify, SoundCloud,
+                  Bandcamp, etc.). You can listen to my music using the links
+                  below.
+                </p>
+                <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
+                  <a
+                    className="text-blue-500 underline"
+                    href="https://soundcloud.com/primaryflow"
+                  >
+                    SoundCloud
+                  </a>
+                  <a
+                    className="text-blue-500 underline"
+                    href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
+                  >
+                    Spotify
+                  </a>
+                  <a
+                    className="text-blue-500 underline"
+                    href="https://music.apple.com/ng/artist/dominant/id1275392590"
+                  >
+                    Apple Music
+                  </a>
+                  <a
+                    className="text-blue-500 underline"
+                    href="https://dominantmusic.bandcamp.com"
+                  >
+                    Bandcamp
+                  </a>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+            <section
+              ref={albumsRef}
+              className="body-font font-poppins min-h-screen py-12 flex flex-col items-center justify-center"
+            >
+              <h1 className="my-8 text-[24px]">Have a sneak at my albums!</h1>
+              <div className="mx-auto flex flex-col justify-center items-center w-[500px]">
+                <iframe
+                  title="Harvest of Memories"
+                  className="border-0 w-full h-[120px] self-center"
+                  src="https://bandcamp.com/EmbeddedPlayer/album=1224178121/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                  seamless
+                >
+                  <a href="https://dominantmusic.bandcamp.com/album/harvest-of-memories">
+                    Harvest of Memories by DOMINANT
+                  </a>
+                </iframe>
+                <iframe
+                  title="winter story"
+                  className="border-0 w-full h-[120px] self-center"
+                  src="https://bandcamp.com/EmbeddedPlayer/album=2211329182/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                  seamless
+                >
+                  <a href="https://dominantmusic.bandcamp.com/album/winter-story">
+                    winter story by DOMINANT
+                  </a>
+                </iframe>
+                <iframe
+                  title="prismatic"
+                  className="border-0 w-full h-[120px] self-center"
+                  src="https://bandcamp.com/EmbeddedPlayer/album=793618864/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                  seamless
+                >
+                  <a href="https://dominantmusic.bandcamp.com/album/prismatic">
+                    prismatic by DOMINANT
+                  </a>
+                </iframe>
+              </div>
+            </section>
+          </>
         )}
       </div>
     );
