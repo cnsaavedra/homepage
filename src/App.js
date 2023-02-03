@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowDownCircle } from "./icons/icons";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { TypeAnimation } from "react-type-animation";
+import Plx from "react-plx";
 
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
@@ -63,6 +64,68 @@ function App() {
     });
   }
 
+  const parallaxData = [
+    {
+      start: 0,
+      end: 500,
+      properties: [
+        {
+          startValue: 1,
+          endValue: 0,
+          property: "opacity",
+        },
+        {
+          startValue: 1,
+          endValue: 1.75,
+          property: "translateY",
+        },
+      ],
+    },
+  ];
+
+  const parallaxDataAboutMe = [
+    {
+      start: "self",
+      end: "#albums",
+      properties: [
+        {
+          startValue: 0,
+          endValue: 1,
+          property: "opacity",
+        },
+        {
+          startValue: 1,
+          endValue: 1.75,
+          property: "translateY",
+        },
+      ],
+    },
+  ];
+
+  const parallaxDataAlbums = [
+    {
+      start: "self",
+      end: "#end",
+      properties: [
+        {
+          startValue: "#3cb99c",
+          endValue: "rgba(50,50,200,0.8)",
+          property: "backgroundColor",
+        },
+        {
+          startValue: 0,
+          endValue: 100,
+          property: "translateY",
+        },
+        {
+          startValue: 0.75,
+          endValue: 1,
+          property: "opacity",
+        },
+      ],
+    },
+  ];
+
   function homePage() {
     return (
       <div>
@@ -99,205 +162,220 @@ function App() {
                   style={{ fontSize: "3em" }}
                 />
               )}
-              <h1
-                className={`${
-                  pageFirstLoad ? "opacity-0" : "opacity-100"
-                } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
-              >
-                Welcome to my website
-              </h1>
-              <div className="flex justify-center items-center gap-8 mb-8">
-                <h6
-                  tabIndex={0}
-                  role="button"
-                  onClick={() => {
-                    setPageFirstLoad(true);
-                    setCurrentPage("experience");
-                  }}
+              <Plx className="intro" parallaxData={parallaxData}>
+                <h1
                   className={`${
                     pageFirstLoad ? "opacity-0" : "opacity-100"
-                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
+                  } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
                 >
-                  Experience
-                </h6>
-                <h6
-                  tabIndex={0}
-                  role="button"
-                  onClick={() => {
-                    setPageFirstLoad(true);
-                    setCurrentPage("portfolio");
-                  }}
-                  className={`${
-                    pageFirstLoad ? "opacity-0" : "opacity-100"
-                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
-                >
-                  Portfolio
-                </h6>
-                <h6
-                  tabIndex={0}
-                  role="button"
-                  onClick={() => {
-                    setPageFirstLoad(true);
-                    setCurrentPage("contact");
-                  }}
-                  className={`${
-                    pageFirstLoad ? "opacity-0" : "opacity-100"
-                  } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
-                >
-                  Contact
-                </h6>
-              </div>
-              <div className="flex justify-center items-center gap-8 mb-8 ml-6">
-                <a href="https://github.com/cnsaavedra">
-                  <img
+                  Welcome to my website
+                </h1>
+                <div className="flex justify-center items-center gap-8 mb-8">
+                  <h6
+                    tabIndex={0}
+                    role="button"
+                    onClick={() => {
+                      setPageFirstLoad(true);
+                      setCurrentPage("experience");
+                    }}
                     className={`${
-                      pageFirstLoad
-                        ? "opacity-0 -left-36"
-                        : "opacity-100 left-0"
-                    }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                    width={40}
-                    height={40}
-                    src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                    alt="Github"
-                  />
-                </a>
-                <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
-                  <img
+                      pageFirstLoad ? "opacity-0" : "opacity-100"
+                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
+                  >
+                    Experience
+                  </h6>
+                  <h6
+                    tabIndex={0}
+                    role="button"
+                    onClick={() => {
+                      setPageFirstLoad(true);
+                      setCurrentPage("portfolio");
+                    }}
                     className={`${
-                      pageFirstLoad
-                        ? "opacity-0 -left-36"
-                        : "opacity-100 left-0"
-                    }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                    width={40}
-                    height={40}
-                    src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                    alt="Linkedin"
-                  />
-                </a>
-                <a href="https://soundcloud.com/primaryflow">
-                  <img
+                      pageFirstLoad ? "opacity-0" : "opacity-100"
+                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
+                  >
+                    Portfolio
+                  </h6>
+                  <h6
+                    tabIndex={0}
+                    role="button"
+                    onClick={() => {
+                      setPageFirstLoad(true);
+                      setCurrentPage("contact");
+                    }}
                     className={`${
-                      pageFirstLoad
-                        ? "opacity-0 -left-36"
-                        : "opacity-100 left-0"
-                    }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                    width={40}
-                    height={40}
-                    src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                    alt="Soundcloud"
-                  />
-                </a>
-              </div>
+                      pageFirstLoad ? "opacity-0" : "opacity-100"
+                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
+                  >
+                    Contact
+                  </h6>
+                </div>
+                <div className="flex justify-center items-center gap-8 mb-8 ml-6">
+                  <a href="https://github.com/cnsaavedra">
+                    <img
+                      className={`${
+                        pageFirstLoad
+                          ? "opacity-0 -left-36"
+                          : "opacity-100 left-0"
+                      }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                      width={40}
+                      height={40}
+                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                      alt="Github"
+                    />
+                  </a>
+                  <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+                    <img
+                      className={`${
+                        pageFirstLoad
+                          ? "opacity-0 -left-36"
+                          : "opacity-100 left-0"
+                      }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                      width={40}
+                      height={40}
+                      src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                      alt="Linkedin"
+                    />
+                  </a>
+                  <a href="https://soundcloud.com/primaryflow">
+                    <img
+                      className={`${
+                        pageFirstLoad
+                          ? "opacity-0 -left-36"
+                          : "opacity-100 left-0"
+                      }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                      width={40}
+                      height={40}
+                      src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                      alt="Soundcloud"
+                    />
+                  </a>
+                </div>
+              </Plx>
             </div>
           </div>
         </section>
         {!pageFirstLoad && (
           <>
-            <section
-              ref={aboutMeRef}
-              className="body-font font-poppins min-h-screen py-12"
-            >
-              <div className="flex flex-col justify-center items-center mx-auto">
-                <img
-                  className="rounded-full w-[200px] h-[200px]"
-                  src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
-                  alt="Profile"
-                />
-                <h1 className="text-[4em] my-8">About Me</h1>
-                <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
-                  I graduated from the University of Toronto with an HBSc,
-                  including Computer Science Major, Math and Statistics Minors.
-                  Before graduating, I interned through Runner, where I learned
-                  a lot about coding practices, industry standards, and more
-                  involving dev workspaces. After graduating, I went back to
-                  Runner / FutureFuture (Under the umbrella of Runner), where I
-                  developed and maintained an E-Commerce website involving many
-                  other projects related to analytics, dispatching, and delivery
-                  software solutions. In Runner / FutureFuture, I lead a project
-                  staffed as a Full-stack & Lead Developer working on various
-                  roles such as Front-end, Back-end, Mobile, and Dev-ops. My
-                  main focus was to build a dashboard for merchants/partners of
-                  the company that allows them to View/Edit/Add orders,
-                  products, menu's, and also see analtics/insights.
-                </p>
-                <p className="md:w-[1000px] mx-8 md:mx-0">
-                  In my spare time, I developed my personal portfolio
-                  <a href="github.com/cnsaavedra"> (github.com/cnsaavedra) </a>
-                  by making a web, mobile, and desktop applications, mostly in
-                  Javascript, Python, and its frameworks. Outside of my
-                  professional and academic life, I'm a semi-professional music
-                  producer. I have produced for record labels such as Jazz Hop
-                  Café Records and I have achieved more than a million streams
-                  through several music platforms (Spotify, SoundCloud,
-                  Bandcamp, etc.). You can listen to my music using the links
-                  below.
-                </p>
-                <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
-                  <a
-                    className="text-blue-500 underline"
-                    href="https://soundcloud.com/primaryflow"
-                  >
-                    SoundCloud
-                  </a>
-                  <a
-                    className="text-blue-500 underline"
-                    href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
-                  >
-                    Spotify
-                  </a>
-                  <a
-                    className="text-blue-500 underline"
-                    href="https://music.apple.com/ng/artist/dominant/id1275392590"
-                  >
-                    Apple Music
-                  </a>
-                  <a
-                    className="text-blue-500 underline"
-                    href="https://dominantmusic.bandcamp.com"
-                  >
-                    Bandcamp
-                  </a>
+            <Plx className="intro" parallaxData={parallaxDataAboutMe}>
+              <section
+                ref={aboutMeRef}
+                id="about-me"
+                className="body-font font-poppins min-h-screen py-12"
+              >
+                <div className="flex flex-col justify-center items-center mx-auto">
+                  <img
+                    className="rounded-full w-[200px] h-[200px]"
+                    src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
+                    alt="Profile"
+                  />
+                  <h1 className="text-[4em] my-8">About Me</h1>
+                  <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
+                    I graduated from the University of Toronto with an HBSc,
+                    including Computer Science Major, Math and Statistics
+                    Minors. Before graduating, I interned through Runner, where
+                    I learned a lot about coding practices, industry standards,
+                    and more involving dev workspaces. After graduating, I went
+                    back to Runner / FutureFuture (Under the umbrella of
+                    Runner), where I developed and maintained an E-Commerce
+                    website involving many other projects related to analytics,
+                    dispatching, and delivery software solutions. In Runner /
+                    FutureFuture, I lead a project staffed as a Full-stack &
+                    Lead Developer working on various roles such as Front-end,
+                    Back-end, Mobile, and Dev-ops. My main focus was to build a
+                    dashboard for merchants/partners of the company that allows
+                    them to View/Edit/Add orders, products, menu's, and also see
+                    analtics/insights.
+                  </p>
+                  <p className="md:w-[1000px] mx-8 md:mx-0">
+                    In my spare time, I developed my personal portfolio
+                    <a href="github.com/cnsaavedra">
+                      {" "}
+                      (github.com/cnsaavedra){" "}
+                    </a>
+                    by making a web, mobile, and desktop applications, mostly in
+                    Javascript, Python, and its frameworks. Outside of my
+                    professional and academic life, I'm a semi-professional
+                    music producer. I have produced for record labels such as
+                    Jazz Hop Café Records and I have achieved more than a
+                    million streams through several music platforms (Spotify,
+                    SoundCloud, Bandcamp, etc.). You can listen to my music
+                    using the links below.
+                  </p>
+                  <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
+                    <a
+                      className="text-blue-500 underline"
+                      href="https://soundcloud.com/primaryflow"
+                    >
+                      SoundCloud
+                    </a>
+                    <a
+                      className="text-blue-500 underline"
+                      href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
+                    >
+                      Spotify
+                    </a>
+                    <a
+                      className="text-blue-500 underline"
+                      href="https://music.apple.com/ng/artist/dominant/id1275392590"
+                    >
+                      Apple Music
+                    </a>
+                    <a
+                      className="text-blue-500 underline"
+                      href="https://dominantmusic.bandcamp.com"
+                    >
+                      Bandcamp
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </section>
-            <section
-              ref={albumsRef}
-              className="body-font font-poppins min-h-screen py-12 flex flex-col items-center justify-center"
-            >
-              <h1 className="my-8 text-[24px]">Have a sneak at my albums!</h1>
-              <div className="mx-auto flex flex-col justify-center items-center w-[500px]">
-                <iframe
-                  title="Harvest of Memories"
-                  className="border-0 w-full h-[120px] self-center"
-                  src="https://bandcamp.com/EmbeddedPlayer/album=1224178121/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                  seamless
-                >
-                  <a href="https://dominantmusic.bandcamp.com/album/harvest-of-memories">
-                    Harvest of Memories by DOMINANT
-                  </a>
-                </iframe>
-                <iframe
-                  title="winter story"
-                  className="border-0 w-full h-[120px] self-center"
-                  src="https://bandcamp.com/EmbeddedPlayer/album=2211329182/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                  seamless
-                >
-                  <a href="https://dominantmusic.bandcamp.com/album/winter-story">
-                    winter story by DOMINANT
-                  </a>
-                </iframe>
-                <iframe
-                  title="prismatic"
-                  className="border-0 w-full h-[120px] self-center"
-                  src="https://bandcamp.com/EmbeddedPlayer/album=793618864/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                  seamless
-                >
-                  <a href="https://dominantmusic.bandcamp.com/album/prismatic">
-                    prismatic by DOMINANT
-                  </a>
-                </iframe>
-              </div>
-            </section>
+              </section>
+            </Plx>
+            <Plx className="intro" parallaxData={parallaxDataAlbums}>
+              <section
+                id="albums"
+                ref={albumsRef}
+                className="body-font font-poppins min-h-screen py-12 flex flex-col items-center justify-center"
+              >
+                <h1 className="my-8 text-[24px] text-white">
+                  Have a sneak at my albums!
+                </h1>
+                <div className="mx-auto flex flex-col justify-center items-center w-[500px]">
+                  <iframe
+                    title="Harvest of Memories"
+                    className="border-0 w-full h-[120px] self-center"
+                    src="https://bandcamp.com/EmbeddedPlayer/album=1224178121/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                    seamless
+                  >
+                    <a href="https://dominantmusic.bandcamp.com/album/harvest-of-memories">
+                      Harvest of Memories by DOMINANT
+                    </a>
+                  </iframe>
+                  <iframe
+                    title="winter story"
+                    className="border-0 w-full h-[120px] self-center"
+                    src="https://bandcamp.com/EmbeddedPlayer/album=2211329182/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                    seamless
+                  >
+                    <a href="https://dominantmusic.bandcamp.com/album/winter-story">
+                      winter story by DOMINANT
+                    </a>
+                  </iframe>
+                  <iframe
+                    title="prismatic"
+                    className="border-0 w-full h-[120px] self-center"
+                    src="https://bandcamp.com/EmbeddedPlayer/album=793618864/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                    seamless
+                  >
+                    <a href="https://dominantmusic.bandcamp.com/album/prismatic">
+                      prismatic by DOMINANT
+                    </a>
+                  </iframe>
+                </div>
+              </section>
+              <div id="end" />
+            </Plx>
           </>
         )}
       </div>
