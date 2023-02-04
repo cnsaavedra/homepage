@@ -276,13 +276,13 @@ function App() {
                     including Computer Science Major, Math and Statistics
                     Minors. Before graduating, I interned through Runner, where
                     I learned a lot about coding practices, industry standards,
-                    and more involving dev workspaces. After graduating, I went
-                    back to Runner / FutureFuture (Under the umbrella of
+                    and more involving dev workspaces. After graduating, I
+                    returned to Runner / FutureFuture (Under the umbrella of
                     Runner), where I developed and maintained an E-Commerce
                     website involving many other projects related to analytics,
                     dispatching, and delivery software solutions. In Runner /
-                    FutureFuture, I lead a project staffed as a Full-stack &
-                    Lead Developer working on various roles such as Front-end,
+                    FutureFuture, I led a project staffed as a Full-stack & Lead
+                    Developer working on various roles such as Front-end,
                     Back-end, Mobile, and Dev-ops. My main focus was to build a
                     dashboard for merchants/partners of the company that allows
                     them to View/Edit/Add orders, products, menu's, and also see
@@ -294,7 +294,7 @@ function App() {
                       {" "}
                       (github.com/cnsaavedra){" "}
                     </a>
-                    by making a web, mobile, and desktop applications, mostly in
+                    by making web, mobile, and desktop applications, mostly in
                     Javascript, Python, and its frameworks. Outside of my
                     professional and academic life, I'm a semi-professional
                     music producer. I have produced for record labels such as
