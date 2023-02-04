@@ -580,7 +580,7 @@ function App() {
 
   const parallaxDataP3 = [
     {
-      start: 2300,
+      start: "self",
       end: 2800,
       properties: [
         {
@@ -594,7 +594,7 @@ function App() {
 
   const parallaxDataP4 = [
     {
-      start: 2500,
+      start: "self",
       end: 3900,
       properties: [
         {
