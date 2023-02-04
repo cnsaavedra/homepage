@@ -549,6 +549,77 @@ function App() {
     },
   });
 
+  const parallaxDataP1 = [
+    {
+      start: "self",
+      end: 1500,
+      duration: 1000,
+      properties: [
+        {
+          startValue: 0.5,
+          endValue: 1.1,
+          property: "scale",
+        },
+      ],
+    },
+  ];
+
+  const parallaxDataP2 = [
+    {
+      start: "self",
+      end: 2400,
+      properties: [
+        {
+          startValue: 0.5,
+          endValue: 1.1,
+          property: "scale",
+        },
+      ],
+    },
+  ];
+
+  const parallaxDataP3 = [
+    {
+      start: 2300,
+      end: 2800,
+      properties: [
+        {
+          startValue: 0.5,
+          endValue: 1.1,
+          property: "scale",
+        },
+      ],
+    },
+  ];
+
+  const parallaxDataP4 = [
+    {
+      start: 2500,
+      end: 3900,
+      properties: [
+        {
+          startValue: 0.5,
+          endValue: 1.1,
+          property: "scale",
+        },
+      ],
+    },
+  ];
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
+
   function portfolio() {
     return (
       <section className="body-font font-poppins">
@@ -720,42 +791,82 @@ function App() {
                     You are given 60 seconds to put in your thoughts, therefore
                     the website is trying to get the first thing that comes to
                     you and your friends minds.
-                    <img
-                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
-                      alt="Logo"
-                    />
+                    {!isMobile ? (
+                      <Plx className="p1-img" parallaxData={parallaxDataP1}>
+                        <img
+                          className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                          src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
+                          alt="Logo"
+                        />
+                      </Plx>
+                    ) : (
+                      <img
+                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
+                        alt="Logo"
+                      />
+                    )}
                   </span>
                 </li>
                 <li className="text-[18px] flex flex-col">
                   • For example if we want to choose a food place, we would
                   select "Picking Food".
-                  <img
-                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
-                    alt="Logo"
-                  />
+                  {!isMobile ? (
+                    <Plx className="p2-img" parallaxData={parallaxDataP2}>
+                      <img
+                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
+                        alt="Logo"
+                      />
+                    </Plx>
+                  ) : (
+                    <img
+                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
+                      alt="Logo"
+                    />
+                  )}
                 </li>
                 <li className="text-[18px] flex flex-col">
                   • In this scenario, seems like everyone is okay with whatever.
                   The website analyzes the data and tries to narrow down options
                   and finally giving the best option.
-                  <img
-                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
-                    alt="Logo"
-                  />
+                  {!isMobile ? (
+                    <Plx className="p3-img" parallaxData={parallaxDataP3}>
+                      <img
+                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
+                        alt="Logo"
+                      />
+                    </Plx>
+                  ) : (
+                    <img
+                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
+                      alt="Logo"
+                    />
+                  )}
                 </li>
                 <li className="text-[18px] flex flex-col">
                   • From the database, the website narrowed down to only
                   selecting food and checks for the most common cuisine/food (If
                   someone says "I don't want burger" it would detect the "don't
                   want (insert food here)" and would not include burger).
-                  <img
-                    className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                    src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
-                    alt="Logo"
-                  />
+                  {!isMobile ? (
+                    <Plx className="p4-img" parallaxData={parallaxDataP4}>
+                      <img
+                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
+                        alt="Logo"
+                      />
+                    </Plx>
+                  ) : (
+                    <img
+                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
+                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
+                      alt="Logo"
+                    />
+                  )}
                 </li>
                 <li className="text-[18px] flex flex-col">
                   • So in the end we are given these options!
