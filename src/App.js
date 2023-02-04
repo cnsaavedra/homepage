@@ -140,7 +140,7 @@ function App() {
                   setPressedAboutMeArrow(true);
                   scrollToAboutMe();
                 }}
-                className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-ping cursor-pointer"
+                className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer"
               >
                 <ArrowDownCircle size={45} />
               </div>
