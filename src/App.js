@@ -556,8 +556,8 @@ function App() {
       duration: 1000,
       properties: [
         {
-          startValue: 0.5,
-          endValue: 1.1,
+          startValue: 0.75,
+          endValue: 1.05,
           property: "scale",
         },
       ],
@@ -570,8 +570,8 @@ function App() {
       end: 2400,
       properties: [
         {
-          startValue: 0.5,
-          endValue: 1.1,
+          startValue: 0.75,
+          endValue: 1.05,
           property: "scale",
         },
       ],
@@ -584,8 +584,8 @@ function App() {
       end: 2800,
       properties: [
         {
-          startValue: 0.5,
-          endValue: 1.1,
+          startValue: 0.75,
+          endValue: 1.05,
           property: "scale",
         },
       ],
@@ -598,8 +598,8 @@ function App() {
       end: 3900,
       properties: [
         {
-          startValue: 0.5,
-          endValue: 1.1,
+          startValue: 0.75,
+          endValue: 1.05,
           property: "scale",
         },
       ],
