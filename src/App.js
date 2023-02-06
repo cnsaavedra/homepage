@@ -15,6 +15,7 @@ function App() {
   const albumsRef = useRef(null);
 
   const [scrollDir, setScrollDir] = useState("none");
+  const [yPageOffset, setYPageOffset] = useState(false);
 
   useEffect(() => {
     if (!pageFirstLoad) {
@@ -24,6 +25,10 @@ function App() {
 
       const updateScrollDir = () => {
         const scrollY = window.pageYOffset;
+
+        if (scrollY > 550) {
+          setYPageOffset(true);
+        }
 
         if (Math.abs(scrollY - lastScrollY) < threshold) {
           ticking = false;
@@ -132,7 +137,8 @@ function App() {
         <section className="body-font font-poppins min-h-screen">
           {!pressedAboutMeArrow &&
             !pageFirstLoad &&
-            scrollDir !== "scrolling down" && (
+            scrollDir !== "scrolling down" &&
+            !yPageOffset && (
               <div
                 tabIndex={0}
                 role="button"
