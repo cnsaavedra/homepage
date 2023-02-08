@@ -945,41 +945,85 @@ function App() {
             <span className="font-light text-[18px]">tokibitsu@gmail.com</span>
           </h6>
           <div className="flex flex-col md:flex-row gap-24 justify-center items-center relative my-auto md:h-[500px]">
-            <a href="https://github.com/cnsaavedra">
+            <a className="relative" href="https://github.com/cnsaavedra">
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                } z-50 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                 alt="Github"
               />
+              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  } z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                  width={250}
+                  height={250}
+                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                  alt="Github"
+                />
+                <h1 className="text-black absolute bottom-[-25px] right-[41%] text-center">
+                  Github
+                </h1>
+              </div>
             </a>
+
             <a
-              className="ml-[45px] md:ml-0"
+              className="relative"
               href="https://www.linkedin.com/in/christian-saavedra-b07413245/"
             >
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                } z-0 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                alt="Linkedin"
+                alt="Github"
               />
+              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  } bg-white z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                  width={250}
+                  height={250}
+                  src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
+                  alt="Linkedin"
+                />
+                <h1 className="text-black absolute bottom-[-45px] right-[45%] text-center">
+                  Linkedin
+                </h1>
+              </div>
             </a>
-            <a href="https://soundcloud.com/primaryflow">
+
+            <a className="relative" href="https://soundcloud.com/primaryflow">
               <img
                 className={`${
                   pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                } z-0 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
                 width={250}
                 height={250}
                 src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                alt="Soundcloud"
+                alt="SoundCloud"
               />
+              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
+                <img
+                  className={`${
+                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
+                  } bg-white z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
+                  width={250}
+                  height={250}
+                  src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
+                  alt="Linkedin"
+                />
+                <h1 className="text-black absolute bottom-[-30px] right-[32%] text-center">
+                  SoundCloud
+                </h1>
+              </div>
             </a>
           </div>
         </div>
