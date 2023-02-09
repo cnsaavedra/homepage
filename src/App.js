@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowLeft, ArrowDownCircle } from "./icons/icons";
+import { ArrowLeft, ArrowDownCircle, ArrowUpCircle } from "./icons/icons";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { TypeAnimation } from "react-type-animation";
@@ -28,6 +28,10 @@ function App() {
 
         if (scrollY > 550) {
           setYPageOffset(true);
+        } else {
+          if (currentPage === "portfolio") {
+            setYPageOffset(false);
+          }
         }
 
         if (Math.abs(scrollY - lastScrollY) < threshold) {
@@ -65,6 +69,13 @@ function App() {
   function scrollToAboutMe() {
     window.scrollTo({
       top: 850,
+      behavior: "smooth",
+    });
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
       behavior: "smooth",
     });
   }
@@ -898,6 +909,19 @@ function App() {
               my github
             </a>
           </h1>
+          {yPageOffset && (
+            <div
+              tabIndex={0}
+              role="button"
+              onClick={() => {
+                setPressedAboutMeArrow(true);
+                scrollToTop();
+              }}
+              className="z-50 bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer"
+            >
+              <ArrowUpCircle size={45} />
+            </div>
+          )}
         </div>
       </section>
     );
