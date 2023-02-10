@@ -511,6 +511,11 @@ function App() {
                 Xero
               </li>
               <li className="text-[16px] ml-[8px]">
+                • Overall, revamped e-commerce tools and APIs, enhanced UI/UX,
+                implemented tests/automation, and contributed to delivering a
+                data analytics project.
+              </li>
+              <li className="text-[16px] ml-[8px]">
                 • Worked on database queries to help with analytics
               </li>
               <li className="text-[16px] ml-[8px]">
@@ -531,20 +536,24 @@ function App() {
               <li className="text-[16px] ml-[8px]">
                 • Worked on various projects:
                 <li className="ml-[8px]">
-                  - Dispatch to help dispatchers/couriers, Ecommerce website,
-                  Analytics Platform, Courier App to help couriers with delivery
+                  - Developed and delivered various projects including an
+                  e-commerce website, dispatch platform for
+                  dispatchers/couriers, an analytics platform, and a courier app
+                  aimed at streamlining delivery processes.
                 </li>
               </li>
               <li className="text-[16px] ml-[8px]">
-                • Overall improve, fix and organize code
+                • Overall, implementing better UI/UX, adding more utilities,
+                conducting rigorous QA testing, and fixing critical issues.
+                Ensured cross-browser compatibility across popular browsers such
+                as Internet Explorer, Google Chrome, Safari, and Firefox.
               </li>
               <li className="text-[16px] ml-[8px]">
-                • Improved UI/UX and added utilities/pages for dispatch team
-                with task/order lists, user info, mapping system UI/UX, and
-                auto-updates
+                • Delivered a utilities/pages for dispatch team with task/order
+                lists, user info, mapping system UI/UX, and auto-updates
               </li>
               <li className="text-[16px] ml-[8px]">
-                • Improved UI/UX and added utilities/pages for the main website
+                •Improved UI/UX and added utilities/pages for the main website
                 using animations and improved Frontend code
               </li>
               <li className="text-[16px] ml-[8px]">
