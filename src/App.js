@@ -553,7 +553,7 @@ function App() {
                 lists, user info, mapping system UI/UX, and auto-updates
               </li>
               <li className="text-[16px] ml-[8px]">
-                •Improved UI/UX and added utilities/pages for the main website
+                • Improved UI/UX and added utilities/pages for the main website
                 using animations and improved Frontend code
               </li>
               <li className="text-[16px] ml-[8px]">
