@@ -105,7 +105,7 @@ function App() {
       end: "#albums",
       properties: [
         {
-          startValue: 0.5,
+          startValue: 0.8,
           endValue: 1,
           property: "opacity",
         },
