@@ -803,6 +803,39 @@ function App() {
             } relative transition-all ease-in-out delay-300`}
           >
             <div className="flex flex-col items-center gap-4 mb-4">
+              <h1 className="font-bold text-[50px] my-8">Archived Pins</h1>
+            </div>
+            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
+              <ul className="gap-2 flex flex-col justify-start mx-auto">
+                <li className="text-[18px]">• Discord Pin Archiving Bot</li>
+                <li className="text-[18px]">• Uses Python and Discord API</li>
+                <li className="text-[18px]">
+                  • A Discord bot that creates a dedicated archive channel for
+                  all your pinned messages. With just a few commands, it
+                  seamlessly transfers all existing pins from a specific channel
+                  to the new archived pins channel, ensuring that important
+                  information is never lost.
+                </li>
+                <li className="text-[18px]">
+                  • Follows an .env structure to keep private tokens safe
+                </li>
+              </ul>
+              <div className="mx-auto flex justify-center">
+                <img
+                  className="md:w-[1500px]"
+                  src="https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png"
+                  alt="Logo"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            className={`${
+              pageFirstLoad ? "opacity-0" : "opacity-100"
+            } relative transition-all ease-in-out delay-300`}
+          >
+            <div className="flex flex-col items-center gap-4 mb-4">
               <h1 className="font-bold text-[50px] my-8">Pick For Us</h1>
             </div>
             <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
