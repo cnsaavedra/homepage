@@ -445,23 +445,43 @@ function App() {
                 Full-stack / Lead Developer
               </h1>
               <li className="text-[16px] ml-[8px]">
-                • Worked on various projects: Merchant Dashboard, E-Commerce
-                Tools, Delivery Solutions, Courier/Driver applications to help
-                couriers with delivery all via React, React Native, PHP, Laravel
-                and AWS.
+                • Developed various projects, including a Merchant Dashboard,
+                E-Commerce Tools, Delivery Solutions, and Courier/Driver
+                applications using cutting-edge technologies such as
+                React/Typescript, React Native, PHP, Laravel, and AWS.
+                Implemented features that improved delivery efficiency for
+                couriers and streamlined operations for businesses.
               </li>
               <li className="text-[16px] ml-[8px]">
-                • Developed new features, and pages and fixed bugs for the main
-                delivery website including new checkout methods, blog page,
-                partners page, career signup, and more • Developed new features
-                for the delivery dashboard, improving the workflow of Customer
-                Service and Dispatchers
+                • Led the design and development of a comprehensive merchant
+                dashboard for web and mobile platforms. I utilized my full-stack
+                development expertise to provide merchants with intuitive tools
+                for managing orders, products, menus, and insights/analytics.
+                Ensured seamless user experience and improved efficiency for
+                business operations.
               </li>
               <li className="text-[16px] ml-[8px]">
-                • Automated metrics that allow couriers to see their statistics
-                on delivering • Created a dashboard for merchants to use
-                involving analytics that allows them to view/edit/add orders,
-                products, menus, and insights for both web and mobile
+                • Contributed to enhancing the delivery dashboard by developing
+                key features and implementing a modern design. Streamlined
+                Customer Service and Dispatcher's workflow, improving efficiency
+                and customer satisfaction. Utilized my full-stack development
+                skills to bring the project to fruition and provide a better
+                user experience.
+              </li>
+              <li className="text-[16px] ml-[8px]">
+                • Contributed to the growth and success of an e-commerce website
+                by developing new features and pages and fixing bugs.
+                Implemented innovative solutions, including new checkout
+                methods, a comprehensive blog page, partner pages, and a
+                streamlined career sign-up process. Used my full-stack
+                development expertise to deliver a seamless user experience and
+                improve the website's overall functionality.
+              </li>
+              <li className="text-[16px] ml-[8px]">
+                • Optimized delivery process by automating metrics and improving
+                order creation/editing, gifting details, streamlining
+                operations, and enhancing courier/dispatcher performance and
+                experience.
               </li>
             </ul>
           </div>
