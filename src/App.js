@@ -284,7 +284,7 @@ function App() {
                 <div className="flex flex-col justify-center items-center mx-auto">
                   <img
                     className="rounded-full w-[200px] h-[200px]"
-                    src="https://media.licdn.com/dms/image/C4D03AQGwMRyxQcAftA/profile-displayphoto-shrink_200_200/0/1657980975938?e=1680739200&v=beta&t=FHyOmPGy-_d7Lul5MpPRnQLWRr7TDaaOxbqMcRwl3nQ"
+                    src="https://media.licdn.com/dms/image/D5603AQGOtva26WsPhQ/profile-displayphoto-shrink_800_800/0/1676056266008?e=1681344000&v=beta&t=w2JUWQury__l50wXg---N10ynb8g8Ng4rxAkGt6FCGE"
                     alt="Profile"
                   />
                   <h1 className="text-[4em] my-8">About Me</h1>
