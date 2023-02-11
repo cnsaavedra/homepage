@@ -447,7 +447,7 @@ function App() {
               <li className="text-[16px] ml-[8px]">
                 • Developed various projects, including a Merchant Dashboard,
                 E-Commerce Tools, Delivery Solutions, and Courier/Driver
-                applications using technologies such as React/Typescript, React
+                applications using technologies such as React, Typescript, React
                 Native, PHP, Laravel, and AWS. Implemented features that
                 improved delivery efficiency for couriers and streamlined
                 operations for businesses.
