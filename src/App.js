@@ -289,36 +289,38 @@ function App() {
                   />
                   <h1 className="text-[4em] my-8">About Me</h1>
                   <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
-                    I graduated from the University of Toronto with an HBSc,
-                    including Computer Science Major, Math and Statistics
-                    Minors. Before graduating, I interned through Runner, where
-                    I learned a lot about coding practices, industry standards,
-                    and more involving dev workspaces. After graduating, I
-                    returned to Runner / FutureFuture (Under the umbrella of
-                    Runner), where I developed and maintained an E-Commerce
-                    website involving many other projects related to analytics,
-                    dispatching, and delivery software solutions. In Runner /
-                    FutureFuture, I led a project staffed as a Full-stack & Lead
-                    Developer working on various roles such as Front-end,
-                    Back-end, Mobile, and Dev-ops. My main focus was to build a
-                    dashboard for merchants/partners of the company that allows
-                    them to View/Edit/Add orders, products, menu's, and also see
-                    analtics/insights.
+                    As a graduate of the University of Toronto with a degree in
+                    Computer Science and minors in Math and Statistics,
+                    alongside my work experiences, I have a strong foundation in
+                    coding and problem-solving. During my time at university, I
+                    had the opportunity to intern at Runner, where I honed my
+                    skills in coding practices and industry standards, as well
+                    as gained hands-on experience working on a variety of
+                    projects. At FutureFuture I was responsible for developing
+                    and maintaining an E-Commerce website and working on
+                    analytics, dispatching, and delivery software solutions. In
+                    my role, I have the opportunity to wear many hats, including
+                    Front-end, Back-end, Mobile, and Dev-ops, which has allowed
+                    me to build a well-rounded skillset.
                   </p>
                   <p className="md:w-[1000px] mx-8 md:mx-0">
-                    In my spare time, I developed my personal portfolio
+                    Outside of work, I continue to build upon my skills and stay
+                    current in the tech industry by developing my portfolio
                     <a href="github.com/cnsaavedra">
                       {" "}
                       (github.com/cnsaavedra){" "}
                     </a>
-                    by making web, mobile, and desktop applications, mostly in
-                    Javascript, Python, and its frameworks. Outside of my
-                    professional and academic life, I'm a semi-professional
-                    music producer. I have produced for record labels such as
-                    Jazz Hop Café Records and I have achieved more than a
-                    million streams through several music platforms (Spotify,
-                    SoundCloud, Bandcamp, etc.). You can listen to my music
-                    using the links below.
+                    in my free time. Mainly utilizing Javascript, Python, and
+                    its frameworks, I am passionate about creating new and
+                    innovative web, mobile, and desktop applications.
+                  </p>
+                  <p className="md:w-[1000px] mx-8 md:mx-0">
+                    In addition to my professional work, I am a
+                    semi-professional music producer. I have worked with record
+                    labels such as Jazz Hop Café Records. I have achieved over a
+                    million streams on music platforms like Spotify, SoundCloud,
+                    and Bandcamp. You can find my work at the links below if
+                    you'd like to hear my music.
                   </p>
                   <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
                     <a
