@@ -460,7 +460,10 @@ function App() {
                 development expertise to provide merchants with intuitive tools
                 for managing orders, products, menus, and insights/analytics.
                 Ensured seamless user experience and improved efficiency for
-                business operations.
+                business operations. Handled and analyzed large datasets with
+                over 1,000,000+ data rows and more than ~250,000 users on the
+                platform, utilizing my expertise in big data management and
+                analysis.
               </li>
               <li className="text-[16px] ml-[8px]">
                 • Contributed to enhancing the delivery dashboard by developing
@@ -510,7 +513,9 @@ function App() {
               </h1>
               <li className="text-[16px] ml-[8px]">
                 • Using PHP, Laravel, AWS, Amazon Redshift, PostgreSQL, Stripe,
-                Xero
+                Xero. Handled and analyzed large datasets with over 1,000,000+
+                data rows and more than ~250,000 users on the platform,
+                utilizing my expertise in big data management and analysis.
               </li>
               <li className="text-[16px] ml-[8px]">
                 • Overall, revamped e-commerce tools and APIs, enhanced UI/UX,
