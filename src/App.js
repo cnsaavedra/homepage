@@ -9,7 +9,7 @@ function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
   const [currentPage, setCurrentPage] = useState("homepage");
   const [pressedAboutMeArrow, setPressedAboutMeArrow] = useState(false);
-  const delay = currentPage === "homepage" ? 4 : 0.5;
+  const delay = currentPage === "homepage" ? 1.8 : 0.5;
 
   const aboutMeRef = useRef(null);
   const albumsRef = useRef(null);
