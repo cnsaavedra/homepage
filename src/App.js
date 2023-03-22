@@ -167,9 +167,7 @@ function App() {
               {pageFirstLoad && (
                 <TypeAnimation
                   sequence={[
-                    "Hi,", // Types 'One'
-                    1000, // Waits 2s
-                    "Hi, my name is Christian Saavedra", // Types 'Three' without deleting 'Two'
+                    "Hi, my name is Christian",
                     () => {
                       console.log("Done typing!"); // Place optional callbacks anywhere in the array
                     },
