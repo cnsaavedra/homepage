@@ -503,6 +503,15 @@ function TacticalFrame({ currentPage, setCurrentPage, setPageFirstLoad }) {
               </button>
             );
           })}
+          <a
+            href={`${process.env.PUBLIC_URL}/Christian-Saavedra-Resume.pdf`}
+            target="_blank"
+            rel="noreferrer"
+            className="px-2.5 py-1 font-mono text-[11px] md:text-xs transition-all border bg-archive-ink text-white border-archive-ink hover:bg-archive-cyan hover:text-archive-ink hover:border-archive-cyan"
+          >
+            <span className="text-archive-amber mr-1">PDF</span>
+            Resume
+          </a>
         </nav>
       </header>
 
@@ -717,21 +726,21 @@ function App() {
                       code: "01",
                       jp: "経歴",
                       label: "Experience",
-                      sub: "1M+ Rows & Data Pipelines",
+                      sub: "AI Pipelines · 500k+ Users",
                     },
                     {
                       key: "portfolio",
                       code: "02",
                       jp: "研究開発",
                       label: "Portfolio",
-                      sub: "Neural Nets, NLP & Projects",
+                      sub: "Neural Nets, NLP & DSP",
                     },
                     {
                       key: "contact",
                       code: "03",
                       jp: "通信",
                       label: "Contact",
-                      sub: "Direct Links & Channels",
+                      sub: "Direct Links & Resume",
                     },
                   ].map((nav) => (
                     <button
@@ -759,6 +768,26 @@ function App() {
                       </div>
                     </button>
                   ))}
+                  <a
+                    href={`${process.env.PUBLIC_URL}/Christian-Saavedra-Resume.pdf`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${
+                      pageFirstLoad ? "opacity-0" : "opacity-100"
+                    } group relative text-left bg-archive-ink hover:bg-archive-cyan text-white hover:text-archive-ink border border-archive-ink px-6 py-4 min-w-[210px] transition-all duration-200 shadow-sm chamfer-btn`}
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-archive-amber opacity-90 group-hover:w-1.5 transition-all" />
+                    <div className="flex items-center justify-between font-mono text-[10px] text-archive-cyan group-hover:text-archive-ink mb-1">
+                      <span>[FILE // PDF]</span>
+                      <span className="font-jp">履歴書 ↗</span>
+                    </div>
+                    <div className="text-lg font-semibold tracking-tight">
+                      Resume
+                    </div>
+                    <div className="font-mono text-[11px] text-gray-300 group-hover:text-archive-ink mt-0.5">
+                      View / Download (11-2026)
+                    </div>
+                  </a>
                 </div>
 
                 <div className="flex justify-center items-center gap-6 mb-8">
@@ -899,19 +928,16 @@ function App() {
                         About Me
                       </h2>
                       <p className="text-sm md:text-base text-archive-ink/90">
-                        As a graduate of the University of Toronto with a degree
-                        in Computer Science and minors in Math and Statistics,
-                        alongside my work experiences, I have a strong
-                        foundation in quantitative problem-solving, data
-                        engineering, and software architecture. At Runner and
-                        FutureFuture, I built production analytics platforms,
-                        automated reporting pipelines, and full-stack tools
-                        handling over 1,000,000+ data rows across ~250,000
-                        users.
+                        University of Toronto HBSc graduate in Computer Science
+                        with minors in Mathematical Sciences &amp; Applied
+                        Statistics. Across TrillionCore, Pettable, FutureFuture,
+                        and Runner, I have built AI document enrichment and
+                        vector search pipelines, live revenue analytics, and
+                        data workflows serving 500,000+ users.
                       </p>
                       <p className="text-sm md:text-base text-archive-ink/90">
-                        Outside of work, I build deep learning, neural network,
-                        and data-driven applications on{" "}
+                        Outside of work, I build deep learning, neural audio,
+                        NLP, and multi-agent tools on{" "}
                         <a
                           href="https://github.com/cnsaavedra"
                           target="_blank"
@@ -919,22 +945,15 @@ function App() {
                           className="underline font-mono text-sm text-archive-ink hover:text-archive-cyan"
                         >
                           github.com/cnsaavedra
-                        </a>
-                        . Using Python, TypeScript, PyTorch, ONNX Runtime,
-                        SciPy, and React, my projects span neural audio stem
-                        separation, polyphonic CNN audio-to-MIDI transcription,
-                        natural language negation and voting algorithms,
-                        computer vision automation, and deterministic simulation
-                        engines.
+                        </a>{" "}
+                        using Python, TypeScript, Rust, PyTorch, ONNX Runtime,
+                        and pgvector.
                       </p>
                       <p className="text-sm md:text-base text-archive-ink/90">
-                        In addition to my engineering work, I am a
-                        semi-professional music producer. I have worked with
-                        record labels such as Jazz Hop Café Records and achieved
-                        over a million streams on Spotify, SoundCloud, and
-                        Bandcamp—which directly inspired my research into neural
-                        audio separation and signal processing. You can hear my
-                        music at the links below.
+                        I am also a semi-professional music producer (Jazz Hop
+                        Café Records, 1M+ streams across Spotify, SoundCloud,
+                        and Bandcamp)—which directly led me into neural audio
+                        source separation and signal processing.
                       </p>
 
                       <div className="pt-4 flex flex-wrap items-center gap-3">
@@ -1045,10 +1064,75 @@ function App() {
   }
 
   function experience() {
+    const roles = [
+      {
+        code: "RECORD_01 // DEC 2025 – PRESENT",
+        company: "TrillionCore",
+        role: "Full-Stack & AI Systems Developer",
+        badges: ["PGVECTOR / HNSW", "MULTI-AGENT AI", "8 INTEGRATIONS"],
+        facts: [
+          "Shipped an AI document enrichment pipeline classifying 10 document types with duplicate detection and pgvector/HNSW search (design to prod in 1 week).",
+          "Built the shared AI agent baseline across 3 production codebases (TrillionCore, Birch, TrillionWork) with nightly review loops and typed Router → Service → Repository boundaries.",
+          "Took Birch from prototype to client-demo MVP (AI brief analysis, generated decks, 15-layout drag-and-drop editor, QA regression simulator).",
+          "Launched 8 live data integrations (Drive, Gmail, GitHub, Railway, Vercel, Plaid, Fathom, Fireflies) with OAuth, self-recovering webhooks, and chat querying.",
+          "Shipped metered Stripe billing end-to-end and an autonomous Sentry-to-PR error-fixing agent.",
+        ],
+      },
+      {
+        code: "RECORD_02 // APR 2023 – DEC 2025",
+        company: "Pettable",
+        role: "Full-Stack Developer",
+        badges: ["150K → 250K+ CUSTOMERS", "SQL / BIGQUERY", "SEGMENT / GTM"],
+        facts: [
+          "Helped grow Pettable from ~150,000 to 250,000+ customers by improving checkout funnels and internal workflows.",
+          "Built live revenue and operations dashboards plus the SQL and APIs backing a multimillion-dollar business.",
+          "Rebuilt results and checkout into clean reusable components in a 3-week sprint.",
+          "Owned technical SEO (structured data, speed) and Segment/UTM/GTM subscription attribution analytics.",
+        ],
+      },
+      {
+        code: "RECORD_03 // JAN 2022 – MAR 2023",
+        company: "FutureFuture",
+        role: "Full-Stack Developer",
+        badges: ["500,000+ USERS", "REACT / TS / AWS"],
+        facts: [
+          "Built web and mobile analytics, e-commerce, and delivery apps; led the merchant and dispatcher dashboards.",
+          "Automated core data pipelines behind 500,000+ users to improve delivery efficiency.",
+        ],
+      },
+      {
+        code: "RECORD_04 // JUN 2019 – AUG 2020",
+        company: "Runner",
+        role: "Front-End / Full-Stack Developer",
+        badges: ["REDSHIFT / POSTGRES", "VUE / REACT NATIVE"],
+        facts: [
+          "Built e-commerce and analytics platforms with Vue, React Native, and Laravel focused on large datasets.",
+          "Progressed from cross-browser QA and front-end fixes to owning full-stack tools and analytics APIs.",
+        ],
+      },
+    ];
+
+    const skillGroups = [
+      {
+        label: "AI & DATA",
+        items:
+          "PyTorch · ONNX · Vercel AI SDK · Anthropic/OpenAI · MCP · pgvector/HNSW · BullMQ · Fivetran · BigQuery · Segment",
+      },
+      {
+        label: "LANGUAGES",
+        items: "TypeScript · JavaScript · Python · SQL · Rust · PHP · R · Java · C",
+      },
+      {
+        label: "WEB & INFRA",
+        items:
+          "React 19 · Next.js · Node · Hono · oRPC · Prisma · PostgreSQL · Tailwind · AWS · Vercel · Railway · Docker · Stripe",
+      },
+    ];
+
     return (
       <section className="body-font font-poppins min-h-screen pt-24 pb-20 px-4 relative z-10 bg-tactical-grid">
         <div className="max-w-5xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-8">
             <button
               type="button"
               onClick={() => {
@@ -1059,154 +1143,95 @@ function App() {
               <ArrowLeft />
               <span>RETURN // HOME</span>
             </button>
-            <span className="font-mono text-xs text-archive-slate">
-              [ TELEMETRY LOG // PRODUCTION DATA &amp; ENGINEERING ]
-            </span>
+            <a
+              href={`${process.env.PUBLIC_URL}/Christian-Saavedra-Resume.pdf`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-archive-ink hover:bg-archive-cyan text-white hover:text-archive-ink font-mono text-xs transition-colors chamfer-btn"
+            >
+              <span>[ DOWNLOAD RESUME PDF (11-2026) ↗ ]</span>
+            </a>
           </div>
 
           <div
             className={`${
               pageFirstLoad ? "opacity-0 top-4" : "opacity-100 top-0"
-            } relative transition-all ease-in-out duration-300 mb-8`}
+            } relative transition-all ease-in-out duration-300 mb-8 flex flex-wrap items-end justify-between gap-4`}
           >
-            <h1 className="text-3xl md:text-title font-semibold text-archive-ink tracking-tight">
-              Experience
-            </h1>
-            <p className="font-mono text-xs text-archive-slate mt-1">
-              LARGE-SCALE DATA PIPELINES · ANALYTICS WAREHOUSES · FULL-STACK
-              SYSTEMS
-            </p>
+            <div>
+              <h1 className="text-3xl md:text-title font-semibold text-archive-ink tracking-tight">
+                Experience &amp; Resume
+              </h1>
+              <p className="font-mono text-xs text-archive-slate mt-1">
+                UNIVERSITY OF TORONTO · HBSc CS MAJOR · MATH &amp; APPLIED
+                STATISTICS MINOR
+              </p>
+            </div>
+            <span className="font-jp text-xs text-archive-muted">
+              職務経歴・履歴書 // KEY FACTS
+            </span>
           </div>
 
           <div
             className={`${
               pageFirstLoad ? "opacity-0" : "opacity-100"
-            } transition-opacity ease-in-out duration-300 space-y-8`}
+            } transition-opacity ease-in-out duration-300 space-y-5`}
           >
-            <div className="bg-white/95 border border-archive-line p-6 md:p-8 chamfer-card shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-archive-line pb-4 mb-5">
-                <div className="flex items-center gap-3">
-                  <img
-                    width={40}
-                    height={40}
-                    src="https://media.licdn.com/dms/image/C560BAQE4LymCVTWYLg/company-logo_100_100/0/1519887572074?e=1682553600&v=beta&t=yQW-JNz_A5FHo6llpm6KFauBG1k24EXzIhEPFDsfFBw"
-                    alt="FutureFuture Logo"
-                    className="border border-archive-line"
-                  />
+            {roles.map((r) => (
+              <div
+                key={r.company}
+                className="bg-white/95 border border-archive-line p-6 md:p-7 chamfer-card shadow-sm"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-archive-line pb-3.5 mb-4">
                   <div>
                     <div className="font-mono text-[11px] text-archive-cyan font-semibold">
-                      RECORD_01 // JAN 2022 – JAN 2023
+                      {r.code}
                     </div>
                     <h2 className="font-bold text-xl md:text-2xl text-archive-ink">
-                      FutureFuture Inc.
+                      {r.company}{" "}
+                      <span className="font-normal text-base text-archive-slate">
+                        — {r.role}
+                      </span>
                     </h2>
                   </div>
+                  <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
+                    {r.badges.map((b) => (
+                      <span
+                        key={b}
+                        className="px-2 py-0.5 bg-archive-bg border border-archive-line text-archive-ink"
+                      >
+                        {b}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 font-mono text-[11px]">
-                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
-                    DATASET: 1,000,000+ ROWS
-                  </span>
-                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
-                    SCALE: ~250,000 USERS
-                  </span>
-                </div>
+                <ul className="space-y-2 text-sm md:text-base text-archive-ink/90 leading-relaxed">
+                  {r.facts.map((fact, idx) => (
+                    <li key={idx}>• {fact}</li>
+                  ))}
+                </ul>
               </div>
+            ))}
 
-              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold">
-                ROLE: FULL-STACK / LEAD &amp; DATA SYSTEMS DEVELOPER
+            <div className="bg-white/95 border border-archive-line p-6 chamfer-card shadow-sm">
+              <div className="font-mono text-xs text-archive-cyan font-semibold mb-3">
+                CORE STACK // PROGRAMMING &amp; AI SKILLS
               </div>
-
-              <ul className="space-y-2.5 text-sm md:text-base text-archive-ink/90">
-                <li>
-                  • Handled and analyzed large production datasets with over
-                  1,000,000+ data rows and more than ~250,000 users on the
-                  platform, building automated analytics, insights, and
-                  operational reporting pipelines.
-                </li>
-                <li>
-                  • Led the design and development of a comprehensive Merchant
-                  Dashboard for web and mobile platforms, giving businesses
-                  real-time analytics, order telemetry, product management, and
-                  automated performance metrics.
-                </li>
-                <li>
-                  • Developed end-to-end E-Commerce tools, Delivery &amp;
-                  Dispatch routing software, and Courier applications using
-                  React, TypeScript, React Native, PHP, Laravel, and AWS.
-                </li>
-                <li>
-                  • Streamlined Customer Service and Dispatcher workflows by
-                  automating order metrics, live status tracking, and courier
-                  performance telemetry.
-                </li>
-              </ul>
-            </div>
-
-            <div className="bg-white/95 border border-archive-line p-6 md:p-8 chamfer-card shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-archive-line pb-4 mb-5">
-                <div className="flex items-center gap-3">
-                  <img
-                    width={40}
-                    height={40}
-                    src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
-                    alt="Runner Logo"
-                    className="border border-archive-line"
-                  />
-                  <div>
-                    <div className="font-mono text-[11px] text-archive-cyan font-semibold">
-                      RECORD_02 // JUN 2019 – AUG 2020
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                {skillGroups.map((g) => (
+                  <div
+                    key={g.label}
+                    className="p-3.5 bg-archive-bg border border-archive-line"
+                  >
+                    <div className="text-archive-ink font-semibold mb-1.5">
+                      [{g.label}]
                     </div>
-                    <h2 className="font-bold text-xl md:text-2xl text-archive-ink">
-                      Runner Inc.
-                    </h2>
+                    <div className="text-archive-slate leading-relaxed">
+                      {g.items}
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-wrap gap-2 font-mono text-[11px]">
-                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
-                    WAREHOUSE: AMAZON REDSHIFT + POSTGRESQL
-                  </span>
-                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
-                    ROWS: 1,000,000+
-                  </span>
-                </div>
+                ))}
               </div>
-
-              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold">
-                ROLE: FULL-STACK &amp; DATA ANALYTICS DEVELOPER
-              </div>
-
-              <ul className="space-y-2.5 text-sm md:text-base text-archive-ink/90 mb-6">
-                <li>
-                  • Engineered data warehousing and analytics workflows using
-                  Amazon Redshift, PostgreSQL, AWS, PHP, Laravel, Stripe, and
-                  Xero across 1,000,000+ rows and ~250,000 users.
-                </li>
-                <li>
-                  • Wrote optimized analytical SQL queries and automated data
-                  manipulations, chart generation, spreadsheet exports, and
-                  structured data stores.
-                </li>
-                <li>
-                  • Designed and shipped REST APIs powering analytics
-                  dashboards, automated invoicing, database ingestion, and
-                  real-time courier mapping telemetry.
-                </li>
-              </ul>
-
-              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold border-t border-archive-line pt-4">
-                ROLE: FRONT-END &amp; QA AUTOMATION DEVELOPER
-              </div>
-              <ul className="space-y-2 text-sm md:text-base text-archive-ink/90">
-                <li>
-                  • Built web and iOS analytics applications, dispatcher mapping
-                  interfaces, and courier apps using React Native, Vue, and
-                  custom JavaScript/CSS.
-                </li>
-                <li>
-                  • Implemented automated test suites and rigorous QA checks to
-                  verify data accuracy and cross-browser reliability.
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -1668,7 +1693,7 @@ function App() {
           </div>
 
           <div className="bg-white/95 border border-archive-line p-6 md:p-12 chamfer-card shadow-sm">
-            <div className="border-b border-archive-line pb-5 mb-8 flex flex-wrap items-center justify-between gap-2">
+            <div className="border-b border-archive-line pb-5 mb-8 flex flex-wrap items-center justify-between gap-4">
               <div>
                 <div className="font-mono text-xs text-archive-cyan font-semibold">
                   TRANSMISSION CHANNELS // ONLINE
@@ -1677,9 +1702,14 @@ function App() {
                   Contact and Links
                 </h1>
               </div>
-              <span className="font-jp text-xs text-archive-muted">
-                外部通信リンク // EXTERNAL LINKS
-              </span>
+              <a
+                href={`${process.env.PUBLIC_URL}/Christian-Saavedra-Resume.pdf`}
+                target="_blank"
+                rel="noreferrer"
+                className="px-3.5 py-1.5 bg-archive-ink hover:bg-archive-cyan text-white hover:text-archive-ink font-mono text-xs transition-colors chamfer-btn"
+              >
+                [ VIEW / DOWNLOAD RESUME PDF ↗ ]
+              </a>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
