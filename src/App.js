@@ -54,25 +54,23 @@ const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Hook Coach & Voice AI",
+    title: "Personal Agent Harness (lode-bus)",
     year: "2026",
-    repoUrl: "https://github.com/cnsaavedra/npc-chat-v2",
     summary:
-      "Librosa F0 pitch tracking, Krumhansl-Kessler key detection, faster-whisper STT, and Rust lode-bus.",
+      "Rust CLI coordinating multi-agent LLM workflows with a zero-CPU queue watcher, RwLock file locks, and context packing.",
     facts: [
-      "Segments vocal pitch and musical key from audio alongside syllable-locked lyric cadence analysis.",
-      "Streams WebRTC VAD into faster-whisper and local LLMs, and coordinates multi-agent runs via a zero-CPU Rust CLI bus (lode-bus).",
+      "Coordinates Claude, Gemini, and Codex coding agents across machines through shared skills and deterministic handoffs.",
+      "Enforces RwLock file-manifest reservations, OS event-driven queue watching, and secret-redacting 24 KB context slice packing.",
     ],
   },
   {
-    title: "Vision & Acoustic SimCore",
+    title: "Vocal Pitch & Speech AI",
     year: "2026",
-    repoUrl: "https://github.com/cnsaavedra/house-heist",
     summary:
-      "OpenCV/MSS screen tensor pipelines, Tesseract OCR, and Godot C# decibel propagation AI.",
+      "Librosa F0 pitch tracking, Krumhansl-Kessler musical key detection, WebRTC VAD, and faster-whisper STT.",
     facts: [
-      "Real-time screen tensor capture and template/OCR detection in Python (wrist-helper, ocr-reader).",
-      "Deterministic C# room-level sound propagation, resident/SWAT AI, and automated Blender 4.5 glTF asset validation (house-heist).",
+      "Segments sung vocal pitch (F0) and estimates musical key using 12-pitch chroma correlation against Krumhansl-Kessler profiles.",
+      "Streams microphone audio through WebRTC voice activity detection into local faster-whisper neural transcription.",
     ],
   },
   {
