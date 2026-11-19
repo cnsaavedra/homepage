@@ -5,11 +5,531 @@ import { useKeenSlider } from "keen-slider/react";
 import { TypeAnimation } from "react-type-animation";
 import Plx from "react-plx";
 
+const PORTFOLIO_SYSTEMS = [
+  {
+    id: "SYS-01",
+    code: "NN-AUDIO // DEMUCS-CNN",
+    jp: "深層音源分離・神経転写",
+    title: "Demucs & Basic Pitch Neural Audio",
+    category: "DEEP LEARNING / AUDIO DSP",
+    rarity: "★★★★★★",
+    repoUrl: "https://github.com/cnsaavedra",
+    tags: [
+      "PyTorch Demucs v4",
+      "Spotify Basic Pitch CNN (ICASSP 2022)",
+      "ONNX Runtime",
+      "Frequency-Band Onset Classifier",
+    ],
+    metrics: [
+      { label: "FALSE-POSITIVE PRUNING", value: "2,809 → 1,274 notes (-54.6%)" },
+      { label: "CPU ONNX INFERENCE", value: "~3s / 15s clip · ~25s / 3m song" },
+      { label: "SEPARATION TOPOLOGY", value: "4-Stem Isolated Waveform → MIDI" },
+    ],
+    pipeline: [
+      "RAW MIX WAV",
+      "DEMUCS 4-STEM",
+      "BASIC PITCH CNN (ONNX)",
+      "FREQ-BOUND PRUNING",
+      "MULTITRACK .MID",
+    ],
+    bullets: [
+      "Splits full songs into isolated 4-stem WAV files with PyTorch Demucs first so bass notes and vocal overtones never collide inside the transcription network.",
+      "Runs Spotify's Basic Pitch polyphonic convolutional neural network on CPU via ONNX Runtime to convert isolated audio stems directly into playable multitrack MIDI.",
+      "Constrains each stem to the frequency band its instrument can physically play and tunes neural confidence thresholds, cutting cymbal-wash false positives on a 3-minute song from 2,809 raw notes down to 1,274 clean notes.",
+      "Pairs melodic neural inference with a custom drum onset and frequency-band classifier that maps isolated percussion hits into kick, snare, and hi-hat grooves.",
+    ],
+    visualType: "neural-audio",
+  },
+  {
+    id: "SYS-02",
+    code: "DSP-COMPILER // MUSICORE",
+    jp: "音響信号解析・バイナリ合成",
+    title: "Musicore Signal & Binary FLP Engine",
+    category: "SIGNAL PROCESSING / DSP",
+    rarity: "★★★★★★",
+    repoUrl: "https://github.com/cnsaavedra/MUSICORE-PIPELINE",
+    tags: [
+      "SciPy / NumPy DSP",
+      "12-Pitch Chroma Correlation",
+      "BS.1770 LUFS Metering",
+      "Deterministic Binary Compiler",
+    ],
+    metrics: [
+      { label: "CHROMA CORRELATION GATE", value: "≥ 0.65 active-frame match" },
+      { label: "ONSET ALIGNMENT TOLERANCE", value: "≤ 20ms stem-to-MIDI lock" },
+      { label: "MASTER LOUDNESS TARGET", value: "-11.5 LUFS · ≤ -1.0 dBTP" },
+    ],
+    pipeline: [
+      "WAV + MIDI STEMS",
+      "ONSET & CHROMA FIT",
+      "ROLE CLASSIFIER",
+      "BS.1770 GAIN STAGE",
+      "NATIVE .FLP BINARY",
+    ],
+    bullets: [
+      "Analyzes local WAV stems and MIDI tracks offline with NumPy and SciPy to compile a fully routed, ready-to-record FL Studio project file without opening the DAW.",
+      "Scores every candidate MIDI note against the isolated audio stem—requiring an audio onset within 20 milliseconds and at least 0.65 relative chroma correlation on active frames before confirming a layer.",
+      "Classifies confirmed harmonic parts into musical roles (Chord Body, Mid Pad, Hook Lead, Upper Pluck Arp) and computes bounded spectral EQ pockets (-2.5 dB at 3.52 kHz) so vocals sit cleanly in the mix.",
+      "Calculates offline BS.1770 and RMS loudness headroom across all staged stems to set master pre-glue drive (-12 to +6 dB) with byte-identical parser roundtrips.",
+    ],
+    visualType: "dsp-compiler",
+  },
+  {
+    id: "SYS-03",
+    code: "NLP-DECISION // PICK-FOR-US",
+    jp: "自然言語処理・合意形成推論",
+    title: "Pick For Us",
+    category: "NLP / SOCIAL CHOICE ENGINE",
+    rarity: "★★★★★★",
+    repoUrl: "https://github.com/cnsaavedra/pickforus",
+    tags: [
+      "NegEx Clause Negation (Chapman 2001)",
+      "Word-Boundary Gazetteer",
+      "Damerau-Levenshtein ≤ 1",
+      "Combined Approval Voting {-1, 0, +1}",
+    ],
+    metrics: [
+      { label: "DECISION WINDOW", value: "60-second anonymous blitz" },
+      { label: "TYPO RECOVERY", value: "O(min(|a|,|b|)) edit distance ≤ 1" },
+      { label: "BALLOT AGGREGATION", value: "{-1, 0, +1} spam-capped tally" },
+    ],
+    pipeline: [
+      "60S LIVE CHAT",
+      "NEGEX CLAUSE SPLIT",
+      "GAZETTEER + LEVENSHTEIN",
+      "APPROVAL VOTING {-1,0,+1}",
+      "TRACEABLE TOP-3 VERDICT",
+    ],
+    bullets: [
+      "Hanging out with friends and everyone is indecisive? Everyone joins a 60-second anonymous room and types honest cravings and vetoes before politeness stalls the group.",
+      "Segments natural-language chat with NegEx clause-scope negation so messages like 'ramen sounds good no sushi' or 'I don't want burger' veto only the negated clause while keeping positive cravings intact.",
+      "Matches multi-word phrases through a longest-phrase word-boundary Gazetteer and recovers single-edit typos ('spagetti' → Spaghetti, 'ramne' → Ramen) via Damerau-Levenshtein distance ≤ 1.",
+      "Aggregates ballots using Combined Approval Voting {-1, 0, +1}—preventing vote-splitting, capping single-user repeat spam ('You have duplicates, but we fixed that for you'), and rendering an inspectable step-by-step algorithm trace.",
+    ],
+    visualType: "pickforus",
+    images: [
+      {
+        caption: "01 // MAIN_LOBBY — 60-second room initialization & mode selection",
+        src: "https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png",
+      },
+      {
+        caption: "02 // ANONYMOUS_STREAM — Live natural-language chat & timer countdown",
+        src: "https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png",
+      },
+      {
+        caption: "03 // GAZETTEER_PARSE — Clause polarity & entity extraction matrix",
+        src: "https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png",
+      },
+      {
+        caption: "04 // APPROVAL_VERDICT — Negation-filtered Top 3 & duplicate spam guard",
+        src: "https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png",
+      },
+    ],
+  },
+  {
+    id: "SYS-04",
+    code: "VOICE-LLM // HOOK-NPC-BUS",
+    jp: "音声認識・自律エージェント基盤",
+    title: "Voice AI, Faster-Whisper & Multi-Agent Bus",
+    category: "SPEECH AI / NEURAL AGENTS",
+    rarity: "★★★★★",
+    repoUrl: "https://github.com/cnsaavedra/npc-chat-v2",
+    tags: [
+      "Faster-Whisper Neural STT",
+      "WebRTC VAD + Librosa F0 Pitch",
+      "Krumhansl-Kessler Key Profiles",
+      "Rust lode-bus + Local LLM Agents",
+    ],
+    metrics: [
+      { label: "PITCH & KEY ENGINE", value: "12-Pitch Chroma + F0 Segmentation" },
+      { label: "SPEECH PIPELINE", value: "WebRTC VAD → Faster-Whisper → LLM" },
+      { label: "SYSTEMS BUS LATENCY", value: "< 250ms OS queue watcher · ≤ 24KB pack" },
+    ],
+    pipeline: [
+      "MIC / STREAM AUDIO",
+      "WEBRTC VAD + LIBROSA F0",
+      "FASTER-WHISPER / KEY FIT",
+      "LOCAL LLM / RUST BUS",
+      "LIVE STUDIO OVERLAY",
+    ],
+    bullets: [
+      "Tracks sung vocal fundamental frequency (F0) with Librosa and correlates 12-pitch class distributions against Krumhansl-Kessler major/minor profiles to detect musical key and note segments in Hook Coach.",
+      "Models phonetic confusion matrices and syllable-locked cadence blueprints to generate singable lyric variations that preserve exact vowel endings and rhythm anchors.",
+      "Streams real-time microphone audio through WebRTC Voice Activity Detection into Faster-Whisper neural speech-to-text and local OpenAI-compatible LLMs for reactive stream overlays in NPC-Chat-v2.",
+      "Coordinates multi-agent research and build workflows through a native Rust systems bus (lode-bus) with RwLock file borrow-checking, secret-redacting 24 KB context packets, and sub-250ms OS event wakeups.",
+    ],
+    visualType: "voice-llm",
+  },
+  {
+    id: "SYS-05",
+    code: "CV-SIM // VISION-ACOUSTIC",
+    jp: "視覚テンソル検出・空間音響推論",
+    title: "Computer Vision & Acoustic AI Simulation",
+    category: "COMPUTER VISION / SPATIAL AI",
+    rarity: "★★★★★",
+    repoUrl: "https://github.com/cnsaavedra/house-heist",
+    tags: [
+      "OpenCV (≥ 4.8) + MSS Tensors",
+      "Tesseract OCR + CustomTkinter",
+      "Godot 4 C# Deterministic SimCore",
+      "Blender 4.5 Headless 3D Pipeline",
+    ],
+    metrics: [
+      { label: "VISION CAPTURE", value: "High-frequency MSS screen tensors" },
+      { label: "SIMULATION CORE", value: "Seeded decibel & multi-agent state AI" },
+      { label: "3D ASSET FACTORY", value: "Automated glTF 2.0 / PBR geometry gate" },
+    ],
+    pipeline: [
+      "SCREEN / WORLD STATE",
+      "OPENCV / DECIBEL GRAPH",
+      "OCR & AGENT PERCEPTION",
+      "BEHAVIOR STATE MACHINE",
+      "DETERMINISTIC ACTION",
+    ],
+    bullets: [
+      "Captures desktop frames as fast NumPy tensors via MSS and runs OpenCV template, color-space, grid, and PyTesseract OCR detection pipelines in Wrist-Helper and OCR-Reader.",
+      "Simulates physical decibel propagation across rooms, doorway occlusion, and multi-agent civilian, 911, and SWAT perception state machines in House Heist's pure C# deterministic SimCore.",
+      "Automates headless 3D asset generation, PBR material validation, skeletal rigging, and glTF 2.0 metric verification through a scripted Python and Blender 4.5 pipeline.",
+    ],
+    visualType: "cv-sim",
+  },
+  {
+    id: "SYS-06",
+    code: "DATA-STAT // FFXIV-CENSUS",
+    jp: "人口統計解析・市場速度推論",
+    title: "FFXIV Statistics",
+    category: "DATA ANALYTICS / MARKET VELOCITY",
+    rarity: "★★★★★",
+    repoUrl: "https://github.com/cnsaavedra",
+    tags: [
+      "Square Enix Telemetry API",
+      "Guild Demographic Aggregation",
+      "Market Velocity & Demand Modeling",
+      "React Statistical Visualization",
+    ],
+    metrics: [
+      { label: "DEMOGRAPHIC PARSING", value: "Guild census & class distributions" },
+      { label: "ECONOMY MODELING", value: "Item sales velocity × demand curves" },
+      { label: "VISUALIZATION", value: "Interactive multi-slide telemetry deck" },
+    ],
+    pipeline: [
+      "SQUARE ENIX API",
+      "JSON PARSER & CLEANER",
+      "VELOCITY / CENSUS MATH",
+      "STATISTICAL CHARTS",
+      "INTERACTIVE UI",
+    ],
+    bullets: [
+      "Ingests Final Fantasy XIV API data from Square Enix to parse and aggregate player population statistics.",
+      "Transforms raw guild and server records into clean demographic breakdowns so players can inspect class distributions and free-company composition at a glance.",
+      "Calculates item sales velocities and demand trends to surface high-value market board opportunities.",
+      "Structures equipment and fashion catalog metadata into responsive grid views for fast visual comparison.",
+    ],
+    visualType: "slider",
+    slides: [
+      "https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png",
+      "https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png",
+      "https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png",
+    ],
+  },
+  {
+    id: "SYS-07",
+    code: "DATA-PIPE // ARCHIVED-PINS",
+    jp: "非同期メッセージ抽出・永続化",
+    title: "Archived Pins",
+    category: "AUTOMATED ETL / ARCHIVAL BOT",
+    rarity: "★★★★",
+    repoUrl: "https://github.com/cnsaavedra/archived-pins",
+    tags: [
+      "Python 3 + discord.py",
+      "Automated Pin ETL Pipeline",
+      "Zero-Loss Channel Migration",
+      "Environment-Isolated Credentials",
+    ],
+    metrics: [
+      { label: "INGESTION MODE", value: "Automated channel history sweep" },
+      { label: "PRESERVATION", value: "Payloads, embeds & attachments" },
+      { label: "SECURITY", value: "Dotenv token isolation + mocked suite" },
+    ],
+    pipeline: [
+      "CHANNEL PIN EVENT",
+      "DISCORD API FETCH",
+      "PAYLOAD SERIALIZER",
+      "ARCHIVE CHANNEL SINK",
+      "INDEXED RECORD",
+    ],
+    bullets: [
+      "Discord pin archiving pipeline built with Python and the Discord API.",
+      "Creates a dedicated archive channel and automatically transfers existing pinned messages across channels so key team knowledge is never lost when pin limits fill up.",
+      "Follows strict .env credential isolation and includes automated test coverage for reliable server deployment.",
+    ],
+    visualType: "single-image",
+    image: "https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png",
+  },
+  {
+    id: "SYS-08",
+    code: "GRAPH-DB // OLD-MMO-FRIENDS",
+    jp: "関係グラフ検索・再接続基盤",
+    title: "Old MMO Friends",
+    category: "RELATIONAL GRAPH / SOCIAL PLATFORM",
+    rarity: "★★★★",
+    repoUrl: "https://github.com/cnsaavedra",
+    tags: [
+      "PostgreSQL + Sequelize ORM",
+      "Relational Entity Matching",
+      "Express.js MVC Architecture",
+      "JWT Cryptographic Auth",
+    ],
+    metrics: [
+      { label: "STORAGE ENGINE", value: "PostgreSQL relational social graph" },
+      { label: "ARCHITECTURE", value: "Client-Server MVC + REST API" },
+      { label: "SECURITY", value: "Hashed credentials + JWT sessions" },
+    ],
+    pipeline: [
+      "PLAYER ALIAS QUERY",
+      "SEQUELIZE ORMJOIN",
+      "POSTGRESQL GRAPH",
+      "JWT AUTH GUARD",
+      "RECONNECTION CHAT",
+    ],
+    bullets: [
+      "Social reconnection platform where players index old game servers and character aliases to find and message former guildmates.",
+      "Models user profiles, friend graphs, direct messages, and live notifications inside PostgreSQL using Sequelize queries.",
+      "Follows a clean client-server MVC structure with an Express.js backend and hashed password authentication backed by JWT tokens.",
+    ],
+    visualType: "single-image",
+    image:
+      "https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966",
+  },
+];
+
+function NeuralBackground() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    const mouse = { x: -9999, y: -9999 };
+    const handleMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+
+    const nodeCount = 34;
+    const nodes = Array.from({ length: nodeCount }, (_, i) => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.32,
+      vy: (Math.random() - 0.5) * 0.32,
+      radius: i % 5 === 0 ? 2.6 : 1.7,
+      layer: i % 3,
+      weight: (0.4 + Math.random() * 0.58).toFixed(2),
+    }));
+
+    let tick = 0;
+    const render = () => {
+      tick += 1;
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const m = nodes[j];
+          const dx = n.x - m.x;
+          const dy = n.y - m.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 145) {
+            const alpha = (1 - dist / 145) * 0.16;
+            ctx.strokeStyle = `rgba(15, 20, 28, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(m.x, m.y);
+            ctx.stroke();
+
+            if ((i + j) % 9 === 0 && dist < 115) {
+              const t = ((tick * 0.008 + i * 0.17) % 1 + 1) % 1;
+              const px = n.x + (m.x - n.x) * t;
+              const py = n.y + (m.y - n.y) * t;
+              ctx.fillStyle = "rgba(0, 200, 255, 0.65)";
+              ctx.beginPath();
+              ctx.arc(px, py, 1.8, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+
+        const mdx = n.x - mouse.x;
+        const mdy = n.y - mouse.y;
+        const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mDist < 160) {
+          const mAlpha = (1 - mDist / 160) * 0.55;
+          ctx.strokeStyle = `rgba(0, 200, 255, ${mAlpha})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+
+          if (mDist < 95 && i % 3 === 0) {
+            ctx.fillStyle = "rgba(15, 20, 28, 0.55)";
+            ctx.font = "10px 'JetBrains Mono', monospace";
+            ctx.fillText(`h_${i}[${n.weight}]`, n.x + 6, n.y - 5);
+          }
+        }
+
+        ctx.fillStyle =
+          n.layer === 0
+            ? "rgba(0, 200, 255, 0.75)"
+            : "rgba(15, 20, 28, 0.35)";
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      animationFrameId = window.requestAnimationFrame(render);
+    };
+
+    render();
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0 opacity-75"
+    />
+  );
+}
+
+function TacticalFrame({ currentPage, setCurrentPage, setPageFirstLoad }) {
+  const pageLabels = {
+    homepage: "01 // HOME_INDEX",
+    experience: "02 // EXP_TELEMETRY",
+    portfolio: "03 // NEURAL_ARCHIVE",
+    contact: "04 // COMMS_TERMINAL",
+  };
+
+  const navItems = [
+    { key: "homepage", idx: "01", label: "Home" },
+    { key: "experience", idx: "02", label: "Experience" },
+    { key: "portfolio", idx: "03", label: "Portfolio" },
+    { key: "contact", idx: "04", label: "Contact" },
+  ];
+
+  return (
+    <>
+      <div className="fixed inset-3 md:inset-5 pointer-events-none z-40 border border-archive-line/80">
+        <span className="absolute -top-2 -left-1.5 text-archive-muted font-mono text-xs select-none">
+          +
+        </span>
+        <span className="absolute -top-2 -right-1.5 text-archive-muted font-mono text-xs select-none">
+          +
+        </span>
+        <span className="absolute -bottom-2 -left-1.5 text-archive-muted font-mono text-xs select-none">
+          +
+        </span>
+        <span className="absolute -bottom-2 -right-1.5 text-archive-muted font-mono text-xs select-none">
+          +
+        </span>
+      </div>
+
+      <header className="fixed top-3 md:top-5 left-3 md:left-5 right-3 md:right-5 z-50 flex items-center justify-between px-4 py-2.5 bg-archive-bg/85 backdrop-blur-md border-b border-archive-line">
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            if (currentPage !== "homepage") {
+              setPageFirstLoad(true);
+              setCurrentPage("homepage");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+          className="flex items-center gap-3 cursor-pointer group"
+        >
+          <span className="w-2 h-2 bg-archive-cyan inline-block group-hover:bg-archive-vermilion transition-colors" />
+          <span className="font-mono text-[11px] md:text-xs tracking-wider text-archive-ink font-semibold">
+            [ ARCHIVE // CNS-01 ]
+          </span>
+          <span className="hidden sm:inline-block font-jp text-[11px] text-archive-slate tracking-widest">
+            データ・深層学習 // DATA &amp; DEEP LEARNING
+          </span>
+        </div>
+
+        <nav className="flex items-center gap-1 md:gap-2">
+          {navItems.map((item) => {
+            const active = currentPage === item.key;
+            return (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => {
+                  if (currentPage !== item.key) {
+                    setPageFirstLoad(true);
+                    setCurrentPage(item.key);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+                className={`px-2.5 py-1 font-mono text-[11px] md:text-xs transition-all border ${
+                  active
+                    ? "bg-archive-ink text-white border-archive-ink"
+                    : "bg-white/70 text-archive-slate border-archive-line hover:border-archive-ink hover:text-archive-ink"
+                }`}
+              >
+                <span className="text-archive-cyan mr-1">{item.idx}</span>
+                {item.label}
+              </button>
+            );
+          })}
+        </nav>
+      </header>
+
+      <footer className="fixed bottom-3 md:bottom-5 left-3 md:left-5 right-3 md:right-5 z-40 pointer-events-none hidden md:flex items-center justify-between px-4 py-1.5 text-[11px] font-mono text-archive-slate">
+        <div className="flex items-center gap-3 bg-archive-bg/80 px-2 py-0.5 border border-archive-line">
+          <span className="text-archive-ink font-semibold">
+            {pageLabels[currentPage]}
+          </span>
+          <span className="text-archive-muted">|</span>
+          <span>UofT CS · MATH · STATS</span>
+        </div>
+        <div className="flex items-center gap-3 bg-archive-bg/80 px-2 py-0.5 border border-archive-line">
+          <span>DOMAINS: NEURAL NETS · NLP · AUDIO DSP · CV</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        </div>
+      </footer>
+    </>
+  );
+}
+
 function App() {
   const [pageFirstLoad, setPageFirstLoad] = useState(true);
   const [currentPage, setCurrentPage] = useState("homepage");
   const [pressedAboutMeArrow, setPressedAboutMeArrow] = useState(false);
-  const delay = currentPage === "homepage" ? 1.8 : 0.5;
+  const [selectedSystemIndex, setSelectedSystemIndex] = useState(0);
+  const [copiedEmail, setCopiedEmail] = useState("");
+  const delay = currentPage === "homepage" ? 1.4 : 0.35;
 
   const aboutMeRef = useRef(null);
   const albumsRef = useRef(null);
@@ -51,24 +571,20 @@ function App() {
       };
 
       window.addEventListener("scroll", onScroll);
-      console.log(scrollDir);
-
       return () => window.removeEventListener("scroll", onScroll);
     }
-  }, [scrollDir, pageFirstLoad]);
+  }, [scrollDir, pageFirstLoad, currentPage]);
 
   useEffect(() => {
     let timer1 = setTimeout(() => setPageFirstLoad(false), delay * 1000);
     return () => {
       clearTimeout(timer1);
     };
-  }, [currentPage]);
-
-  function aboutMe() {}
+  }, [currentPage, delay]);
 
   function scrollToAboutMe() {
     window.scrollTo({
-      top: 850,
+      top: 820,
       behavior: "smooth",
     });
   }
@@ -87,7 +603,7 @@ function App() {
       properties: [
         {
           startValue: 1,
-          endValue: 0,
+          endValue: 0.15,
           property: "opacity",
         },
         {
@@ -105,47 +621,35 @@ function App() {
       end: "#albums",
       properties: [
         {
-          startValue: 0.8,
+          startValue: 0.92,
           endValue: 1,
           property: "opacity",
-        },
-        {
-          startValue: 1,
-          endValue: 1.75,
-          property: "translateY",
         },
       ],
     },
   ];
 
-  const parallaxDataAlbums = [
-    {
-      start: "self",
-      end: "#end",
-      properties: [
-        {
-          startValue: "#3cb99c",
-          endValue: "rgba(50,50,200,0.8)",
-          property: "backgroundColor",
-        },
-        {
-          startValue: 0,
-          endValue: 100,
-          property: "translateY",
-        },
-        {
-          startValue: 0.75,
-          endValue: 1,
-          property: "opacity",
-        },
-      ],
-    },
-  ];
+  const [sliderRef] = useKeenSlider({
+    slidesPerView: 1,
+    initial: 0,
+    mode: "snap",
+    vertical: false,
+    spacing: 15,
+    controls: true,
+  });
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedEmail(text);
+      setTimeout(() => setCopiedEmail(""), 2000);
+    }
+  }
 
   function homePage() {
     return (
-      <div>
-        <section className="body-font font-poppins min-h-screen">
+      <div className="relative z-10 bg-tactical-grid">
+        <section className="body-font font-poppins min-h-screen relative flex items-center justify-center">
           {!pressedAboutMeArrow &&
             !pageFirstLoad &&
             scrollDir !== "scrolling down" &&
@@ -157,111 +661,145 @@ function App() {
                   setPressedAboutMeArrow(true);
                   scrollToAboutMe();
                 }}
-                className="absolute bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer"
+                className="fixed bottom-12 right-10 z-50 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer flex flex-col items-center gap-1"
               >
-                <ArrowDownCircle size={45} />
+                <span className="font-mono text-[10px] tracking-widest text-archive-slate bg-white/90 px-2 py-0.5 border border-archive-line">
+                  SCROLL // DOSSIER
+                </span>
+                <ArrowDownCircle size={42} />
               </div>
             )}
-          <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col h-screen">
-            <div className="text-center lg:w-2/3 w-full">
+
+          <div className="container mx-auto flex px-6 py-24 items-center justify-center flex-col min-h-screen">
+            <div className="text-center lg:w-3/4 w-full max-w-4xl">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1 mb-6 bg-white/90 border border-archive-line font-mono text-xs text-archive-slate shadow-sm">
+                <span className="w-2 h-2 bg-archive-cyan inline-block" />
+                <span>OPERATOR DOSSIER // CHRISTIAN SAAVEDRA</span>
+                <span className="text-archive-muted hidden sm:inline">|</span>
+                <span className="font-jp text-[11px] text-archive-muted hidden sm:inline">
+                  ニューラル・データ工学
+                </span>
+              </div>
+
               {pageFirstLoad && (
-                <TypeAnimation
-                  sequence={[
-                    "Hi, my name is Christian",
-                    () => {
-                      console.log("Done typing!"); // Place optional callbacks anywhere in the array
-                    },
-                  ]}
-                  wrapper="div"
-                  cursor={true}
-                  style={{ fontSize: "3em" }}
-                />
+                <div className="my-4 font-medium text-archive-ink">
+                  <TypeAnimation
+                    sequence={["Hi, my name is Christian"]}
+                    wrapper="div"
+                    cursor={true}
+                    style={{ fontSize: "2.75em" }}
+                  />
+                </div>
               )}
+
               <Plx className="intro" parallaxData={parallaxData}>
                 <h1
                   className={`${
                     pageFirstLoad ? "opacity-0" : "opacity-100"
-                  } transition ease-in-out delay-150 title-font text-title mb-4 font-medium text-primary-800 text-black`}
+                  } transition ease-in-out delay-150 title-font text-3xl md:text-title mb-3 font-semibold text-archive-ink tracking-tight`}
                 >
                   Welcome to my website
                 </h1>
-                <div className="flex justify-center items-center gap-8 mb-8">
-                  <h6
-                    tabIndex={0}
-                    role="button"
-                    onClick={() => {
-                      setPageFirstLoad(true);
-                      setCurrentPage("experience");
-                    }}
-                    className={`${
-                      pageFirstLoad ? "opacity-0" : "opacity-100"
-                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-500 mb-8 leading-relaxed text-paragraph text-black`}
-                  >
-                    Experience
-                  </h6>
-                  <h6
-                    tabIndex={0}
-                    role="button"
-                    onClick={() => {
-                      setPageFirstLoad(true);
-                      setCurrentPage("portfolio");
-                    }}
-                    className={`${
-                      pageFirstLoad ? "opacity-0" : "opacity-100"
-                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-700 mb-8 leading-relaxed text-paragraph text-black`}
-                  >
-                    Portfolio
-                  </h6>
-                  <h6
-                    tabIndex={0}
-                    role="button"
-                    onClick={() => {
-                      setPageFirstLoad(true);
-                      setCurrentPage("contact");
-                    }}
-                    className={`${
-                      pageFirstLoad ? "opacity-0" : "opacity-100"
-                    } cursor-pointer hover:text-gray-200 transition-opacity ease-in-out delay-1000 mb-8 leading-relaxed text-paragraph text-black`}
-                  >
-                    Contact
-                  </h6>
-                </div>
-                <div className="flex justify-center items-center gap-8 mb-8 ml-6">
-                  <a href="https://github.com/cnsaavedra">
-                    <img
+
+                <p
+                  className={`${
+                    pageFirstLoad ? "opacity-0" : "opacity-100"
+                  } transition-opacity ease-in-out delay-300 font-mono text-xs md:text-sm text-archive-slate max-w-2xl mx-auto mb-10`}
+                >
+                  Data Systems · Neural Networks · Deep Learning Audio &amp; NLP ·
+                  Full-Stack Engineering
+                </p>
+
+                <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-10">
+                  {[
+                    {
+                      key: "experience",
+                      code: "01",
+                      jp: "経歴",
+                      label: "Experience",
+                      sub: "1M+ Rows & Data Pipelines",
+                    },
+                    {
+                      key: "portfolio",
+                      code: "02",
+                      jp: "研究開発",
+                      label: "Portfolio",
+                      sub: "Neural Nets, NLP & Projects",
+                    },
+                    {
+                      key: "contact",
+                      code: "03",
+                      jp: "通信",
+                      label: "Contact",
+                      sub: "Direct Links & Channels",
+                    },
+                  ].map((nav) => (
+                    <button
+                      key={nav.key}
+                      type="button"
+                      onClick={() => {
+                        setPageFirstLoad(true);
+                        setCurrentPage(nav.key);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
                       className={`${
-                        pageFirstLoad
-                          ? "opacity-0 -left-36"
-                          : "opacity-100 left-0"
-                      }  transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                      width={40}
-                      height={40}
+                        pageFirstLoad ? "opacity-0" : "opacity-100"
+                      } group relative text-left bg-white/95 hover:bg-archive-ink text-archive-ink hover:text-white border border-archive-line hover:border-archive-ink px-6 py-4 min-w-[210px] transition-all duration-200 shadow-sm chamfer-btn`}
+                    >
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-archive-cyan opacity-80 group-hover:w-1.5 transition-all" />
+                      <div className="flex items-center justify-between font-mono text-[10px] text-archive-muted group-hover:text-archive-cyan mb-1">
+                        <span>[STAGE // {nav.code}]</span>
+                        <span className="font-jp">{nav.jp}</span>
+                      </div>
+                      <div className="text-lg font-semibold tracking-tight">
+                        {nav.label}
+                      </div>
+                      <div className="font-mono text-[11px] text-archive-slate group-hover:text-gray-300 mt-0.5">
+                        {nav.sub}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex justify-center items-center gap-6 mb-8">
+                  <a
+                    href="https://github.com/cnsaavedra"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2.5 bg-white border border-archive-line hover:border-archive-cyan transition-all hover:-translate-y-0.5 shadow-sm"
+                    title="GitHub"
+                  >
+                    <img
+                      width={32}
+                      height={32}
                       src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                       alt="Github"
                     />
                   </a>
-                  <a href="https://www.linkedin.com/in/christian-saavedra-b07413245/">
+                  <a
+                    href="https://www.linkedin.com/in/christian-saavedra-b07413245/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2.5 bg-white border border-archive-line hover:border-archive-cyan transition-all hover:-translate-y-0.5 shadow-sm"
+                    title="LinkedIn"
+                  >
                     <img
-                      className={`${
-                        pageFirstLoad
-                          ? "opacity-0 -left-36"
-                          : "opacity-100 left-0"
-                      }  transition-all ease-in-out delay-75 duration-500 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                       src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
                       alt="Linkedin"
                     />
                   </a>
-                  <a href="https://soundcloud.com/primaryflow">
+                  <a
+                    href="https://soundcloud.com/primaryflow"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2.5 bg-white border border-archive-line hover:border-archive-cyan transition-all hover:-translate-y-0.5 shadow-sm"
+                    title="SoundCloud"
+                  >
                     <img
-                      className={`${
-                        pageFirstLoad
-                          ? "opacity-0 -left-36"
-                          : "opacity-100 left-0"
-                      }  transition-all ease-in-out delay-75 duration-700 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                       src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
                       alt="Soundcloud"
                     />
@@ -271,128 +809,235 @@ function App() {
             </div>
           </div>
         </section>
+
         {!pageFirstLoad && (
           <>
             <Plx className="intro" parallaxData={parallaxDataAboutMe}>
               <section
                 ref={aboutMeRef}
                 id="about-me"
-                className="body-font font-poppins min-h-screen py-12"
+                className="body-font font-poppins min-h-screen py-20 px-4 flex items-center"
               >
-                <div className="flex flex-col justify-center items-center mx-auto">
-                  <img
-                    className="rounded-full w-[200px] h-[200px]"
-                    src="https://media.licdn.com/dms/image/D5603AQGOtva26WsPhQ/profile-displayphoto-shrink_800_800/0/1676056266008?e=1681344000&v=beta&t=w2JUWQury__l50wXg---N10ynb8g8Ng4rxAkGt6FCGE"
-                    alt="Profile"
-                  />
-                  <h1 className="text-[4em] my-8">About Me</h1>
-                  <p className="md:w-[1000px] mb-8 mx-8 md:mx-0">
-                    As a graduate of the University of Toronto with a degree in
-                    Computer Science and minors in Math and Statistics,
-                    alongside my work experiences, I have a strong foundation in
-                    coding and problem-solving. During my time at university, I
-                    had the opportunity to intern at Runner, where I honed my
-                    skills in coding practices and industry standards, as well
-                    as gained hands-on experience working on a variety of
-                    projects. At FutureFuture I was responsible for developing
-                    and maintaining an E-Commerce website and working on
-                    analytics, dispatching, and delivery software solutions. In
-                    my role, I have the opportunity to wear many hats, including
-                    Front-end, Back-end, Mobile, and Dev-ops, which has allowed
-                    me to build a well-rounded skillset.
-                  </p>
-                  <p className="md:w-[1000px] mx-8 md:mx-0">
-                    Outside of work, I continue to build upon my skills and stay
-                    current in the tech industry by developing my portfolio
-                    <a href="github.com/cnsaavedra">
-                      {" "}
-                      (github.com/cnsaavedra){" "}
-                    </a>
-                    in my free time. Mainly utilizing Javascript, Python, and
-                    its frameworks, I am passionate about creating new and
-                    innovative web, mobile, and desktop applications.
-                  </p>
-                  <p className="md:w-[1000px] mx-8 md:mx-0">
-                    In addition to my professional work, I am a
-                    semi-professional music producer. I have worked with record
-                    labels such as Jazz Hop Café Records. I have achieved over a
-                    million streams on music platforms like Spotify, SoundCloud,
-                    and Bandcamp. You can find my work at the links below if
-                    you'd like to hear my music.
-                  </p>
-                  <div className="mx-8 md:mx-0 flex flex-col justify-start items-center my-8 gap-4 md:flex-row">
-                    <a
-                      className="text-blue-500 underline"
-                      href="https://soundcloud.com/primaryflow"
-                    >
-                      SoundCloud
-                    </a>
-                    <a
-                      className="text-blue-500 underline"
-                      href="https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI"
-                    >
-                      Spotify
-                    </a>
-                    <a
-                      className="text-blue-500 underline"
-                      href="https://music.apple.com/ng/artist/dominant/id1275392590"
-                    >
-                      Apple Music
-                    </a>
-                    <a
-                      className="text-blue-500 underline"
-                      href="https://dominantmusic.bandcamp.com"
-                    >
-                      Bandcamp
-                    </a>
+                <div className="max-w-5xl mx-auto w-full bg-white/95 border border-archive-line shadow-sm p-6 md:p-12 chamfer-card relative">
+                  <div className="flex flex-wrap items-center justify-between border-b border-archive-line pb-4 mb-8 gap-2">
+                    <div className="flex items-center gap-2.5">
+                      <span className="px-2 py-0.5 bg-archive-ink text-white font-mono text-xs">
+                        PROFILE // 01
+                      </span>
+                      <span className="font-mono text-xs text-archive-slate">
+                        UNIVERSITY OF TORONTO · CS + MATH &amp; STATISTICS
+                      </span>
+                    </div>
+                    <span className="font-jp text-xs text-archive-muted">
+                      研究者プロフィール // OPERATOR BIO
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
+                      <div className="relative p-2 bg-archive-bg border border-archive-line mb-5">
+                        <img
+                          className="w-[170px] h-[170px] object-cover"
+                          src="https://media.licdn.com/dms/image/D5603AQGOtva26WsPhQ/profile-displayphoto-shrink_800_800/0/1676056266008?e=1681344000&v=beta&t=w2JUWQury__l50wXg---N10ynb8g8Ng4rxAkGt6FCGE"
+                          alt="Christian Saavedra"
+                        />
+                        <div className="mt-2 flex items-center justify-between font-mono text-[10px] text-archive-slate">
+                          <span>ID: CNS-UofT</span>
+                          <span className="text-archive-cyan font-semibold">
+                            ACTIVE
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="w-full space-y-3 bg-archive-bg/70 p-4 border border-archive-line font-mono text-xs">
+                        <div className="text-[11px] text-archive-slate font-semibold border-b border-archive-line pb-1.5">
+                          CAPABILITY TELEMETRY
+                        </div>
+                        {[
+                          {
+                            name: "Deep Learning & Audio DSP",
+                            pct: "96%",
+                            bar: "w-[96%]",
+                          },
+                          {
+                            name: "Data Pipelines & Analytics",
+                            pct: "95%",
+                            bar: "w-[95%]",
+                          },
+                          {
+                            name: "NLP & Algorithmic Systems",
+                            pct: "92%",
+                            bar: "w-[92%]",
+                          },
+                          {
+                            name: "Full-Stack & Cloud Infra",
+                            pct: "94%",
+                            bar: "w-[94%]",
+                          },
+                        ].map((stat) => (
+                          <div key={stat.name}>
+                            <div className="flex justify-between text-[11px] mb-1">
+                              <span className="text-archive-ink">
+                                {stat.name}
+                              </span>
+                              <span className="text-archive-slate">
+                                {stat.pct}
+                              </span>
+                            </div>
+                            <div className="w-full h-1.5 bg-archive-line overflow-hidden">
+                              <div
+                                className={`h-full bg-archive-ink ${stat.bar}`}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-8 space-y-4 text-archive-ink leading-relaxed">
+                      <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
+                        About Me
+                      </h2>
+                      <p className="text-sm md:text-base text-archive-ink/90">
+                        As a graduate of the University of Toronto with a degree
+                        in Computer Science and minors in Math and Statistics,
+                        alongside my work experiences, I have a strong
+                        foundation in quantitative problem-solving, data
+                        engineering, and software architecture. At Runner and
+                        FutureFuture, I built production analytics platforms,
+                        automated reporting pipelines, and full-stack tools
+                        handling over 1,000,000+ data rows across ~250,000
+                        users.
+                      </p>
+                      <p className="text-sm md:text-base text-archive-ink/90">
+                        Outside of work, I build deep learning, neural network,
+                        and data-driven applications on{" "}
+                        <a
+                          href="https://github.com/cnsaavedra"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="underline font-mono text-sm text-archive-ink hover:text-archive-cyan"
+                        >
+                          github.com/cnsaavedra
+                        </a>
+                        . Using Python, TypeScript, PyTorch, ONNX Runtime,
+                        SciPy, and React, my projects span neural audio stem
+                        separation, polyphonic CNN audio-to-MIDI transcription,
+                        natural language negation and voting algorithms,
+                        computer vision automation, and deterministic simulation
+                        engines.
+                      </p>
+                      <p className="text-sm md:text-base text-archive-ink/90">
+                        In addition to my engineering work, I am a
+                        semi-professional music producer. I have worked with
+                        record labels such as Jazz Hop Café Records and achieved
+                        over a million streams on Spotify, SoundCloud, and
+                        Bandcamp—which directly inspired my research into neural
+                        audio separation and signal processing. You can hear my
+                        music at the links below.
+                      </p>
+
+                      <div className="pt-4 flex flex-wrap items-center gap-3">
+                        {[
+                          {
+                            label: "SoundCloud",
+                            href: "https://soundcloud.com/primaryflow",
+                          },
+                          {
+                            label: "Spotify",
+                            href: "https://open.spotify.com/artist/1KBXaBhFptSB4D7ncgxITI",
+                          },
+                          {
+                            label: "Apple Music",
+                            href: "https://music.apple.com/ng/artist/dominant/id1275392590",
+                          },
+                          {
+                            label: "Bandcamp",
+                            href: "https://dominantmusic.bandcamp.com",
+                          },
+                        ].map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="px-3.5 py-1.5 bg-archive-bg hover:bg-archive-ink text-archive-ink hover:text-white border border-archive-line font-mono text-xs transition-colors"
+                          >
+                            [ {link.label} ↗ ]
+                          </a>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
             </Plx>
-            <Plx className="intro" parallaxData={parallaxDataAlbums}>
-              <section
-                id="albums"
-                ref={albumsRef}
-                className="body-font font-poppins min-h-screen py-12 flex flex-col items-center justify-center"
-              >
-                <h1 className="my-8 text-[24px] text-white">
-                  Have a sneak at my albums!
-                </h1>
-                <div className="mx-auto flex flex-col justify-center items-center w-[500px]">
-                  <iframe
-                    title="Harvest of Memories"
-                    className="border-0 w-full h-[120px] self-center"
-                    src="https://bandcamp.com/EmbeddedPlayer/album=1224178121/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                    seamless
-                  >
-                    <a href="https://dominantmusic.bandcamp.com/album/harvest-of-memories">
-                      Harvest of Memories by DOMINANT
-                    </a>
-                  </iframe>
-                  <iframe
-                    title="winter story"
-                    className="border-0 w-full h-[120px] self-center"
-                    src="https://bandcamp.com/EmbeddedPlayer/album=2211329182/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                    seamless
-                  >
-                    <a href="https://dominantmusic.bandcamp.com/album/winter-story">
-                      winter story by DOMINANT
-                    </a>
-                  </iframe>
-                  <iframe
-                    title="prismatic"
-                    className="border-0 w-full h-[120px] self-center"
-                    src="https://bandcamp.com/EmbeddedPlayer/album=793618864/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
-                    seamless
-                  >
-                    <a href="https://dominantmusic.bandcamp.com/album/prismatic">
-                      prismatic by DOMINANT
-                    </a>
-                  </iframe>
+
+            <section
+              id="albums"
+              ref={albumsRef}
+              className="body-font font-poppins py-20 px-4 flex flex-col items-center justify-center"
+            >
+              <div className="max-w-4xl w-full bg-white/95 border border-archive-line p-6 md:p-10 chamfer-card shadow-sm">
+                <div className="flex flex-wrap items-center justify-between border-b border-archive-line pb-4 mb-6 gap-2">
+                  <div>
+                    <span className="font-mono text-xs text-archive-cyan font-semibold">
+                      [ AUDIO ARCHIVE // 1,000,000+ STREAMS ]
+                    </span>
+                    <h2 className="text-2xl font-semibold text-archive-ink mt-1">
+                      Have a sneak peek at my albums
+                    </h2>
+                  </div>
+                  <span className="font-jp text-xs text-archive-muted">
+                    音源アーカイブ // DISCOGRAPHY
+                  </span>
                 </div>
-              </section>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      code: "ALBUM_01",
+                      title: "Harvest of Memories",
+                      src: "https://bandcamp.com/EmbeddedPlayer/album=1224178121/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+                      href: "https://dominantmusic.bandcamp.com/album/harvest-of-memories",
+                    },
+                    {
+                      code: "ALBUM_02",
+                      title: "winter story",
+                      src: "https://bandcamp.com/EmbeddedPlayer/album=2211329182/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+                      href: "https://dominantmusic.bandcamp.com/album/winter-story",
+                    },
+                    {
+                      code: "ALBUM_03",
+                      title: "prismatic",
+                      src: "https://bandcamp.com/EmbeddedPlayer/album=793618864/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/",
+                      href: "https://dominantmusic.bandcamp.com/album/prismatic",
+                    },
+                  ].map((album) => (
+                    <div
+                      key={album.code}
+                      className="p-3 bg-archive-bg border border-archive-line"
+                    >
+                      <div className="flex items-center justify-between font-mono text-[11px] text-archive-slate mb-2">
+                        <span>
+                          {album.code} {"//"} {album.title.toUpperCase()}
+                        </span>
+                        <span>ARTIST: DOMINANT</span>
+                      </div>
+                      <iframe
+                        title={album.title}
+                        className="border-0 w-full h-[120px]"
+                        src={album.src}
+                        seamless
+                      >
+                        <a href={album.href}>{album.title} by DOMINANT</a>
+                      </iframe>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div id="end" />
-            </Plx>
+            </section>
           </>
         )}
       </div>
@@ -401,581 +1046,589 @@ function App() {
 
   function experience() {
     return (
-      <section className="body-font font-poppins">
-        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={() => {
-              setCurrentPage("homepage");
-            }}
-            className="absolute top-5 left-5 cursor-pointer"
-          >
-            <div className="hover:opacity-50">
-              <ArrowLeft />
-            </div>
-          </div>
-          <div className="text-center lg:w-2/3 w-full">
-            <h1
-              className={`${
-                pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-              } relative transition-all ease-in-out delay-75 title-font text-title mb-4 font-medium text-primary-800 text-black`}
+      <section className="body-font font-poppins min-h-screen pt-24 pb-20 px-4 relative z-10 bg-tactical-grid">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentPage("homepage");
+              }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-archive-line hover:border-archive-ink font-mono text-xs text-archive-ink transition-all"
             >
-              Experience
-            </h1>
+              <ArrowLeft />
+              <span>RETURN // HOME</span>
+            </button>
+            <span className="font-mono text-xs text-archive-slate">
+              [ TELEMETRY LOG // PRODUCTION DATA &amp; ENGINEERING ]
+            </span>
           </div>
+
           <div
             className={`${
-              pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300 mb-8 pb-8 border-b-[0.5px] border-gray-200 w-full mx-auto flex justify-center flex-col items-center`}
+              pageFirstLoad ? "opacity-0 top-4" : "opacity-100 top-0"
+            } relative transition-all ease-in-out duration-300 mb-8`}
           >
-            <div className="flex items-center gap-4 mb-4">
-              <img
-                width={40}
-                height={40}
-                src="https://media.licdn.com/dms/image/C560BAQE4LymCVTWYLg/company-logo_100_100/0/1519887572074?e=1682553600&v=beta&t=yQW-JNz_A5FHo6llpm6KFauBG1k24EXzIhEPFDsfFBw"
-                alt="Logo"
-              />
-              <h1 className="font-bold text-[32px] my-12">
-                FutureFuture Inc. (Jan 2022 - Jan 2023)
-              </h1>
-            </div>
-            <ul className="gap-2 flex flex-col w-full justify-start">
-              <h1 className="font-bold text-[20px] my-[5px]">
-                Full-stack / Lead Developer
-              </h1>
-              <li className="text-[16px] ml-[8px]">
-                • Developed various projects, including a Merchant Dashboard,
-                E-Commerce Tools, Delivery Solutions, and Courier/Driver
-                applications using technologies such as React, Typescript, React
-                Native, PHP, Laravel, and AWS. Implemented features that
-                improved delivery efficiency for couriers and streamlined
-                operations for businesses.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Led the design and development of a comprehensive merchant
-                dashboard for web and mobile platforms. I utilized my full-stack
-                development expertise to provide merchants with intuitive tools
-                for managing orders, products, menus, and insights/analytics.
-                Ensured seamless user experience and improved efficiency for
-                business operations. Handled and analyzed large datasets with
-                over 1,000,000+ data rows and more than ~250,000 users on the
-                platform, utilizing my expertise in big data management and
-                analysis.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Contributed to enhancing the delivery dashboard by developing
-                key features and implementing a modern design. Streamlined
-                Customer Service and Dispatcher's workflow, improving efficiency
-                and customer satisfaction. Utilized my full-stack development
-                skills to bring the project to fruition and provide a better
-                user experience.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Contributed to the growth and success of an e-commerce website
-                by developing new features and pages and fixing bugs.
-                Implemented innovative solutions, including new checkout
-                methods, a comprehensive blog page, partner pages, and a
-                streamlined career sign-up process. Used my full-stack
-                development expertise to deliver a seamless user experience and
-                improve the website's overall functionality.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Optimized delivery process by automating metrics and improving
-                order creation/editing, gifting details, streamlining
-                operations, and enhancing courier/dispatcher performance and
-                experience.
-              </li>
-            </ul>
+            <h1 className="text-3xl md:text-title font-semibold text-archive-ink tracking-tight">
+              Experience
+            </h1>
+            <p className="font-mono text-xs text-archive-slate mt-1">
+              LARGE-SCALE DATA PIPELINES · ANALYTICS WAREHOUSES · FULL-STACK
+              SYSTEMS
+            </p>
           </div>
 
           <div
             className={`${
               pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300 w-full mx-auto flex justify-center flex-col items-center`}
+            } transition-opacity ease-in-out duration-300 space-y-8`}
           >
-            <div className="flex items-center gap-4 mb-4">
-              <img
-                width={40}
-                height={40}
-                src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
-                alt="Logo"
-              />
-              <h1 className="font-bold text-[32px] md:my-12">
-                Runner Inc. (Jun 2019 - Aug 2020)
-              </h1>
-            </div>
-            <ul className="gap-2 flex flex-col w-full justify-start">
-              <h1 className="font-bold text-[20px] my-[5px]">
-                Full-stack Developer
-              </h1>
-              <li className="text-[16px] ml-[8px]">
-                • Using PHP, Laravel, AWS, Amazon Redshift, PostgreSQL, Stripe,
-                Xero. Handled and analyzed large datasets with over 1,000,000+
-                data rows and more than ~250,000 users on the platform,
-                utilizing my expertise in big data management and analysis.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Overall, revamped e-commerce tools and APIs, enhanced UI/UX,
-                implemented tests/automation, and contributed to delivering a
-                data analytics project.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Worked on database queries to help with analytics
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Automating tables, charts, excel sheets, data manipulations,
-                and data stores
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Created API's for all platforms worked on such as: e-commerce
-                api's, analytics, database storing, invoice, automation, and map
-                system for order/courier infos
-              </li>
-            </ul>
-            <br />
-            <ul className="gap-2 flex flex-col w-full justify-start my-4">
-              <h1 className="font-bold text-[20px] my-[5px]">
-                Front-end Developer
-              </h1>
-              <li className="text-[16px] ml-[8px]">
-                • Worked on various projects:
-                <li className="ml-[8px]">
-                  - Developed and delivered various projects including an
-                  e-commerce website, dispatch platform for
-                  dispatchers/couriers, an analytics platform, and a courier app
-                  aimed at streamlining delivery processes.
+            <div className="bg-white/95 border border-archive-line p-6 md:p-8 chamfer-card shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-archive-line pb-4 mb-5">
+                <div className="flex items-center gap-3">
+                  <img
+                    width={40}
+                    height={40}
+                    src="https://media.licdn.com/dms/image/C560BAQE4LymCVTWYLg/company-logo_100_100/0/1519887572074?e=1682553600&v=beta&t=yQW-JNz_A5FHo6llpm6KFauBG1k24EXzIhEPFDsfFBw"
+                    alt="FutureFuture Logo"
+                    className="border border-archive-line"
+                  />
+                  <div>
+                    <div className="font-mono text-[11px] text-archive-cyan font-semibold">
+                      RECORD_01 // JAN 2022 – JAN 2023
+                    </div>
+                    <h2 className="font-bold text-xl md:text-2xl text-archive-ink">
+                      FutureFuture Inc.
+                    </h2>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2 font-mono text-[11px]">
+                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
+                    DATASET: 1,000,000+ ROWS
+                  </span>
+                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
+                    SCALE: ~250,000 USERS
+                  </span>
+                </div>
+              </div>
+
+              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold">
+                ROLE: FULL-STACK / LEAD &amp; DATA SYSTEMS DEVELOPER
+              </div>
+
+              <ul className="space-y-2.5 text-sm md:text-base text-archive-ink/90">
+                <li>
+                  • Handled and analyzed large production datasets with over
+                  1,000,000+ data rows and more than ~250,000 users on the
+                  platform, building automated analytics, insights, and
+                  operational reporting pipelines.
                 </li>
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Overall, implementing better UI/UX, adding more utilities,
-                conducting rigorous QA testing, and fixing critical issues.
-                Ensured cross-browser compatibility across popular browsers such
-                as Internet Explorer, Google Chrome, Safari, and Firefox.
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Delivered a utilities/pages for dispatch team with task/order
-                lists, user info, mapping system UI/UX, and auto-updates
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Improved UI/UX and added utilities/pages for the main website
-                using animations and improved Frontend code
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Created application for both website and iOS that helps with
-                analytics
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Started on an app for couriers using React Native on iOS
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Using custom CSS and Javascript
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • Worked on both Vue and React Native
-              </li>
-              <li className="text-[16px] ml-[8px]">
-                • QA work such as creating test, automation and overall bug
-                testing
-              </li>
-            </ul>
+                <li>
+                  • Led the design and development of a comprehensive Merchant
+                  Dashboard for web and mobile platforms, giving businesses
+                  real-time analytics, order telemetry, product management, and
+                  automated performance metrics.
+                </li>
+                <li>
+                  • Developed end-to-end E-Commerce tools, Delivery &amp;
+                  Dispatch routing software, and Courier applications using
+                  React, TypeScript, React Native, PHP, Laravel, and AWS.
+                </li>
+                <li>
+                  • Streamlined Customer Service and Dispatcher workflows by
+                  automating order metrics, live status tracking, and courier
+                  performance telemetry.
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white/95 border border-archive-line p-6 md:p-8 chamfer-card shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-archive-line pb-4 mb-5">
+                <div className="flex items-center gap-3">
+                  <img
+                    width={40}
+                    height={40}
+                    src="https://media.licdn.com/dms/image/C4E0BAQEP4gbQhWMX-A/company-logo_100_100/0/1639493389335?e=1682553600&v=beta&t=06FZkRCrXBS7liVuQzHR3hf13v6VZ8qhheYomIYFcRk"
+                    alt="Runner Logo"
+                    className="border border-archive-line"
+                  />
+                  <div>
+                    <div className="font-mono text-[11px] text-archive-cyan font-semibold">
+                      RECORD_02 // JUN 2019 – AUG 2020
+                    </div>
+                    <h2 className="font-bold text-xl md:text-2xl text-archive-ink">
+                      Runner Inc.
+                    </h2>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2 font-mono text-[11px]">
+                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
+                    WAREHOUSE: AMAZON REDSHIFT + POSTGRESQL
+                  </span>
+                  <span className="px-2.5 py-1 bg-archive-bg border border-archive-line text-archive-ink">
+                    ROWS: 1,000,000+
+                  </span>
+                </div>
+              </div>
+
+              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold">
+                ROLE: FULL-STACK &amp; DATA ANALYTICS DEVELOPER
+              </div>
+
+              <ul className="space-y-2.5 text-sm md:text-base text-archive-ink/90 mb-6">
+                <li>
+                  • Engineered data warehousing and analytics workflows using
+                  Amazon Redshift, PostgreSQL, AWS, PHP, Laravel, Stripe, and
+                  Xero across 1,000,000+ rows and ~250,000 users.
+                </li>
+                <li>
+                  • Wrote optimized analytical SQL queries and automated data
+                  manipulations, chart generation, spreadsheet exports, and
+                  structured data stores.
+                </li>
+                <li>
+                  • Designed and shipped REST APIs powering analytics
+                  dashboards, automated invoicing, database ingestion, and
+                  real-time courier mapping telemetry.
+                </li>
+              </ul>
+
+              <div className="font-mono text-xs text-archive-slate mb-3 font-semibold border-t border-archive-line pt-4">
+                ROLE: FRONT-END &amp; QA AUTOMATION DEVELOPER
+              </div>
+              <ul className="space-y-2 text-sm md:text-base text-archive-ink/90">
+                <li>
+                  • Built web and iOS analytics applications, dispatcher mapping
+                  interfaces, and courier apps using React Native, Vue, and
+                  custom JavaScript/CSS.
+                </li>
+                <li>
+                  • Implemented automated test suites and rigorous QA checks to
+                  verify data accuracy and cross-browser reliability.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
     );
   }
 
-  const [sliderRef, slider] = useKeenSlider({
-    slidesPerView: 1,
-    initial: 0,
-    mode: "snap",
-    vertical: false,
-    spacing: 15,
-    controls: true,
-    breakpoints: {
-      "(max-width: 768px)": {
-        slidesPerView: 1,
-        vertical: true,
-      },
-    },
-  });
-
-  const parallaxDataP1 = [
-    {
-      start: "self",
-      end: 1500,
-      duration: 1000,
-      properties: [
-        {
-          startValue: 0.75,
-          endValue: 1.05,
-          property: "scale",
-        },
-      ],
-    },
-  ];
-
-  const parallaxDataP2 = [
-    {
-      start: "self",
-      end: 2400,
-      properties: [
-        {
-          startValue: 0.75,
-          endValue: 1.05,
-          property: "scale",
-        },
-      ],
-    },
-  ];
-
-  const parallaxDataP3 = [
-    {
-      start: "self",
-      end: 2800,
-      properties: [
-        {
-          startValue: 0.75,
-          endValue: 1.05,
-          property: "scale",
-        },
-      ],
-    },
-  ];
-
-  const parallaxDataP4 = [
-    {
-      start: "self",
-      end: 3900,
-      properties: [
-        {
-          startValue: 0.75,
-          endValue: 1.05,
-          property: "scale",
-        },
-      ],
-    },
-  ];
-
-  const [width, setWidth] = useState(window.innerWidth);
-
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth);
-  }
-  useEffect(() => {
-    window.addEventListener("resize", handleWindowSizeChange);
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 768;
-
-  function portfolio() {
-    return (
-      <section className="body-font font-poppins">
-        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={() => {
-              setCurrentPage("homepage");
-            }}
-            className="absolute top-5 left-5 cursor-pointer"
-          >
-            <div className="hover:opacity-50">
-              <ArrowLeft />
-            </div>
+  function renderTechnicalDiagram(sys) {
+    if (sys.visualType === "neural-audio") {
+      return (
+        <div className="bg-archive-bg border border-archive-line p-5 font-mono text-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-archive-line pb-2">
+            <span className="text-archive-ink font-semibold">
+              NEURAL SIGNAL TELEMETRY // DEMUCS HT + BASIC PITCH CNN
+            </span>
+            <span className="text-archive-cyan">ONNX_CPU_RUNTIME</span>
           </div>
-          <div className="text-center lg:w-2/3 w-full">
-            <h1
-              className={`${
-                pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-              } relative transition-all ease-in-out delay-75 title-font text-title mb-4 font-medium text-primary-800 text-black`}
-            >
-              Portfolio
-            </h1>
-          </div>
-          <div
-            className={`${
-              pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300`}
-          >
-            <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[50px] my-8">Old MMO Friends</h1>
-            </div>
-            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start mx-auto">
-                <li className="text-[18px]">
-                  • Users find and message other users to socialize/reconcile
-                  via this social platform.
-                </li>
-                <li className="text-[18px]">
-                  • Manages users; profiles, friends, messages, notifications
-                  and other user information.
-                </li>
-                <li className="text-[18px]">
-                  • Uses PostgreSQL via Sequelize creating queries
-                </li>
-                <li className="text-[18px]">
-                  • Follows an MVC structure along with a client and a server,
-                  with Express.js back-end framework.
-                </li>
-                <li className="text-[18px] mb-8 md:mb-0">
-                  • Hashes user passwords with JWT tokens
-                </li>
-              </ul>
-              <div className="mx-auto flex justify-center">
-                <img
-                  className="object-contain"
-                  src="https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966"
-                  alt="Logo"
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white p-4 border border-archive-line">
+              <div className="text-[11px] text-archive-slate mb-2">
+                01. 4-STEM SOURCE SEPARATION (ISOLATED OVERLAPS)
               </div>
-            </div>
-          </div>
-
-          <div
-            className={`${
-              pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300`}
-          >
-            <div className="flex flex-col items-start md:items-center gap-4 mb-4">
-              <h1 className="font-bold text-[50px] my-8">FFXIV Statistics</h1>
-            </div>
-            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start mx-auto">
-                <li className="text-[18px]">
-                  • Using the API of Final Fantasy 14 by Square Enix to gather
-                  data that allows to analyze statistics given by the API
-                </li>
-                <li className="text-[18px]">
-                  • Manipulated data to get the results we need in a UI/UX
-                  friendly manner, designed to show an attractive way to present
-                  statistics
-                </li>
-                <li className="text-[18px]">
-                  • Ability to find out the demographics of a guild, through
-                  data manipluations and parsing
-                </li>
-                <li className="text-[18px]">
-                  • Ability to find out the best market values through finding
-                  velocities of items sold and their demands
-                </li>
-                <li className="text-[18px] mb-8 md:mb-0">
-                  • Efficiently uses CSS flex/grid to show the "fashion" section
-                  of the website in an easy and efficient way to present the
-                  clothings from the game
-                </li>
-              </ul>
-              <div className="keen-slider max-w-[500px] overflow-hidden">
+              {[
+                { stem: "VOCALS.WAV", freq: "85 Hz – 1.1 kHz", conf: "0.94" },
+                { stem: "BASS.WAV", freq: "32 Hz – 350 Hz", conf: "0.97" },
+                { stem: "OTHER.WAV", freq: "130 Hz – 4.2 kHz", conf: "0.89" },
+                { stem: "DRUMS.WAV", freq: "Onset + Band Split", conf: "0.92" },
+              ].map((row) => (
                 <div
-                  ref={sliderRef}
-                  className="keen-slider flex gap-4 h-[500px] w-[500px] overflow-hidden"
+                  key={row.stem}
+                  className="flex items-center justify-between py-1 border-b border-archive-line/60 last:border-0 text-[11px]"
                 >
-                  <div className="keen-slider__slide flex flex-col justify-center items-center">
-                    <img
-                      className="h-[500px]"
-                      src="https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png"
-                      alt="Logo"
-                    />
-                    <h6 className="flex justify-center self-center">1/3</h6>
+                  <span className="font-semibold text-archive-ink">
+                    {row.stem}
+                  </span>
+                  <span className="text-archive-slate">{row.freq}</span>
+                  <span className="text-archive-cyan">p={row.conf}</span>
+                </div>
+              ))}
+            </div>
+            <div className="bg-white p-4 border border-archive-line flex flex-col justify-between">
+              <div className="text-[11px] text-archive-slate mb-2">
+                02. FALSE-POSITIVE NOTE PRUNING (3-MIN TRACK BENCHMARK)
+              </div>
+              <div className="space-y-3 my-auto">
+                <div>
+                  <div className="flex justify-between text-[11px] mb-1">
+                    <span>Untuned Default Basic Pitch (`other` stem)</span>
+                    <span className="text-archive-vermilion">2,809 notes</span>
                   </div>
-                  <div className="keen-slider__slide flex flex-col justify-center items-center">
-                    <img
-                      className="h-[500px]"
-                      src="https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png"
-                      alt="Logo"
-                    />
-                    <h6 className="flex justify-center self-center">2/3</h6>
+                  <div className="w-full h-2 bg-archive-line">
+                    <div className="h-full bg-archive-vermilion w-full" />
                   </div>
-                  <div className="keen-slider__slide flex flex-col justify-center items-center">
-                    <img
-                      className="h-[500px] object-cover"
-                      src="https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png"
-                      alt="Logo"
-                    />
-                    <h6 className="flex justify-center self-center">3/3</h6>
+                </div>
+                <div>
+                  <div className="flex justify-between text-[11px] mb-1">
+                    <span>Frequency-Constrained &amp; Threshold-Tuned CNN</span>
+                    <span className="text-emerald-600 font-semibold">
+                      1,274 real notes (-54.6% noise)
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-archive-line">
+                    <div className="h-full bg-archive-cyan w-[45.3%]" />
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div
-            className={`${
-              pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300`}
-          >
-            <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[50px] my-8">Archived Pins</h1>
-            </div>
-            <div className="flex flex-col md:flex-row md:gap-[250px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-2 flex flex-col justify-start mx-auto">
-                <li className="text-[18px]">• Discord Pin Archiving Bot</li>
-                <li className="text-[18px]">• Uses Python and Discord API</li>
-                <li className="text-[18px]">
-                  • A Discord bot that creates a dedicated archive channel for
-                  all your pinned messages. With just a few commands, it
-                  seamlessly transfers all existing pins from a specific channel
-                  to the new archived pins channel, ensuring that important
-                  information is never lost.
-                </li>
-                <li className="text-[18px]">
-                  • Follows an .env structure to keep private tokens safe
-                </li>
-              </ul>
-              <div className="mx-auto flex justify-center">
-                <img
-                  className="md:w-[1500px]"
-                  src="https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png"
-                  alt="Logo"
-                />
+              <div className="text-[10px] text-archive-muted mt-3">
+                Eliminates cymbal wash &amp; reverb-tail pitch hallucinations
+                while preserving true harmonic voicings.
               </div>
             </div>
           </div>
+        </div>
+      );
+    }
+
+    if (sys.visualType === "dsp-compiler") {
+      return (
+        <div className="bg-archive-bg border border-archive-line p-5 font-mono text-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-archive-line pb-2">
+            <span className="text-archive-ink font-semibold">
+              CHROMA &amp; LOUDNESS SOLVER // MUSICORE BINARY ENGINE
+            </span>
+            <span className="text-archive-cyan">FL_25.2.5_BINARY</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="bg-white p-3.5 border border-archive-line">
+              <div className="text-[10px] text-archive-slate mb-1">
+                GATE 01 // NOTE-TO-STEM LOCK
+              </div>
+              <div className="text-base font-semibold text-archive-ink">
+                Δt ≤ 20 ms · Chroma ≥ 0.65
+              </div>
+              <p className="text-[11px] text-archive-slate mt-1">
+                Every retained MIDI note must align with an audio stem onset and
+                pass 12-pitch chroma correlation.
+              </p>
+            </div>
+            <div className="bg-white p-3.5 border border-archive-line">
+              <div className="text-[10px] text-archive-slate mb-1">
+                GATE 02 // SPECTRAL POCKET EQ
+              </div>
+              <div className="text-base font-semibold text-archive-ink">
+                3.52 kHz ≤ -2.5 dB
+              </div>
+              <p className="text-[11px] text-archive-slate mt-1">
+                Automated PEQ2 role carving + drum-triggered sidechain ducking
+                keeps lead vocal presence clear.
+              </p>
+            </div>
+            <div className="bg-white p-3.5 border border-archive-line">
+              <div className="text-[10px] text-archive-slate mb-1">
+                GATE 03 // BS.1770 MASTER GLUE
+              </div>
+              <div className="text-base font-semibold text-archive-ink">
+                -11.5 LUFS · ≤ -1 dBTP
+              </div>
+              <p className="text-[11px] text-archive-slate mt-1">
+                Computes offline staged sum headroom to set bounded pre-glue
+                drive (-12..+6 dB).
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (sys.visualType === "voice-llm" || sys.visualType === "cv-sim") {
+      return (
+        <div className="bg-archive-bg border border-archive-line p-5 font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-archive-line pb-2 mb-3">
+            <span className="text-archive-ink font-semibold">
+              SYSTEM ARCHITECTURE // {sys.code}
+            </span>
+            <span className="text-archive-cyan">DETERMINISTIC_RUNTIME</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {sys.metrics.map((m) => (
+              <div
+                key={m.label}
+                className="bg-white p-3.5 border border-archive-line"
+              >
+                <div className="text-[10px] text-archive-slate">{m.label}</div>
+                <div className="text-sm font-semibold text-archive-ink mt-1">
+                  {m.value}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  }
+
+  function portfolio() {
+    const activeSys =
+      PORTFOLIO_SYSTEMS[selectedSystemIndex] || PORTFOLIO_SYSTEMS[0];
+
+    return (
+      <section className="body-font font-poppins min-h-screen pt-24 pb-24 px-4 relative z-10 bg-tactical-grid">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentPage("homepage");
+              }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-archive-line hover:border-archive-ink font-mono text-xs text-archive-ink transition-all"
+            >
+              <ArrowLeft />
+              <span>RETURN // HOME</span>
+            </button>
+            <div className="font-mono text-xs text-archive-slate">
+              [ ARCHIVE SELECTOR // {PORTFOLIO_SYSTEMS.length} REGISTERED
+              SYSTEMS ]
+            </div>
+          </div>
 
           <div
             className={`${
-              pageFirstLoad ? "opacity-0" : "opacity-100"
-            } relative transition-all ease-in-out delay-300`}
+              pageFirstLoad ? "opacity-0 top-4" : "opacity-100 top-0"
+            } relative transition-all ease-in-out duration-300 mb-6 flex flex-wrap items-end justify-between gap-4`}
           >
-            <div className="flex flex-col items-center gap-4 mb-4">
-              <h1 className="font-bold text-[50px] my-8">Pick For Us</h1>
+            <div>
+              <div className="font-mono text-xs text-archive-cyan font-semibold">
+                NEURAL NETWORKS · DEEP LEARNING · NLP · DATA ENGINEERING
+              </div>
+              <h1 className="text-3xl md:text-title font-semibold text-archive-ink tracking-tight">
+                Portfolio &amp; Neural Archive
+              </h1>
             </div>
-            <div className="flex flex-col md:gap-[500px] items-center pb-8 border-b-2 border-gray-200">
-              <ul className="gap-8 md:gap-2 flex flex-col justify-start">
-                <li className="text-[18px] flex flex-col italic">
-                  • Done through vanilla Javascript, HTML, using MongoDB for the
-                  database to show that the foundation of Javascript, HTML,
-                  jQuery, Database related languages
-                </li>
-                <li className="text-[18px]">
-                  • Hanging out with friends? Everyone is indecisive and you all
-                  don't know where to go? Get everyone on this website and
-                  anonymously share your thoughts on what to do for the rest of
-                  the day!
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • What's so special about this? Can't we just share our
-                  thoughts in real life?
-                  <span className="text-[15px] ml-8">
-                    No one will be the decisive friend and finalize a place. It
-                    is also most likely that deep down, you and your friends
-                    have an idea what you all really want. This website will
-                    extract the information needed from you and your friends to
-                    finalize and get the most wanted option. And really if
-                    everyone is indecisive, who is the leader of the group? THIS
-                    WEBSITE!
-                  </span>
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  •How do you extract the most wanted option?
-                  <span className="text-[15px] ml-8">
-                    You are given 60 seconds to put in your thoughts, therefore
-                    the website is trying to get the first thing that comes to
-                    you and your friends minds.
-                    {!isMobile ? (
-                      <Plx className="p1-img" parallaxData={parallaxDataP1}>
-                        <img
-                          className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                          src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
-                          alt="Logo"
-                        />
-                      </Plx>
-                    ) : (
-                      <img
-                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/mainmenu.png"
-                        alt="Logo"
-                      />
-                    )}
-                  </span>
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • For example if we want to choose a food place, we would
-                  select "Picking Food".
-                  {!isMobile ? (
-                    <Plx className="p2-img" parallaxData={parallaxDataP2}>
-                      <img
-                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
-                        alt="Logo"
-                      />
-                    </Plx>
-                  ) : (
-                    <img
-                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/chatscreenfood.png"
-                      alt="Logo"
-                    />
-                  )}
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • In this scenario, seems like everyone is okay with whatever.
-                  The website analyzes the data and tries to narrow down options
-                  and finally giving the best option.
-                  {!isMobile ? (
-                    <Plx className="p3-img" parallaxData={parallaxDataP3}>
-                      <img
-                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
-                        alt="Logo"
-                      />
-                    </Plx>
-                  ) : (
-                    <img
-                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/databasefood.png"
-                      alt="Logo"
-                    />
-                  )}
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • From the database, the website narrowed down to only
-                  selecting food and checks for the most common cuisine/food (If
-                  someone says "I don't want burger" it would detect the "don't
-                  want (insert food here)" and would not include burger).
-                  {!isMobile ? (
-                    <Plx className="p4-img" parallaxData={parallaxDataP4}>
-                      <img
-                        className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                        src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
-                        alt="Logo"
-                      />
-                    </Plx>
-                  ) : (
-                    <img
-                      className="mx-auto object-contain my-24 border-[1px] border-gray-300 p-4"
-                      src="https://github.com/cnsaavedra/pickforus/raw/master/meta/foodexamples/suggestionfoodv2.png"
-                      alt="Logo"
-                    />
-                  )}
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • So in the end we are given these options!
-                </li>
-                <li className="text-[18px] flex flex-col">
-                  • The "You have duplicates, but we fixed that for you" is
-                  towards the message that had burger in the same sentence (Or
-                  could be spammed by the same guy. Keep in mind if it's from
-                  the same guy who wants to spam a certain cuisine/food in the
-                  chat then not everyone indecisive and therefore that person
-                  can plan the meal for everyone). It is a way to disallow from
-                  repeating the same words accidentally.
-                </li>
-              </ul>
-            </div>
-          </div>
-          <h1 className="my-8">
-            More on{" "}
             <a
               href="https://github.com/cnsaavedra/"
-              className="underline text-blue-300"
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2 bg-archive-ink text-white hover:bg-archive-cyan hover:text-archive-ink font-mono text-xs transition-colors"
             >
-              my github
+              [ GITHUB // CNSAAVEDRA ↗ ]
             </a>
-          </h1>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Left Gacha Operator / System Archive Roster */}
+            <div className="lg:col-span-4 space-y-2">
+              <div className="font-mono text-[11px] text-archive-slate px-1 mb-2 flex justify-between">
+                <span>SELECT SYSTEM RECORD</span>
+                <span className="font-jp">システム一覧</span>
+              </div>
+              {PORTFOLIO_SYSTEMS.map((sys, idx) => {
+                const isSelected = idx === selectedSystemIndex;
+                return (
+                  <button
+                    key={sys.id}
+                    type="button"
+                    onClick={() => setSelectedSystemIndex(idx)}
+                    className={`w-full text-left p-3.5 border transition-all relative chamfer-btn ${
+                      isSelected
+                        ? "bg-archive-ink text-white border-archive-ink shadow-sm"
+                        : "bg-white/90 text-archive-ink border-archive-line hover:border-archive-ink"
+                    }`}
+                  >
+                    <div
+                      className={`absolute left-0 top-0 bottom-0 w-1 ${
+                        isSelected ? "bg-archive-cyan" : "bg-transparent"
+                      }`}
+                    />
+                    <div className="flex items-center justify-between font-mono text-[10px] mb-1">
+                      <span
+                        className={
+                          isSelected
+                            ? "text-archive-cyan font-semibold"
+                            : "text-archive-slate"
+                        }
+                      >
+                        [{sys.id}] {sys.category}
+                      </span>
+                      <span className="text-archive-amber">{sys.rarity}</span>
+                    </div>
+                    <div className="font-semibold text-sm md:text-base leading-snug">
+                      {sys.title}
+                    </div>
+                    <div
+                      className={`font-jp text-[10px] mt-0.5 ${
+                        isSelected ? "text-gray-300" : "text-archive-muted"
+                      }`}
+                    >
+                      {sys.jp}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Right Active System Inspection Stage */}
+            <div className="lg:col-span-8 bg-white/95 border border-archive-line p-6 md:p-8 chamfer-card shadow-sm space-y-6">
+              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-archive-line pb-5">
+                <div>
+                  <div className="flex items-center gap-2 font-mono text-xs text-archive-cyan font-semibold">
+                    <span>[{activeSys.id}]</span>
+                    <span>{activeSys.code}</span>
+                    <span className="text-archive-amber">
+                      {activeSys.rarity}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-archive-ink mt-1">
+                    {activeSys.title}
+                  </h2>
+                  <div className="font-jp text-xs text-archive-muted mt-0.5">
+                    {activeSys.jp} {"//"} {activeSys.category}
+                  </div>
+                </div>
+                <a
+                  href={activeSys.repoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3.5 py-1.5 bg-archive-bg hover:bg-archive-ink text-archive-ink hover:text-white border border-archive-line font-mono text-xs transition-colors"
+                >
+                  [ INSPECT REPO ↗ ]
+                </a>
+              </div>
+
+              {/* Model & Algorithm Tags */}
+              <div className="flex flex-wrap gap-2">
+                {activeSys.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2.5 py-1 bg-archive-bg border border-archive-line font-mono text-[11px] text-archive-ink"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Neural / Data Pipeline Topology Strip */}
+              <div className="bg-archive-bg/80 border border-archive-line p-4">
+                <div className="font-mono text-[10px] text-archive-slate mb-2.5 flex justify-between">
+                  <span>DATA &amp; INFERENCE PIPELINE TOPOLOGY</span>
+                  <span>FORWARD_PASS // ACTIVE</span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  {activeSys.pipeline.map((step, i) => (
+                    <div key={step} className="flex items-center gap-2">
+                      <span className="px-2.5 py-1 bg-white border border-archive-line font-mono text-[11px] text-archive-ink font-medium">
+                        {i + 1}. {step}
+                      </span>
+                      {i < activeSys.pipeline.length - 1 && (
+                        <span className="font-mono text-archive-cyan text-xs">
+                          →
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Key Quantitative Telemetry */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {activeSys.metrics.map((metric) => (
+                  <div
+                    key={metric.label}
+                    className="p-3 bg-archive-bg/50 border border-archive-line"
+                  >
+                    <div className="font-mono text-[10px] text-archive-slate">
+                      {metric.label}
+                    </div>
+                    <div className="font-mono text-xs md:text-sm font-semibold text-archive-ink mt-1">
+                      {metric.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Plain-English System Breakdown */}
+              <div className="space-y-2.5">
+                <div className="font-mono text-xs text-archive-slate font-semibold">
+                  SYSTEM OVERVIEW &amp; ARCHITECTURE
+                </div>
+                <ul className="space-y-2.5 text-sm md:text-base text-archive-ink/90 leading-relaxed">
+                  {activeSys.bullets.map((b, i) => (
+                    <li key={i}>• {b}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Specialized Technical Diagram or Preserved Visual Evidence */}
+              {renderTechnicalDiagram(activeSys)}
+
+              {activeSys.visualType === "pickforus" && (
+                <div className="space-y-6 pt-2">
+                  <div className="font-mono text-xs text-archive-slate font-semibold border-t border-archive-line pt-4">
+                    VISUAL WALKTHROUGH // 60-SECOND NLP &amp; APPROVAL VOTING
+                    TRACE
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {activeSys.images.map((img) => (
+                      <div
+                        key={img.caption}
+                        className="bg-archive-bg border border-archive-line p-3 flex flex-col justify-between"
+                      >
+                        <div className="font-mono text-[10px] text-archive-slate mb-2">
+                          {img.caption}
+                        </div>
+                        <img
+                          className="mx-auto object-contain max-h-[260px] bg-white border border-archive-line p-2"
+                          src={img.src}
+                          alt={img.caption}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeSys.visualType === "slider" && (
+                <div className="pt-2">
+                  <div className="font-mono text-xs text-archive-slate font-semibold border-t border-archive-line pt-4 mb-3">
+                    TELEMETRY GALLERY // SWIPE OR DRAG SLIDES
+                  </div>
+                  <div className="keen-slider max-w-[520px] mx-auto overflow-hidden border border-archive-line bg-archive-bg p-3">
+                    <div
+                      ref={sliderRef}
+                      className="keen-slider flex gap-4 h-[420px] w-full overflow-hidden"
+                    >
+                      {activeSys.slides.map((src, idx) => (
+                        <div
+                          key={src}
+                          className="keen-slider__slide flex flex-col justify-center items-center"
+                        >
+                          <img
+                            className="h-[370px] object-contain"
+                            src={src}
+                            alt={`${activeSys.title} slide ${idx + 1}`}
+                          />
+                          <h6 className="font-mono text-xs text-archive-slate mt-2">
+                            SLIDE // {idx + 1} OF {activeSys.slides.length}
+                          </h6>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeSys.visualType === "single-image" && (
+                <div className="pt-2">
+                  <div className="font-mono text-xs text-archive-slate font-semibold border-t border-archive-line pt-4 mb-3">
+                    SYSTEM CAPTURE // LIVE INTERFACE
+                  </div>
+                  <div className="bg-archive-bg border border-archive-line p-3 flex justify-center">
+                    <img
+                      className="object-contain max-h-[420px]"
+                      src={activeSys.image}
+                      alt={activeSys.title}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
           {yPageOffset && (
             <div
               tabIndex={0}
@@ -984,7 +1637,7 @@ function App() {
                 setPressedAboutMeArrow(true);
                 scrollToTop();
               }}
-              className="z-50 bottom-10 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer"
+              className="fixed z-50 bottom-12 right-10 transition-all ease-in-out delay-75 duration-200 animate-bounce hover:animate-pulse cursor-pointer"
             >
               <ArrowUpCircle size={45} />
             </div>
@@ -996,141 +1649,161 @@ function App() {
 
   function contact() {
     return (
-      <div className="my-auto mx-auto flex px-5 py-24 items-center justify-center flex-col">
-        <div
-          tabIndex={0}
-          role="button"
-          onClick={() => {
-            setCurrentPage("homepage");
-          }}
-          className="absolute top-5 left-5 cursor-pointer"
-        >
-          <div className="hover:opacity-50">
-            <ArrowLeft />
-          </div>
-        </div>
-        <div className="text-center lg:w-2/3 w-full">
-          <h1
-            className={`${
-              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-            }  transition-all ease-in-out delay-75 title-font text-title mb-4 font-medium text-primary-800 text-black  top-[-150px]`}
-          >
-            Contact and Links
-          </h1>
-          <h6
-            className={`${
-              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-            }  transition-all ease-in-out delay-75 title-font text-[20px] mb-4 font-medium text-primary-800 text-black`}
-          >
-            Email:{" "}
-            <span className="font-light text-[18px]">
-              christian.nico.saavedra@gmail.com
-            </span>
-          </h6>
-          <h6
-            className={`${
-              pageFirstLoad ? "opacity-0 top-10" : "opacity-100 top-0"
-            }  transition-all ease-in-out delay-75 title-font text-[20px] mb-4 font-medium text-primary-800 text-black`}
-          >
-            Music Email:{" "}
-            <span className="font-light text-[18px]">tokibitsu@gmail.com</span>
-          </h6>
-          <div className="flex flex-col md:flex-row gap-24 justify-center items-center relative my-auto md:h-[500px]">
-            <a className="relative" href="https://github.com/cnsaavedra">
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                } z-50 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                width={250}
-                height={250}
-                src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                alt="Github"
-              />
-              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
-                <img
-                  className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  } z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={250}
-                  height={250}
-                  src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                  alt="Github"
-                />
-                <h1 className="text-black absolute bottom-[-25px] right-[41%] text-center">
-                  Github
-                </h1>
-              </div>
-            </a>
-
-            <a
-              className="relative"
-              href="https://www.linkedin.com/in/christian-saavedra-b07413245/"
+      <section className="body-font font-poppins min-h-screen pt-24 pb-20 px-4 flex items-center justify-center relative z-10 bg-tactical-grid">
+        <div className="max-w-4xl w-full">
+          <div className="flex items-center justify-between mb-8">
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentPage("homepage");
+              }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-archive-line hover:border-archive-ink font-mono text-xs text-archive-ink transition-all"
             >
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                } z-0 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                width={250}
-                height={250}
-                src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                alt="Github"
-              />
-              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
-                <img
-                  className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  } bg-white z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={250}
-                  height={250}
-                  src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                  alt="Linkedin"
-                />
-                <h1 className="text-black absolute bottom-[-45px] right-[45%] text-center">
-                  Linkedin
-                </h1>
-              </div>
-            </a>
+              <ArrowLeft />
+              <span>RETURN // HOME</span>
+            </button>
+            <span className="font-mono text-xs text-archive-slate">
+              [ COMMS_TERMINAL // DIRECT CHANNELS ]
+            </span>
+          </div>
 
-            <a className="relative" href="https://soundcloud.com/primaryflow">
-              <img
-                className={`${
-                  pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                } z-0 transition-all ease-in-out delay-75 duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                width={250}
-                height={250}
-                src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                alt="SoundCloud"
-              />
-              <div className="absolute bottom-0 left-0 right-0 w-full h-full z-0 hover:opacity-100 opacity-0 transition-all ease-in-out duration-200">
-                <img
-                  className={`${
-                    pageFirstLoad ? "opacity-0 -left-36" : "opacity-100 left-0"
-                  } bg-white z-50 transition-all ease-in-out duration-200 title-font text-[24px] mb-4 font-medium text-primary-800 text-black hover:-translate-y-1 hover:scale-110`}
-                  width={250}
-                  height={250}
-                  src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                  alt="Linkedin"
-                />
-                <h1 className="text-black absolute bottom-[-30px] right-[32%] text-center">
-                  SoundCloud
+          <div className="bg-white/95 border border-archive-line p-6 md:p-12 chamfer-card shadow-sm">
+            <div className="border-b border-archive-line pb-5 mb-8 flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <div className="font-mono text-xs text-archive-cyan font-semibold">
+                  TRANSMISSION CHANNELS // ONLINE
+                </div>
+                <h1 className="text-3xl md:text-title font-semibold text-archive-ink tracking-tight mt-1">
+                  Contact and Links
                 </h1>
               </div>
-            </a>
+              <span className="font-jp text-xs text-archive-muted">
+                外部通信リンク // EXTERNAL LINKS
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+              {[
+                {
+                  code: "CHANNEL_01 // ENGINEERING & DATA",
+                  label: "Email",
+                  email: "christian.nico.saavedra@gmail.com",
+                },
+                {
+                  code: "CHANNEL_02 // AUDIO & PRODUCTION",
+                  label: "Music Email",
+                  email: "tokibitsu@gmail.com",
+                },
+              ].map((item) => (
+                <div
+                  key={item.email}
+                  className="p-4 bg-archive-bg border border-archive-line flex flex-col justify-between gap-3"
+                >
+                  <div>
+                    <div className="font-mono text-[10px] text-archive-slate">
+                      {item.code}
+                    </div>
+                    <div className="font-semibold text-sm text-archive-ink mt-1">
+                      {item.label}
+                    </div>
+                    <div className="font-mono text-xs md:text-sm text-archive-ink mt-1 break-all">
+                      {item.email}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => copyToClipboard(item.email)}
+                      className="px-3 py-1 bg-white hover:bg-archive-ink text-archive-ink hover:text-white border border-archive-line font-mono text-[11px] transition-colors"
+                    >
+                      {copiedEmail === item.email
+                        ? "[ COPIED TO CLIPBOARD ]"
+                        : "[ COPY ADDRESS ]"}
+                    </button>
+                    <a
+                      href={`mailto:${item.email}`}
+                      className="px-3 py-1 bg-white hover:bg-archive-cyan text-archive-ink border border-archive-line font-mono text-[11px] transition-colors"
+                    >
+                      [ SEND MAIL ↗ ]
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {[
+                {
+                  code: "LINK_01",
+                  name: "GitHub",
+                  sub: "github.com/cnsaavedra",
+                  href: "https://github.com/cnsaavedra",
+                  img: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                },
+                {
+                  code: "LINK_02",
+                  name: "LinkedIn",
+                  sub: "Christian Saavedra",
+                  href: "https://www.linkedin.com/in/christian-saavedra-b07413245/",
+                  img: "https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg",
+                },
+                {
+                  code: "LINK_03",
+                  name: "SoundCloud",
+                  sub: "soundcloud.com/primaryflow",
+                  href: "https://soundcloud.com/primaryflow",
+                  img: "https://cdn-icons-png.flaticon.com/512/145/145809.png",
+                },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group p-6 bg-archive-bg/60 hover:bg-white border border-archive-line hover:border-archive-ink transition-all flex flex-col items-center text-center chamfer-btn"
+                >
+                  <div className="w-full flex justify-between font-mono text-[10px] text-archive-slate mb-4">
+                    <span>{social.code}</span>
+                    <span className="text-archive-cyan group-hover:translate-x-0.5 transition-transform">
+                      ↗
+                    </span>
+                  </div>
+                  <img
+                    width={72}
+                    height={72}
+                    src={social.img}
+                    alt={social.name}
+                    className="mb-4 group-hover:scale-105 transition-transform"
+                  />
+                  <div className="font-semibold text-base text-archive-ink">
+                    {social.name}
+                  </div>
+                  <div className="font-mono text-[11px] text-archive-slate mt-1">
+                    {social.sub}
+                  </div>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 
-  if (currentPage === "homepage") {
-    return homePage();
-  } else if (currentPage === "experience") {
-    return experience();
-  } else if (currentPage === "portfolio") {
-    return portfolio();
-  } else if (currentPage === "contact") {
-    return contact();
-  }
+  return (
+    <div className="min-h-screen bg-archive-bg text-archive-ink relative selection:bg-archive-cyan selection:text-archive-ink">
+      <NeuralBackground />
+      <TacticalFrame
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        setPageFirstLoad={setPageFirstLoad}
+      />
+      {currentPage === "homepage" && homePage()}
+      {currentPage === "experience" && experience()}
+      {currentPage === "portfolio" && portfolio()}
+      {currentPage === "contact" && contact()}
+    </div>
+  );
 }
 
 export default App;
