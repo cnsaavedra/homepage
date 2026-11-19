@@ -1,5 +1,12 @@
 import { useEffect, useState, useRef } from "react";
-import { ArrowLeft, ArrowDownCircle, ArrowUpCircle } from "./icons/icons";
+import {
+  ArrowLeft,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  GitHub,
+  Linkedin,
+  SoundCloud,
+} from "./icons/icons";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { TypeAnimation } from "react-type-animation";
@@ -7,8 +14,38 @@ import Plx from "react-plx";
 
 const PORTFOLIO_PROJECTS = [
   {
+    title: "Personal Agent Harness (lode-bus)",
+    year: "Nov 2026",
+    summary:
+      "Rust CLI coordinating multi-agent LLM workflows with a zero-CPU queue watcher, RwLock file locks, and context packing.",
+    facts: [
+      "Coordinates Claude, Gemini, and Codex coding agents across machines through shared skills and deterministic handoffs.",
+      "Enforces RwLock file-manifest reservations, OS event-driven queue watching, and secret-redacting 24 KB context slice packing.",
+    ],
+  },
+  {
+    title: "Vocal Pitch & Speech AI",
+    year: "Nov 2026",
+    summary:
+      "Librosa F0 pitch tracking, Krumhansl-Kessler musical key detection, WebRTC VAD, and faster-whisper STT.",
+    facts: [
+      "Segments sung vocal pitch (F0) and estimates musical key using 12-pitch chroma correlation against Krumhansl-Kessler profiles.",
+      "Streams microphone audio through WebRTC voice activity detection into local faster-whisper neural transcription.",
+    ],
+  },
+  {
+    title: "Musicore",
+    year: "Oct 2026",
+    summary:
+      "Offline NumPy/SciPy chroma and onset alignment compiled into editable FL Studio projects.",
+    facts: [
+      "Matches candidate MIDI against audio stems using ≤ 20ms onset lock and ≥ 0.65 active-frame chroma correlation.",
+      "Computes offline BS.1770 loudness headroom and writes native binary .flp mixer and FX states.",
+    ],
+  },
+  {
     title: "Demucs & Basic Pitch",
-    year: "2026",
+    year: "Aug 2026",
     summary:
       "PyTorch 4-stem separation and ONNX CNN audio-to-MIDI note pruning.",
     facts: [
@@ -18,25 +55,55 @@ const PORTFOLIO_PROJECTS = [
     ],
   },
   {
-    title: "Musicore",
-    year: "2026",
-    repoUrl: "https://github.com/cnsaavedra/MUSICORE-PIPELINE",
+    title: "Archived Pins",
+    year: "Feb 2023",
+    repoUrl: "https://github.com/cnsaavedra/archived-pins",
     summary:
-      "Offline NumPy/SciPy chroma and onset alignment compiled into editable FL Studio projects.",
+      "Hand-written Python Discord bot migrating channel pins into dedicated archive channels.",
     facts: [
-      "Matches candidate MIDI against audio stems using ≤ 20ms onset lock and ≥ 0.65 active-frame chroma correlation.",
-      "Computes offline BS.1770 loudness headroom and writes native binary .flp mixer and FX states.",
+      "Built from scratch in Python with discord.py to preserve pinned messages past Discord's per-channel pin limit.",
+      "Structured with isolated .env credential handling and mocked unit tests.",
+    ],
+    singleImage: "https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png",
+  },
+  {
+    title: "FFXIV Statistics",
+    year: "Sep 2021",
+    repoUrl: "https://github.com/cnsaavedra/ffxiv_statistics",
+    summary:
+      "Hand-coded React analytics app parsing Square Enix API census data and market board velocity.",
+    facts: [
+      "Written from scratch pre-AI: manual JSON normalization, guild demographic aggregation, and custom sales-velocity × demand modeling.",
+      "Built responsive CSS grid/flex catalogs to browse server demographics and in-game gear collections.",
+    ],
+    slides: [
+      "https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png",
+      "https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png",
+      "https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png",
     ],
   },
   {
+    title: "Old MMO Friends",
+    year: "Jan 2019",
+    repoUrl: "https://github.com/cnsaavedra/old-mmo-friends",
+    summary:
+      "Hand-built PostgreSQL and Express MVC social graph platform for reconnecting former guildmates.",
+    facts: [
+      "Engineered manually from scratch in 2019: custom PostgreSQL schema, Sequelize ORM relational queries, profiles, friend graphs, and notifications.",
+      "Implemented client-server MVC routing in Express.js with salted password hashing and JWT authentication.",
+    ],
+    singleImage:
+      "https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966",
+  },
+  {
     title: "Pick For Us",
-    year: "2018 / 2026",
+    year: "Oct 2018",
     repoUrl: "https://github.com/cnsaavedra/pickforus",
     summary:
-      "60-second anonymous group decision app using NegEx negation, Damerau-Levenshtein, and Approval Voting.",
+      "Hand-coded 60-second anonymous group decision app using NegEx negation, Damerau-Levenshtein, and Approval Voting.",
     facts: [
-      "Parses live group chat with NegEx clause-scope negation and word-boundary gazetteer matching.",
-      "Recovers typos via Damerau-Levenshtein ≤ 1 and tallies spam-capped Combined Approval Voting {-1, 0, +1} with an inspectable trace.",
+      "Implemented completely from scratch without AI/LLMs using classical NLP: NegEx clause-scope negation and longest-phrase word-boundary gazetteer matching.",
+      "Hand-coded O(min(|a|, |b|)) Damerau-Levenshtein ≤ 1 typo recovery and spam-capped Combined Approval Voting {-1, 0, +1} with an inspectable deterministic trace.",
     ],
     images: [
       {
@@ -52,63 +119,6 @@ const PORTFOLIO_PROJECTS = [
         src: "https://github.com/cnsaavedra/pickforus/raw/master/docs/media/verdict.png",
       },
     ],
-  },
-  {
-    title: "Personal Agent Harness (lode-bus)",
-    year: "2026",
-    summary:
-      "Rust CLI coordinating multi-agent LLM workflows with a zero-CPU queue watcher, RwLock file locks, and context packing.",
-    facts: [
-      "Coordinates Claude, Gemini, and Codex coding agents across machines through shared skills and deterministic handoffs.",
-      "Enforces RwLock file-manifest reservations, OS event-driven queue watching, and secret-redacting 24 KB context slice packing.",
-    ],
-  },
-  {
-    title: "Vocal Pitch & Speech AI",
-    year: "2026",
-    summary:
-      "Librosa F0 pitch tracking, Krumhansl-Kessler musical key detection, WebRTC VAD, and faster-whisper STT.",
-    facts: [
-      "Segments sung vocal pitch (F0) and estimates musical key using 12-pitch chroma correlation against Krumhansl-Kessler profiles.",
-      "Streams microphone audio through WebRTC voice activity detection into local faster-whisper neural transcription.",
-    ],
-  },
-  {
-    title: "FFXIV Statistics",
-    year: "2024",
-    summary:
-      "Guild demographic parsing and market board velocity modeling via the Square Enix API.",
-    facts: [
-      "Parses Final Fantasy XIV server and free-company data into demographic breakdowns.",
-      "Computes item sales velocity and demand, and displays gear/fashion catalogs.",
-    ],
-    slides: [
-      "https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png",
-      "https://i.gyazo.com/0b62b9e6a7aeb24ce908d014cab2e2fc.png",
-      "https://i.gyazo.com/ab826e146b39b2d6d4d2405b0ec74719.png",
-    ],
-  },
-  {
-    title: "Archived Pins",
-    year: "2023",
-    repoUrl: "https://github.com/cnsaavedra/archived-pins",
-    summary:
-      "Python Discord bot migrating pinned messages into dedicated archive channels.",
-    facts: [
-      "Transfers channel pins into a persistent archive channel via discord.py with isolated .env config and automated tests.",
-    ],
-    singleImage: "https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png",
-  },
-  {
-    title: "Old MMO Friends",
-    year: "2023",
-    summary:
-      "PostgreSQL and Express social graph platform for finding former guildmates.",
-    facts: [
-      "Indexes servers, aliases, friends, and messages in PostgreSQL via Sequelize ORM with Express MVC and JWT auth.",
-    ],
-    singleImage:
-      "https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966",
   },
 ];
 
@@ -371,48 +381,34 @@ function App() {
                     href="https://github.com/cnsaavedra"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="GitHub"
                     className={`${
                       pageFirstLoad ? "opacity-0" : "opacity-100"
                     } transition-all ease-in-out duration-300 hover:opacity-40 hover:-translate-y-0.5`}
                   >
-                    <img
-                      className={isDark ? "invert" : ""}
-                      width={26}
-                      height={26}
-                      src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                      alt="GitHub"
-                    />
+                    <GitHub size={24} />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/christian-saavedra-b07413245/"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="LinkedIn"
                     className={`${
                       pageFirstLoad ? "opacity-0" : "opacity-100"
                     } transition-all ease-in-out duration-300 hover:opacity-40 hover:-translate-y-0.5`}
                   >
-                    <img
-                      className={isDark ? "brightness-200 grayscale" : ""}
-                      width={26}
-                      height={26}
-                      src="https://brand.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Bug.svg.original.svg"
-                      alt="LinkedIn"
-                    />
+                    <Linkedin size={22} />
                   </a>
                   <a
                     href="https://soundcloud.com/primaryflow"
                     target="_blank"
                     rel="noreferrer"
+                    aria-label="SoundCloud"
                     className={`${
                       pageFirstLoad ? "opacity-0" : "opacity-100"
                     } transition-all ease-in-out duration-300 hover:opacity-40 hover:-translate-y-0.5`}
                   >
-                    <img
-                      width={26}
-                      height={26}
-                      src="https://cdn-icons-png.flaticon.com/512/145/145809.png"
-                      alt="SoundCloud"
-                    />
+                    <SoundCloud size={26} />
                   </a>
                 </div>
               </Plx>
