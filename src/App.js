@@ -59,10 +59,10 @@ const PORTFOLIO_PROJECTS = [
     year: "Feb 2023",
     repoUrl: "https://github.com/cnsaavedra/archived-pins",
     summary:
-      "Hand-written Python Discord bot migrating channel pins into dedicated archive channels.",
+      "Python Discord bot automating zero-loss pin archival into dedicated channel indexes.",
     facts: [
-      "Built from scratch in Python with discord.py to preserve pinned messages past Discord's per-channel pin limit.",
-      "Structured with isolated .env credential handling and mocked unit tests.",
+      "Built in Python with discord.py to migrate channel pins past Discord's per-channel limit without losing attachments or message context.",
+      "Structured with environment-isolated token configuration and mocked unit tests.",
     ],
     singleImage: "https://i.gyazo.com/01e0c3a831104f713f78597492c3d3b0.png",
   },
@@ -71,10 +71,10 @@ const PORTFOLIO_PROJECTS = [
     year: "Sep 2021",
     repoUrl: "https://github.com/cnsaavedra/ffxiv_statistics",
     summary:
-      "Hand-coded React analytics app parsing Square Enix API census data and market board velocity.",
+      "React analytics platform modeling Final Fantasy XIV guild demographics and market board velocity.",
     facts: [
-      "Written from scratch pre-AI: manual JSON normalization, guild demographic aggregation, and custom sales-velocity × demand modeling.",
-      "Built responsive CSS grid/flex catalogs to browse server demographics and in-game gear collections.",
+      "Normalizes live Square Enix API payloads into guild census distributions, class breakdowns, and item sales-velocity vs. demand metrics.",
+      "Renders responsive gear and demographic views using custom CSS grid layouts.",
     ],
     slides: [
       "https://i.gyazo.com/f20c7e041f2b2e4d16a4a3dd037db063.png",
@@ -87,10 +87,10 @@ const PORTFOLIO_PROJECTS = [
     year: "Jan 2019",
     repoUrl: "https://github.com/cnsaavedra/old-mmo-friends",
     summary:
-      "Hand-built PostgreSQL and Express MVC social graph platform for reconnecting former guildmates.",
+      "Full-stack PostgreSQL and Express MVC social graph for reconnecting former guildmates.",
     facts: [
-      "Engineered manually from scratch in 2019: custom PostgreSQL schema, Sequelize ORM relational queries, profiles, friend graphs, and notifications.",
-      "Implemented client-server MVC routing in Express.js with salted password hashing and JWT authentication.",
+      "Models player profiles, server histories, friend graphs, direct messages, and notifications in PostgreSQL via Sequelize ORM.",
+      "Implements client-server MVC routing in Express.js with salted password hashing and JWT session authentication.",
     ],
     singleImage:
       "https://camo.githubusercontent.com/3e2e771e7d3eb2bf066d1d08ccb44d73af5c54a24446beaf6dc44e5c2c52047b/68747470733a2f2f692e6779617a6f2e636f6d2f64646537653936343964643833356536656164336432623939623465663535302e676966",
@@ -100,10 +100,10 @@ const PORTFOLIO_PROJECTS = [
     year: "Oct 2018",
     repoUrl: "https://github.com/cnsaavedra/pickforus",
     summary:
-      "Hand-coded 60-second anonymous group decision app using NegEx negation, Damerau-Levenshtein, and Approval Voting.",
+      "60-second anonymous group decision engine combining classical NLP and Combined Approval Voting.",
     facts: [
-      "Implemented completely from scratch without AI/LLMs using classical NLP: NegEx clause-scope negation and longest-phrase word-boundary gazetteer matching.",
-      "Hand-coded O(min(|a|, |b|)) Damerau-Levenshtein ≤ 1 typo recovery and spam-capped Combined Approval Voting {-1, 0, +1} with an inspectable deterministic trace.",
+      "Segments live chat with NegEx clause-scope negation and longest-phrase word-boundary gazetteer matching.",
+      "Recovers typos in O(min(|a|, |b|)) via Damerau-Levenshtein ≤ 1 and aggregates spam-capped Combined Approval Voting {-1, 0, +1} with a deterministic trace.",
     ],
     images: [
       {
